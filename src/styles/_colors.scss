@@ -1,0 +1,84 @@
+// Color Palette - Blue Theme (SCSS variables for build-time)
+$primary-blue: #2563eb;
+$primary-blue-dark: #1e40af;
+$primary-blue-light: #3b82f6;
+$secondary-blue: #1d4ed8;
+$accent-blue: #60a5fa;
+$accent-blue-light: #93c5fd;
+
+// Gradient Colors
+$gradient-start: #2563eb;
+$gradient-end: #1e40af;
+$gradient-light-start: #dbeafe;
+$gradient-light-end: #bfdbfe;
+
+// Background Colors
+$bg-white: #ffffff;
+$bg-light: #f8fafc;
+$bg-dark: #1a1a1a;
+$bg-gray: #f5f7fa;
+
+// Text Colors
+$text-dark: #333333;
+$text-medium: #555555;
+$text-light: #666666;
+$text-white: #ffffff;
+
+// Border & Shadow Colors
+$border-light: rgba(255, 255, 255, 0.5);
+$shadow-color: rgba(37, 99, 235, 0.1);
+$shadow-color-hover: rgba(37, 99, 235, 0.15);
+$shadow-color-strong: rgba(37, 99, 235, 0.3);
+$shadow-color-button: rgba(37, 99, 235, 0.4);
+
+// Utility Colors
+$overlay-light: rgba(255, 255, 255, 0.95);
+$overlay-medium: rgba(255, 255, 255, 0.98);
+
+// CSS Custom Properties for Dark Mode
+:root {
+  // Backgrounds
+  --bg-primary: #{$bg-white};
+  --bg-secondary: #{$bg-light};
+  --bg-tertiary: #{$bg-gray};
+  --bg-inverse: #{$bg-dark};
+  
+  // Text
+  --text-primary: #{$text-dark};
+  --text-secondary: #{$text-medium};
+  --text-tertiary: #{$text-light};
+  --text-inverse: #{$text-white};
+  
+  // Overlays
+  --overlay-light: #{$overlay-light};
+  --overlay-medium: #{$overlay-medium};
+  
+  // Shadows
+  --shadow-color: #{$shadow-color};
+  --shadow-color-hover: #{$shadow-color-hover};
+  --shadow-color-strong: #{$shadow-color-strong};
+}
+
+:root.dark {
+  // Backgrounds (dark mode)
+  --bg-primary: #1e293b;
+  --bg-secondary: #0f172a;
+  --bg-tertiary: #334155;
+  --bg-inverse: #{$bg-white};
+  
+  // Text (dark mode)
+  --text-primary: #f1f5f9;
+  --text-secondary: #cbd5e1;
+  --text-tertiary: #94a3b8;
+  --text-inverse: #{$text-dark};
+  
+  // Overlays (dark mode)
+  --overlay-light: rgba(30, 41, 59, 0.95);
+  --overlay-medium: rgba(15, 23, 42, 0.98);
+  
+  // Shadows (dark mode)
+  --shadow-color: rgba(0, 0, 0, 0.3);
+  --shadow-color-hover: rgba(0, 0, 0, 0.4);
+  --shadow-color-strong: rgba(0, 0, 0, 0.5);
+}
+

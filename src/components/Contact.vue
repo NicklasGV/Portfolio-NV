@@ -1,0 +1,238 @@
+<template>
+  <section id="contact" class="section contact">
+    <div class="container">
+      <h2 class="section-title">{{ t.contact.title }}</h2>
+      <div class="contact-content">
+        <div class="contact-info">
+          <p class="contact-intro">
+            {{ t.contact.intro }}
+          </p>
+          <div class="contact-methods">
+            <div class="contact-method">
+              <div class="contact-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                  <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                  <polyline points="22,6 12,13 2,6"/>
+                </svg>
+              </div>
+              <div>
+                <h4>{{ t.contact.email }}</h4>
+                <a href="mailto:your.email@example.com">nvedeby@gmail.com</a>
+              </div>
+            </div>
+            <div class="contact-method">
+              <div class="contact-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                  <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+                </svg>
+              </div>
+              <div>
+                <h4>{{ t.contact.phone }}</h4>
+                <a href="tel:+4560524646">+45 60 52 46 46</a>
+              </div>
+            </div>
+            <div class="contact-method">
+              <div class="contact-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                  <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
+                  <rect x="2" y="9" width="4" height="12"/>
+                  <circle cx="4" cy="4" r="2"/>
+                </svg>
+              </div>
+              <div>
+                <h4>{{ t.contact.linkedin }}</h4>
+                <a href="https://www.linkedin.com/in/nicklas-vedeby-3155351b7/" target="_blank">linkedin.com/in/nicklas-vedeby</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <form class="contact-form" @submit.prevent="handleSubmit">
+          <div class="form-group">
+            <label for="name">{{ t.contact.form.name }}</label>
+            <input 
+              type="text" 
+              id="name" 
+              v-model="form.name" 
+              required 
+              :placeholder="t.contact.form.namePlaceholder"
+            />
+          </div>
+          <div class="form-group">
+            <label for="email">{{ t.contact.form.email }}</label>
+            <input 
+              type="email" 
+              id="email" 
+              v-model="form.email" 
+              required 
+              :placeholder="t.contact.form.emailPlaceholder"
+            />
+          </div>
+          <div class="form-group">
+            <label for="message">{{ t.contact.form.message }}</label>
+            <textarea 
+              id="message" 
+              v-model="form.message" 
+              required 
+              rows="6"
+              :placeholder="t.contact.form.messagePlaceholder"
+            ></textarea>
+          </div>
+          <button type="submit" class="submit-btn">{{ t.contact.form.submit }}</button>
+        </form>
+      </div>
+    </div>
+  </section>
+</template>
+
+<script setup>
+import { ref } from 'vue'
+import { useLanguage } from '../composables/useLanguage'
+
+const { t } = useLanguage()
+const form = ref({
+  name: '',
+  email: '',
+  message: ''
+})
+
+const handleSubmit = () => {
+  // Handle form submission here
+  alert(t.contact.form.success)
+  form.value = { name: '', email: '', message: '' }
+}
+</script>
+
+<style lang="scss" scoped>
+.contact {
+  padding: 80px 2rem;
+  background: var(--bg-primary);
+  transition: background-color 0.3s;
+}
+
+.contact-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  max-width: $breakpoint-xl;
+  margin: 0 auto;
+}
+
+.contact-intro {
+  font-size: 1.1rem;
+  line-height: 1.8;
+  color: var(--text-secondary);
+  margin-bottom: 2rem;
+}
+
+.contact-methods {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.contact-method {
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+}
+
+.contact-icon {
+  width: 50px;
+  height: 50px;
+  background: linear-gradient(135deg, $gradient-start 0%, $gradient-end 100%);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  color: $text-white;
+
+  svg {
+    width: 24px;
+    height: 24px;
+    stroke-width: 2;
+  }
+}
+
+.contact-method h4 {
+  margin: 0 0 0.25rem 0;
+  color: var(--text-primary);
+  font-size: 1rem;
+}
+
+.contact-method a {
+  color: $primary-blue;
+  text-decoration: none;
+  transition: color 0.3s;
+
+  &:hover {
+    color: $secondary-blue;
+  }
+}
+
+.contact-form {
+  background: var(--bg-secondary);
+  padding: 2rem;
+  border-radius: 16px;
+  transition: background-color 0.3s;
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+
+  label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: var(--text-primary);
+    font-weight: 500;
+  }
+
+  input,
+  textarea {
+    width: 100%;
+    padding: 0.75rem;
+    border: 2px solid var(--bg-tertiary);
+    border-radius: 8px;
+    font-size: 1rem;
+    font-family: inherit;
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    transition: border-color 0.3s, background-color 0.3s;
+    box-sizing: border-box;
+
+    &:focus {
+      outline: none;
+      border-color: $primary-blue;
+    }
+  }
+}
+
+.submit-btn {
+  width: 100%;
+  padding: 1rem;
+  background: linear-gradient(135deg, $gradient-start 0%, $gradient-end 100%);
+  color: $text-white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.3s, box-shadow 0.3s;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 20px $shadow-color-button;
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+}
+
+@include tablet-down {
+  .contact-content {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+}
+</style>
