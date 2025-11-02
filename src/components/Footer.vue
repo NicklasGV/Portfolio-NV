@@ -3,9 +3,9 @@
     <div class="container">
       <p>&copy; {{ currentYear }} Portfolio. {{ t.footer.rights }}</p>
       <div class="footer-links">
-        <a href="https://github.com" target="_blank" class="footer-link">GitHub</a>
-        <a href="https://linkedin.com" target="_blank" class="footer-link">LinkedIn</a>
-        <a href="mailto:your.email@example.com" class="footer-link">{{ t.contact.email }}</a>
+        <a href="https://github.com/NicklasGV" target="_blank" class="footer-link">GitHub</a>
+        <a href="https://www.linkedin.com/in/nicklas-vedeby-3155351b7/" target="_blank" class="footer-link">LinkedIn</a>
+        <a href="mailto:nvedeby@gmail.com" class="footer-link">{{ t.contact.email }}</a>
       </div>
     </div>
   </footer>
@@ -20,8 +20,8 @@ const currentYear = new Date().getFullYear()
 
 <style lang="scss" scoped>
 .footer {
-  background: var(--bg-inverse);
-  color: var(--text-inverse);
+  background: $bg-dark;
+  color: $bg-light;
   padding: 2rem;
   text-align: center;
   transition: background-color 0.3s, color 0.3s;
@@ -43,7 +43,7 @@ const currentYear = new Date().getFullYear()
 }
 
 .footer-link {
-  color: var(--text-inverse);
+  color: $bg-light;
   text-decoration: none;
   transition: color 0.3s;
 

@@ -1,4 +1,7 @@
 import { ref, computed } from 'vue'
+import protonedmusicImage from '../assets/images/protonedmusic.webp'
+import buildabotImage from '../assets/images/buildabot.svg'
+import samlinoImage from '../assets/images/samlino.png'
 
 const currentLanguage = ref('da')
 
@@ -146,19 +149,19 @@ const translations = {
       title: 'Uddannelse',
       timeline: [
         {
-          year: '2020',
+          year: 'Marts 2020',
           title: 'Påbegyndte Datatekniker Uddannelse',
           description: 'Startede min rejse ind i datateknologi og lærte fundamenterne i dataanalyse, databasesystemer og programmering.'
         },
         {
-          year: '2021-2024',
-          title: 'Mellemliggende Studier',
-          description: 'Udvidede viden i avanceret databehandling, webudviklingsteknologier og full-stack applikationsudvikling.'
+          year: '2024-2025',
+          title: 'Elevplads hos Samlino.dk',
+          description: 'Arbejdede som elev hos Samlino.dk, hvor jeg udviklede mine færdigheder inden for webudvikling og dataanalyse og ETL processer.'
         },
         {
           year: 'Maj 2025',
           title: 'Afsluttet Uddannelse',
-          description: 'Gennemførte med succes min datatekniker uddannelse, udstyret med omfattende færdigheder inden for både dataanalyse og webudvikling.'
+          description: 'Gennemførte min datatekniker uddannelse, udstyret med omfattende færdigheder inden for både dataanalyse, webudvikling og ETL processer. Jeg har også fået en masse erfaring med at arbejde i team og med andre udviklere.'
         }
       ]
     },
@@ -171,8 +174,8 @@ const translations = {
             { name: 'SQL', level: 90 },
             { name: 'Python', level: 85 },
             { name: 'Dataanalyse', level: 88 },
-            { name: 'Database Design', level: 82 },
-            { name: 'ETL Processer', level: 80 }
+            { name: 'ETL Processer', level: 80 },
+            { name: 'DB Performance Tuning', level: 80 }
           ]
         },
         {
@@ -203,34 +206,29 @@ const translations = {
       title: 'Projekter',
       items: [
         {
+          image: protonedmusicImage,
           title: 'Protoned Music',
           description: 'En webbaseret platform for en kundes musik produktion, hvor kunden kunne skabe events, sælge billetter, merch og andet. <br> <span class="highlight">Kunden har desværre valgt at lukke ned, og projektet er derfor ikke længere tilgængeligt.</span>',
-          tags: ['Angular', 'SQL', 'C#', '.NET']
+          tags: ['Angular', 'SQL', 'C#', '.NET'],
         },
         {
-          title: 'E-Handels Web Applikation',
-          description: 'Full-stack e-handelsplatform med brugergodkendelse, indkøbskurv og betalingsintegration.',
-          tags: ['Vue.js', 'Node.js', 'MongoDB', 'REST API'],
-          github: '#',
-          demo: '#'
+          image: buildabotImage,
+          title: 'Build a Bot',
+          description: 'En webbaseret platform for at bygge og teste bot\'s til Discord. Dette projekt er mit og en vens. Som er lavet som et slut projekt i vores uddannelse. Det bygges stadig på her og der men står pt i dvale.',
+          tags: ['Angular', 'Discord.js', 'REST API', 'C#'],
+          github: 'https://github.com/NicklasGV/Build-a-Bot',
+          demo: 'https://buildabot.dk/',
         },
         {
-          title: 'ETL Pipeline System',
-          description: 'Automatiseret ETL pipeline til behandling og transformering af data fra flere kilder til et forenet datalager.',
-          tags: ['Python', 'ETL', 'Databehandling', 'Automatisering'],
-          github: '#',
-          demo: null
-        },
-        {
-          title: 'Responsivt Portfolio Website',
-          description: 'Moderne, responsivt portfolio website bygget med Vue.js og Vite, med glatte animationer og mobil-first design.',
-          tags: ['Vue.js', 'Vite', 'CSS3', 'Responsivt Design'],
-          github: '#',
-          demo: '#'
+          image: samlinoImage,
+          title: 'Samlino.dk',
+          description: 'Er en sammenlignings platform for at sammenligne priser på hovedsageligt bil forsikringer. men også a-kasser og el. <br> <span class="highlight">Jeg har ikke lavet Samlino.dk, har arbejdet for dem som udvikler.</span>',
+          tags: ['Vue.js', 'Python', 'SQL', 'REST API'],
+          demo: 'https://www.samlino.dk/'
         }
       ],
       github: 'GitHub',
-      demo: 'Live Demo'
+      demo: 'Live Site'
     },
     contact: {
       title: 'Kontakt',

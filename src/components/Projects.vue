@@ -10,16 +10,7 @@
         >
           <div class="project-image">
             <div class="project-placeholder">
-              <svg viewBox="0 0 200 150" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <rect width="200" height="150" fill="url(#gradient)"/>
-                <path d="M50 75 L100 50 L150 75 L100 100 Z" fill="white" opacity="0.3"/>
-                <defs>
-                  <linearGradient id="gradient" x1="0" y1="0" x2="200" y2="150">
-                    <stop offset="0%" stop-color="#2563eb"/>
-                    <stop offset="100%" stop-color="#1e40af"/>
-                  </linearGradient>
-                </defs>
-              </svg>
+              <img :src="project.image" alt="Project Image" width="100%" height="100%" />
             </div>
           </div>
           <div class="project-content">

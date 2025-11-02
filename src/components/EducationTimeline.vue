@@ -6,7 +6,7 @@
         <div class="timeline-item" v-for="(item, index) in t.education.timeline" :key="index">
           <div class="timeline-marker"></div>
           <div class="timeline-content">
-            <div class="timeline-year">{{ item.year }}</div>
+            <time class="timeline-year" :datetime="item.year">{{ item.year }}</time>
             <h3 class="timeline-title">{{ item.title }}</h3>
             <p class="timeline-description">{{ item.description }}</p>
           </div>
