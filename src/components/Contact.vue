@@ -77,7 +77,22 @@
               :placeholder="t.contact.form.messagePlaceholder"
             ></textarea>
           </div>
-          <button type="submit" class="submit-btn">{{ t.contact.form.submit }}</button>
+          <button 
+            type="submit" 
+            class="submit-btn"
+            :disabled="isSubmitting"
+          >
+            {{ isSubmitting ? t.contact.form.sending : t.contact.form.submit }}
+          </button>
+          <p
+            v-if="status"
+            class="form-status"
+            :class="`form-status--${status.type}`"
+            role="status"
+            aria-live="polite"
+          >
+            {{ status.message }}
+          </p>
         </form>
       </div>
     </div>
@@ -85,20 +100,60 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { computed, ref } from 'vue'
 import { useLanguage } from '../composables/useLanguage'
 
 const { t } = useLanguage()
+const formCopy = computed(() => t.value.contact.form)
 const form = ref({
   name: '',
   email: '',
   message: ''
 })
 
-const handleSubmit = () => {
-  // Handle form submission here
-  alert(t.contact.form.success)
-  form.value = { name: '', email: '', message: '' }
+const status = ref(null)
+const isSubmitting = ref(false)
+const contactEndpoint = import.meta.env.VITE_CONTACT_ENDPOINT || '/api/contact'
+
+const handleSubmit = async () => {
+  if (isSubmitting.value) {
+    return
+  }
+
+  isSubmitting.value = true
+  status.value = {
+    type: 'info',
+    message: formCopy.value.sending,
+  }
+
+  try {
+    const response = await fetch(contactEndpoint, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(form.value),
+    })
+
+    const result = await response.json().catch(() => ({}))
+
+    if (!response.ok || !result?.success) {
+      throw new Error(result?.message || formCopy.value.error)
+    }
+
+    status.value = {
+      type: 'success',
+      message: formCopy.value.success,
+    }
+    form.value = { name: '', email: '', message: '' }
+  } catch (error) {
+    status.value = {
+      type: 'error',
+      message: error?.message || formCopy.value.error,
+    }
+  } finally {
+    isSubmitting.value = false
+  }
 }
 </script>
 
@@ -226,6 +281,38 @@ const handleSubmit = () => {
 
   &:active {
     transform: translateY(0);
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+    opacity: 0.7;
+    transform: none;
+    box-shadow: none;
+  }
+}
+
+.form-status {
+  margin-top: 1rem;
+  padding: 0.875rem 1rem;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  background: var(--bg-tertiary);
+  border: 1px solid transparent;
+
+  &--info {
+    border-color: rgba($primary-blue, 0.4);
+    color: $primary-blue;
+  }
+
+  &--success {
+    border-color: rgba(60, 204, 137, 0.4);
+    color: #2c9464;
+  }
+
+  &--error {
+    border-color: rgba(220, 53, 69, 0.4);
+    color: #c12b39;
   }
 }
 

@@ -11,6 +11,7 @@ const translations = {
       about: 'About',
       education: 'Education',
       skills: 'Skills',
+      workExperience: 'Work Experience',
       projects: 'Projects',
       contact: 'Contact'
     },
@@ -24,19 +25,53 @@ const translations = {
       title: 'Education',
       timeline: [
         {
-          year: '2020',
+          year: 'March 2020',
           title: 'Started Data Technician Education',
-          description: 'Began my journey into data technology, learning the fundamentals of data analysis, database systems, and programming.'
+          description: 'Started my journey into data technology and learned the fundamentals of data analysis, database systems, and programming.'
         },
         {
-          year: '2021-2024',
-          title: 'Intermediate Studies',
-          description: 'Expanded knowledge in advanced data processing, web development technologies, and full-stack application development.'
+          year: '2024-2025',
+          title: 'Apprenticeship at Samlino.dk',
+          description: 'Worked as an apprentice at Samlino.dk, where I developed my skills in web development, data analysis, and ETL processes.'
         },
         {
           year: 'May 2025',
           title: 'Completed Education',
-          description: 'Successfully completed my data technician education, equipped with comprehensive skills in both data analysis and web development.'
+          description: 'Completed my data technician education, equipped with comprehensive skills in data analysis, web development, and ETL processes. I have also gained a lot of experience working in teams and with other developers.'
+        }
+      ]
+    },
+    workExperience: {
+      title: 'Work Experience',
+      present: 'Present',
+      timeline: [
+        {
+          startDate: 'Jan 2019',
+          endDate: 'March 2021',
+          title: 'Full-time Employee',
+          company: 'Rema 1000',
+          description: 'I worked in this period as a full-time employee at Rema 1000, where I was responsible for the frozen foods department, both with ordering and restocking.'
+        },
+        {
+          startDate: 'Dec 2021',
+          endDate: 'Jan 2024',
+          title: 'Closing Manager',
+          company: 'Rema 1000',
+          description: 'I worked as a closing manager at Rema 1000 for about 2 years, where I was responsible for leading the young workers who were there, and simultaneously managing the store and its closing.'
+        },
+        {
+          startDate: 'Jan 2024',
+          endDate: 'May 2025',
+          title: 'Data Technician Apprentice',
+          company: 'Samlino.dk',
+          description: 'Worked as an apprentice at Samlino.dk, where I developed my skills in web development, data analysis, and ETL processes.'
+        },
+        {
+          startDate: 'June 2024',
+          endDate: 'Nov 2025',
+          title: 'Developer',
+          company: 'Samlino.dk',
+          description: 'I have worked as a developer at Samlino where I have developed a lot of things in Python, but for the last 2 months I have focused a lot on the web development of the site and have therefore worked a lot with Vue.js.'
         }
       ]
     },
@@ -49,17 +84,18 @@ const translations = {
             { name: 'SQL', level: 90 },
             { name: 'Python', level: 85 },
             { name: 'Data Analysis', level: 88 },
-            { name: 'Database Design', level: 82 },
-            { name: 'ETL Processes', level: 80 }
+            { name: 'ETL Processes', level: 80 },
+            { name: 'DB Performance Tuning', level: 80 }
           ]
         },
         {
           title: 'Web Development',
           skills: [
-            { name: 'Vue.js', level: 85 },
-            { name: 'JavaScript', level: 88 },
-            { name: 'HTML/CSS', level: 92 },
-            { name: 'Node.js', level: 75 },
+            { name: 'Vue.js', level: 90 },
+            { name: 'Angular', level: 90 },
+            { name: 'JavaScript', level: 90 },
+            { name: 'HTML/CSS', level: 95 },
+            { name: 'Node.js', level: 60 },
             { name: 'Responsive Design', level: 90 }
           ]
         },
@@ -68,9 +104,10 @@ const translations = {
           skills: [
             { name: 'Git', level: 85 },
             { name: 'REST APIs', level: 80 },
-            { name: 'Linux', level: 75 },
+            { name: 'Cursor AI', level: 75 },
+            { name: 'ChatGPT', level: 70 },
             { name: 'Docker', level: 70 },
-            { name: 'Cloud Services', level: 72 }
+            { name: 'AWS System', level: 65 }
           ]
         }
       ]
@@ -79,36 +116,29 @@ const translations = {
       title: 'Projects',
       items: [
         {
-          title: 'Data Analytics Dashboard',
-          description: 'A comprehensive dashboard for visualizing and analyzing large datasets with interactive charts and real-time updates.',
-          tags: ['Python', 'SQL', 'Data Visualization', 'Dash'],
-          github: '#',
-          demo: '#'
+          image: protonedmusicImage,
+          title: 'Protoned Music',
+          description: 'A web-based platform for a customer\'s music production, where the customer could create events, sell tickets, merch, and more. <br> <span class="highlight">Unfortunately, the customer has chosen to shut down, and the project is therefore no longer available.</span>',
+          tags: ['Angular', 'SQL', 'C#', '.NET'],
         },
         {
-          title: 'E-Commerce Web Application',
-          description: 'Full-stack e-commerce platform with user authentication, shopping cart, and payment integration.',
-          tags: ['Vue.js', 'Node.js', 'MongoDB', 'REST API'],
-          github: '#',
-          demo: '#'
+          image: buildabotImage,
+          title: 'Build a Bot',
+          description: 'A web-based platform for building and testing bots for Discord. This project is mine and a friend\'s, made as a final project in our education. It\'s still being worked on here and there but is currently dormant.',
+          tags: ['Angular', 'Discord.js', 'REST API', 'C#'],
+          github: 'https://github.com/NicklasGV/Build-a-Bot',
+          demo: 'https://buildabot.dk/',
         },
         {
-          title: 'ETL Pipeline System',
-          description: 'Automated ETL pipeline for processing and transforming data from multiple sources into a unified data warehouse.',
-          tags: ['Python', 'ETL', 'Data Processing', 'Automation'],
-          github: '#',
-          demo: null
-        },
-        {
-          title: 'Responsive Portfolio Website',
-          description: 'Modern, responsive portfolio website built with Vue.js and Vite, featuring smooth animations and mobile-first design.',
-          tags: ['Vue.js', 'Vite', 'CSS3', 'Responsive Design'],
-          github: '#',
-          demo: '#'
+          image: samlinoImage,
+          title: 'Samlino.dk',
+          description: 'Is a comparison platform for comparing prices on mainly car insurance, but also unemployment funds and electricity. <br> <span class="highlight">I did not create Samlino.dk, I have worked for them as a developer.</span>',
+          tags: ['Vue.js', 'Python', 'SQL', 'REST API'],
+          demo: 'https://www.samlino.dk/'
         }
       ],
       github: 'GitHub',
-      demo: 'Live Demo'
+      demo: 'Live Site'
     },
     contact: {
       title: 'Get In Touch',
@@ -124,7 +154,9 @@ const translations = {
         emailPlaceholder: 'your.email@example.com',
         messagePlaceholder: 'Your message...',
         submit: 'Send Message',
-        success: 'Thank you for your message! I\'ll get back to you soon.'
+        sending: 'Sending your message...',
+        success: 'Thank you for your message! I\'ll get back to you soon.',
+        error: 'Something went wrong. Please try again later.'
       }
     },
     footer: {
@@ -136,6 +168,7 @@ const translations = {
       about: 'Om Mig',
       education: 'Uddannelse',
       skills: 'Kompetencer',
+      workExperience: 'Erfaring',
       projects: 'Projekter',
       contact: 'Kontakt'
     },
@@ -162,6 +195,40 @@ const translations = {
           year: 'Maj 2025',
           title: 'Afsluttet Uddannelse',
           description: 'Gennemførte min datatekniker uddannelse, udstyret med omfattende færdigheder inden for både dataanalyse, webudvikling og ETL processer. Jeg har også fået en masse erfaring med at arbejde i team og med andre udviklere.'
+        }
+      ]
+    },
+    workExperience: {
+      title: 'Erfaring',
+      present: 'Nuværende',
+      timeline: [
+        {
+          startDate: 'Jan 2019',
+          endDate: 'Marts 2021',
+          title: 'Fuldtidsansat',
+          company: 'Rema 1000',
+          description: 'Jeg arbejde i denne periode som fuldtidsansat i Rema 1000, hvor jeg blandt andet stod for frost afdelingen, både med bestilling men også opfyldning.'
+        },
+        {
+          startDate: 'Dec 2021',
+          endDate: 'Jan 2024',
+          title: 'Lukke ansvarlig',
+          company: 'Rema 1000',
+          description: 'Jeg arbejdede som lukke ansvarlig i Rema 1000 i ca 2 år, hvor jeg stod for at lede de ung arbejdere der var. og samtidig stå for butikken og dens lukning.'
+        },
+        {
+          startDate: 'Jan 2024',
+          endDate: 'Maj 2025',
+          title: 'Datatekniker Elev',
+          company: 'Samlino.dk',
+          description: 'Arbejdede som elev hos Samlino.dk, hvor jeg udviklede mine færdigheder inden for webudvikling og dataanalyse og ETL processer.'
+        },
+        {
+          startDate: 'Juni 2024',
+          endDate: 'Nov 2025',
+          title: 'Udvikler',
+          company: 'Samlino.dk',
+          description: 'Jeg har arbejdet som udvikler hos Samlino hvor jeg har udviklet en del ting i Python, men de sidste 2 måneder har jeg fokuseret meget på webudviklingen af siden og har derfor stået meget med Vue.js.'
         }
       ]
     },
@@ -244,7 +311,9 @@ const translations = {
         emailPlaceholder: 'din.email@eksempel.dk',
         messagePlaceholder: 'Din besked...',
         submit: 'Send Besked',
-        success: 'Tak for din besked! Jeg vender tilbage snarest.'
+        sending: 'Sender din besked...',
+        success: 'Tak for din besked! Jeg vender tilbage snarest.',
+        error: 'Noget gik galt. Prøv venligst igen senere.'
       }
     },
     footer: {

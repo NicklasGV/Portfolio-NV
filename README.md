@@ -37,6 +37,11 @@ npm install
 npm run dev
 ```
 
+3. Start the contact API server (in a separate terminal):
+```bash
+npm run server
+```
+
 3. Open your browser and navigate to `http://localhost:5173`
 
 ### Build for Production

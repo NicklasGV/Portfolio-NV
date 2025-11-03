@@ -4,6 +4,7 @@
     <About />
     <EducationTimeline />
     <Skills />
+    <WorkExperience />
     <Projects />
     <Contact />
     <Footer />
@@ -16,6 +17,7 @@ import About from './components/About.vue'
 import EducationTimeline from './components/EducationTimeline.vue'
 import Skills from './components/Skills.vue'
 import Projects from './components/Projects.vue'
+import WorkExperience from './components/WorkExperience.vue'
 import Contact from './components/Contact.vue'
 import Footer from './components/Footer.vue'
 </script>

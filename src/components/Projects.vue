@@ -10,7 +10,7 @@
         >
           <div class="project-image">
             <div class="project-placeholder">
-              <img :src="project.image" alt="Project Image" width="100%" height="100%" />
+              <img :src="project.image" alt="Project Image" width="100%" height="100%" class="project-image-img"/>
             </div>
           </div>
           <div class="project-content">
@@ -69,6 +69,12 @@ const { t } = useLanguage()
   gap: 2rem;
   max-width: $breakpoint-xl;
   margin: 0 auto;
+}
+
+.project-image-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
 }
 
 .project-card {
