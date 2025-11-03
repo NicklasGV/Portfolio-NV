@@ -46,7 +46,7 @@
             </div>
           </div>
         </div>
-        <form class="contact-form" @submit.prevent="handleSubmit">
+        <!-- <form class="contact-form" @submit.prevent="handleSubmit">
           <div class="form-group">
             <label for="name">{{ t.contact.form.name }}</label>
             <input 
@@ -93,7 +93,7 @@
           >
             {{ status.message }}
           </p>
-        </form>
+        </form> -->
       </div>
     </div>
   </section>
@@ -165,8 +165,8 @@ const handleSubmit = async () => {
 }
 
 .contact-content {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
+  display: flex;
+  justify-content: center;
   gap: 4rem;
   max-width: $breakpoint-xl;
   margin: 0 auto;
@@ -183,6 +183,8 @@ const handleSubmit = async () => {
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
+  width: 400px;
+  margin-inline: auto;
 }
 
 .contact-method {
