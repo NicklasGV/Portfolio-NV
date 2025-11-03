@@ -16,7 +16,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '18'
+          node-version: '20'
           cache: 'npm'
       
       - name: Install dependencies
@@ -25,19 +25,8 @@ jobs:
       - name: Build project
         run: npm run build
       
-      - name: Validate FTP secrets
-        run: |
-          if [ -z "${{ secrets.FTP_SERVER }}" ] || [ -z "${{ secrets.FTP_USERNAME }}" ] || [ -z "${{ secrets.FTP_PASSWORD }}" ]; then
-            echo "Error: FTP secrets are not configured in GitHub."
-            echo "Please add the following secrets in your repository settings:"
-            echo "  - FTP_SERVER"
-            echo "  - FTP_USERNAME"
-            echo "  - FTP_PASSWORD"
-            exit 1
-          fi
-      
       - name: Deploy to Hostinger via FTP
-        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.0
         with:
           server: ${{ secrets.FTP_SERVER }}
           username: ${{ secrets.FTP_USERNAME }}
