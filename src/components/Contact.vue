@@ -45,6 +45,17 @@
               </div>
             </div>
           </div>
+          <p class="contact-download">
+            <span>{{ t.contact.downloadLabel }}</span>
+            <a
+              :href="cvUrl"
+              download
+              target="_blank"
+              rel="noopener"
+            >
+              {{ t.contact.downloadLink }}
+            </a>
+          </p>
         </div>
         <!-- <form class="contact-form" @submit.prevent="handleSubmit">
           <div class="form-group">
@@ -104,6 +115,7 @@ import { computed, ref } from 'vue'
 import { useLanguage } from '../composables/useLanguage'
 
 const { t } = useLanguage()
+const cvUrl = new URL('../assets/pdfs/cv-nicklas-vedeby.pdf', import.meta.url)
 const formCopy = computed(() => t.value.contact.form)
 const form = ref({
   name: '',
@@ -230,6 +242,24 @@ const handleSubmit = async () => {
   }
 }
 
+.contact-download {
+  margin-top: 2rem;
+  font-size: 1rem;
+  color: var(--text-secondary);
+
+  a {
+    margin-left: 0.35rem;
+    color: $primary-blue;
+    font-weight: 600;
+    text-decoration: none;
+    transition: color 0.3s;
+
+    &:hover {
+      color: $secondary-blue;
+    }
+  }
+}
+
 .contact-form {
   background: var(--bg-secondary);
   padding: 2rem;
@@ -345,6 +375,15 @@ const handleSubmit = async () => {
   .contact-method h4,
   .contact-method a {
     text-align: left;
+  }
+
+  .contact-download {
+    text-align: center;
+
+    a {
+      display: inline-block;
+      margin: 0.5rem 0 0;
+    }
   }
 }
 

@@ -1,6 +1,6 @@
 import { ref, computed } from 'vue'
 import protonedmusicImage from '../assets/images/protonedmusic.webp'
-import buildabotImage from '../assets/images/buildabot.svg'
+import buildabotImage from '../assets/images/buildabotwide.svg'
 import samlinoImage from '../assets/images/samlino.png'
 
 const currentLanguage = ref('da')
@@ -19,7 +19,9 @@ const translations = {
       title: 'About Me',
       lead: 'Welcome to my portfolio! I\'m a passionate <strong>Data Technician</strong> and <strong>Web Developer</strong> who loves transforming data into insights and building beautiful, functional web experiences.',
       text1: 'I began my journey in data technology around 2020 and completed my education in May 2025. Throughout my studies, I\'ve developed expertise in data analysis, database management, and full-stack web development.',
-      text2: 'I\'m constantly learning and exploring new technologies, always striving to create solutions that are both technically sound and user-friendly. Whether it\'s cleaning and analyzing datasets or building responsive web applications, I approach every project with attention to detail and a commitment to excellence.'
+      text2: 'I\'m constantly learning and exploring new technologies, always striving to create solutions that are both technically sound and user-friendly. Whether it\'s cleaning and analyzing datasets or building responsive web applications, I approach every project with attention to detail and a commitment to excellence.',
+      downloadLabel: 'Prefer a PDF of my CV? ',
+      downloadCta: 'Grab it here',
     },
     education: {
       title: 'Education',
@@ -37,7 +39,7 @@ const translations = {
         {
           year: 'May 2025',
           title: 'Completed Education',
-          description: 'Completed my data technician education, equipped with comprehensive skills in data analysis, web development, and ETL processes. I have also gained a lot of experience working in teams and with other developers.'
+          description: 'Completed my data technician education, equipped with comprehensive skills in data analysis, web development, and ETL processes. I have also gained a lot of experience working in teams and with other developers. <br> <span class="highlight">Proof of completion, grades and certificate can be sent upon request</span>'
         }
       ]
     },
@@ -146,6 +148,8 @@ const translations = {
       email: 'Email',
       phone: 'Phone',
       linkedin: 'LinkedIn',
+      downloadLabel: 'Prefer a PDF?',
+      downloadLink: 'Grab my CV',
       form: {
         name: 'Name',
         email: 'Email',
@@ -160,7 +164,8 @@ const translations = {
       }
     },
     footer: {
-      rights: 'All rights reserved.'
+      rights: 'All rights reserved.',
+      downloadCv: 'Download CV'
     }
   },
   da: {
@@ -170,13 +175,16 @@ const translations = {
       skills: 'Kompetencer',
       workExperience: 'Erfaring',
       projects: 'Projekter',
-      contact: 'Kontakt'
+      contact: 'Kontakt',
+      cv: 'Download CV'
     },
     about: {
       title: 'Om Mig',
       lead: 'Velkommen til mit portfolio! Jeg er en passioneret <strong>Datatekniker</strong> og <strong>Webudvikler</strong> der elsker at omdanne data til indsigt og bygge smukke, funktionelle weboplevelser.',
       text1: 'Jeg startede min rejse inden for datateknologi omkring 2020 og afsluttede min uddannelse i maj 2025. Gennem mine studier har jeg udviklet ekspertise inden for dataanalyse, databaseadministration og full-stack webudvikling.',
-      text2: 'Jeg lærer konstant og udforsker nye teknologier og stræber altid efter at skabe løsninger, der er både tekniske solide og brugervenlige. Uanset om det er rensning og analyse af datasæt eller bygning af responsive webapplikationer, går jeg til hvert projekt med opmærksomhed på detaljer og et engagement for ekspertise.'
+      text2: 'Jeg lærer konstant og udforsker nye teknologier og stræber altid efter at skabe løsninger, der er både tekniske solide og brugervenlige. Uanset om det er rensning og analyse af datasæt eller bygning af responsive webapplikationer, går jeg til hvert projekt med opmærksomhed på detaljer og et engagement for ekspertise.',
+      downloadLabel: 'Hvis du vil have en PDF af mit CV, ',
+      downloadCta: 'kan du hente det her',
     },
     education: {
       title: 'Uddannelse',
@@ -275,13 +283,14 @@ const translations = {
         {
           image: protonedmusicImage,
           title: 'Protoned Music',
-          description: 'En webbaseret platform for en kundes musik produktion, hvor kunden kunne skabe events, sælge billetter, merch og andet. <br> <span class="highlight">Kunden har desværre valgt at lukke ned, og projektet er derfor ikke længere tilgængeligt.</span>',
+          description: 'Mit første "rigtige" projekt bygget sammen med nogle venner fra studiet. <br> En webbaseret platform for en kundes musik produktion, hvor kunden kunne skabe events, sælge billetter, merch og andet. <br> <span class="highlight">Kunden har desværre valgt at lukke ned, og projektet er derfor ikke længere tilgængeligt.</span>',
           tags: ['Angular', 'SQL', 'C#', '.NET'],
+          github: 'https://github.com/NicklasGV/ProtonedMusic',
         },
         {
           image: buildabotImage,
           title: 'Build a Bot',
-          description: 'En webbaseret platform for at bygge og teste bot\'s til Discord. Dette projekt er mit og en vens. Som er lavet som et slut projekt i vores uddannelse. Det bygges stadig på her og der men står pt i dvale.',
+          description: 'En webbaseret platform for at bygge og teste bot\'s til Discord. Dette projekt er mit og en vens. Som er lavet som et slut projekt i vores uddannelse. <br> <span class="highlight">Det bygges stadig på her og der men står pt i dvale.</span>',
           tags: ['Angular', 'Discord.js', 'REST API', 'C#'],
           github: 'https://github.com/NicklasGV/Build-a-Bot',
           demo: 'https://buildabot.dk/',
@@ -303,6 +312,8 @@ const translations = {
       email: 'E-mail',
       phone: 'Telefon',
       linkedin: 'LinkedIn',
+      downloadLabel: 'Vil du hellere have en PDF?',
+      downloadLink: 'Hent mit CV',
       form: {
         name: 'Navn',
         email: 'E-mail',
@@ -317,7 +328,8 @@ const translations = {
       }
     },
     footer: {
-      rights: 'Alle rettigheder forbeholdes.'
+      rights: 'Alle rettigheder forbeholdes.',
+      downloadCv: 'Download CV'
     }
   }
 }

@@ -7,6 +7,19 @@
           <p class="lead" v-html="t.about.lead"></p>
           <p>{{ t.about.text1 }}</p>
           <p>{{ t.about.text2 }}</p>
+          <div class="about-actions">
+            <p class="contact-download">
+            <span>{{ t.about.downloadLabel }}</span>
+            <a
+              :href="cvUrl"
+              download
+              target="_blank"
+              rel="noopener"
+            >
+              {{ t.about.downloadCta }}
+            </a>
+          </p>
+          </div>
         </div>
         <div class="about-image">
           <img src="../assets/images/profile.png" alt="Profile Picture" width="430" height="400"/>
@@ -20,6 +33,7 @@
 import { useLanguage } from '../composables/useLanguage'
 
 const { t } = useLanguage()
+const cvUrl = new URL('../assets/pdfs/cv-nicklas-vedeby.pdf', import.meta.url)
 </script>
 
 <style lang="scss" scoped>
@@ -65,6 +79,33 @@ const { t } = useLanguage()
   font-size: 1.3rem;
   color: var(--text-primary);
   font-weight: 500;
+}
+
+.about-actions {
+  margin-top: 2rem;
+}
+
+.about-download {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.75rem;
+  background: linear-gradient(135deg, $gradient-start 0%, $gradient-end 100%);
+  color: $text-white;
+  border-radius: 12px;
+  font-weight: 600;
+  text-decoration: none;
+  box-shadow: 0 4px 20px $shadow-color-button;
+  transition: transform 0.3s, box-shadow 0.3s;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 24px rgba(44, 96, 255, 0.35);
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
 }
 
 .about-image {
@@ -116,6 +157,11 @@ const { t } = useLanguage()
 
   .section-title {
     font-size: 2rem;
+  }
+
+  .about-actions {
+    display: flex;
+    justify-content: center;
   }
 }
 </style>

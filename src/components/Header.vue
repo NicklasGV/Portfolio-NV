@@ -2,7 +2,10 @@
   <header class="header">
     <nav class="nav">
       <div class="nav-brand">
-        <h1>Portfolio</h1>
+        <div class="logo-container">
+          <img src="../assets/images/logo.png" alt="Wide Logo - Nicklas Vedeby" class="logo logo-desktop" width="40" height="40" /> <h1 class="logo-text">Nicklas Vedeby</h1>
+        </div>
+        <img src="../assets/images/logo.png" alt="Narrow Logo - Nicklas Vedeby" class="logo logo-mobile" width="40" height="40" />
       </div>
       <ul class="nav-links">
         <li><a href="#about" @click="scrollTo('about')">{{ t.nav.about }}</a></li>
@@ -78,6 +81,18 @@ const scrollTo = (section) => {
   transition: background-color 0.3s, box-shadow 0.3s;
 }
 
+.logo-desktop {
+  @include mobile {
+    display: none;
+  }
+}
+
+.logo-mobile {
+  @include desktop {
+    display: none;
+  }
+}
+
 .nav {
   max-width: $breakpoint-xl;
   margin: 0 auto;
@@ -144,6 +159,23 @@ const scrollTo = (section) => {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+}
+
+.logo-container {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  .logo-text {
+    font-size: 1.5rem;
+    font-weight: 600;
+    background: linear-gradient(135deg, $gradient-start 0%, $gradient-end 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  @include mobile {
+    display: none;
+  }
 }
 
 .nav-links {

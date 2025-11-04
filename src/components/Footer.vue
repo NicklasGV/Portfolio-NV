@@ -3,6 +3,7 @@
     <div class="container">
       <p>&copy; {{ currentYear }} Portfolio. {{ t.footer.rights }}</p>
       <div class="footer-links">
+        <a :href="cvUrl" download target="_blank" rel="noopener" class="footer-link">{{ t.footer.downloadCv }}</a>
         <a href="https://github.com/NicklasGV" target="_blank" class="footer-link">GitHub</a>
         <a href="https://www.linkedin.com/in/nicklas-vedeby-3155351b7/" target="_blank" class="footer-link">LinkedIn</a>
         <a href="mailto:nvedeby@gmail.com" class="footer-link">{{ t.contact.email }}</a>
@@ -16,6 +17,7 @@ import { useLanguage } from '../composables/useLanguage'
 
 const { t } = useLanguage()
 const currentYear = new Date().getFullYear()
+const cvUrl = new URL('../assets/pdfs/cv-nicklas-vedeby.pdf', import.meta.url)
 </script>
 
 <style lang="scss" scoped>
