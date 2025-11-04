@@ -1,6 +1,7 @@
 import { createApp } from 'vue'
 import './styles/main.scss'
 import App from './App.vue'
+import router from './router'
 import faviconUrl from './assets/images/nv.ico?url'
 
 const ensureFavicon = () => {
@@ -17,5 +18,9 @@ const ensureFavicon = () => {
 
 ensureFavicon()
 
-createApp(App).mount('#app')
+const app = createApp(App)
+
+app.use(router)
+
+app.mount('#app')
 
