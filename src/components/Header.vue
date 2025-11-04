@@ -8,6 +8,7 @@
         <li><a href="#about" @click="scrollTo('about')">{{ t.nav.about }}</a></li>
         <li><a href="#education" @click="scrollTo('education')">{{ t.nav.education }}</a></li>
         <li><a href="#skills" @click="scrollTo('skills')">{{ t.nav.skills }}</a></li>
+        <li><a href="#work-experience" @click="scrollTo('work-experience')">{{ t.nav.workExperience }}</a></li>
         <li><a href="#projects" @click="scrollTo('projects')">{{ t.nav.projects }}</a></li>
         <li><a href="#contact" @click="scrollTo('contact')">{{ t.nav.contact }}</a></li>
       </ul>
@@ -35,6 +36,7 @@
       <li><a href="#about" @click="scrollTo('about')">{{ t.nav.about }}</a></li>
       <li><a href="#education" @click="scrollTo('education')">{{ t.nav.education }}</a></li>
       <li><a href="#skills" @click="scrollTo('skills')">{{ t.nav.skills }}</a></li>
+      <li><a href="#workExperience" @click="scrollTo('workExperience')">{{ t.nav.workExperience }}</a></li>
       <li><a href="#projects" @click="scrollTo('projects')">{{ t.nav.projects }}</a></li>
       <li><a href="#contact" @click="scrollTo('contact')">{{ t.nav.contact }}</a></li>
     </ul>
