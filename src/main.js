@@ -3,6 +3,7 @@ import './styles/main.scss'
 import App from './App.vue'
 import router from './router'
 import faviconUrl from './assets/images/nv.ico?url'
+import { updateSEO } from '@/utils/seo'
 
 const ensureFavicon = () => {
   const existing = document.querySelector("link[rel~='icon']")
@@ -17,6 +18,7 @@ const ensureFavicon = () => {
 }
 
 ensureFavicon()
+updateSEO()
 
 const app = createApp(App)
 

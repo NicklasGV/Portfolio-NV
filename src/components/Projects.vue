@@ -10,7 +10,13 @@
         >
           <div class="project-image">
             <div class="project-placeholder">
-              <img :src="project.image" alt="Project Image" width="100%" height="100%" class="project-image-img"/>
+              <img
+                :src="project.image"
+                :alt="project.alt || project.title"
+                loading="lazy"
+                decoding="async"
+                class="project-image-img"
+              />
             </div>
           </div>
           <div class="project-content">

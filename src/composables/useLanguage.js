@@ -1,9 +1,29 @@
 import { ref, computed } from 'vue'
+import { useRouter } from 'vue-router'
+import { updateSEO } from '@/utils/seo'
 import protonedmusicImage from '../assets/images/protonedmusic.webp'
 import buildabotImage from '../assets/images/buildabotwide.svg'
 import samlinoImage from '../assets/images/samlino.png'
 
 const currentLanguage = ref('da')
+
+const normalizeDocumentLanguage = (lang) => {
+  switch (lang) {
+    case 'en':
+      return 'en'
+    case 'da':
+    default:
+      return 'da-DK'
+  }
+}
+
+const applyDocumentLanguage = (lang) => {
+  if (typeof document === 'undefined') {
+    return
+  }
+
+  document.documentElement.setAttribute('lang', normalizeDocumentLanguage(lang))
+}
 
 const translations = {
   en: {
@@ -22,6 +42,7 @@ const translations = {
       text2: 'I\'m constantly learning and exploring new technologies, always striving to create solutions that are both technically sound and user-friendly. Whether it\'s cleaning and analyzing datasets or building responsive web applications, I approach every project with attention to detail and a commitment to excellence.',
       downloadLabel: 'Prefer a PDF of my CV? ',
       downloadCta: 'Grab it here',
+      imageAlt: 'Portrait of Nicklas Vedeby, Data Technician and Web Developer',
     },
     education: {
       title: 'Education',
@@ -122,6 +143,7 @@ const translations = {
           title: 'Protoned Music',
           description: 'A web-based platform for a customer\'s music production, where the customer could create events, sell tickets, merch, and more. <br> <span class="highlight">Unfortunately, the customer has chosen to shut down, and the project is therefore no longer available.</span>',
           tags: ['Angular', 'SQL', 'C#', '.NET'],
+          alt: 'Screenshot from the Protoned Music events and ticketing platform',
         },
         {
           image: buildabotImage,
@@ -130,13 +152,15 @@ const translations = {
           tags: ['Angular', 'Discord.js', 'REST API', 'C#'],
           github: 'https://github.com/NicklasGV/Build-a-Bot',
           demo: 'https://buildabot.dk/',
+          alt: 'Preview of the Build a Bot Discord automation platform interface',
         },
         {
           image: samlinoImage,
           title: 'Samlino.dk',
           description: 'Is a comparison platform for comparing prices on mainly car insurance, but also unemployment funds and electricity. <br> <span class="highlight">I did not create Samlino.dk, I have worked for them as a developer.</span>',
           tags: ['Vue.js', 'Python', 'SQL', 'REST API'],
-          demo: 'https://www.samlino.dk/'
+          demo: 'https://www.samlino.dk/',
+          alt: 'Screenshot of the Samlino.dk comparison platform homepage',
         }
       ],
       github: 'GitHub',
@@ -185,6 +209,7 @@ const translations = {
       text2: 'Jeg lærer konstant og udforsker nye teknologier og stræber altid efter at skabe løsninger, der er både tekniske solide og brugervenlige. Uanset om det er rensning og analyse af datasæt eller bygning af responsive webapplikationer, går jeg til hvert projekt med opmærksomhed på detaljer og et engagement for ekspertise.',
       downloadLabel: 'Hvis du vil have en PDF af mit CV, ',
       downloadCta: 'kan du hente det her',
+      imageAlt: 'Portræt af Nicklas Vedeby, datatekniker og webudvikler',
     },
     education: {
       title: 'Uddannelse',
@@ -286,6 +311,7 @@ const translations = {
           description: 'Mit første "rigtige" projekt bygget sammen med nogle venner fra studiet. <br> En webbaseret platform for en kundes musik produktion, hvor kunden kunne skabe events, sælge billetter, merch og andet. <br> <span class="highlight">Kunden har desværre valgt at lukke ned, og projektet er derfor ikke længere tilgængeligt.</span>',
           tags: ['Angular', 'SQL', 'C#', '.NET'],
           github: 'https://github.com/NicklasGV/ProtonedMusic',
+          alt: 'Skærmbillede af Protoned Music platformen til events og billetsalg',
         },
         {
           image: buildabotImage,
@@ -294,13 +320,15 @@ const translations = {
           tags: ['Angular', 'Discord.js', 'REST API', 'C#'],
           github: 'https://github.com/NicklasGV/Build-a-Bot',
           demo: 'https://buildabot.dk/',
+          alt: 'Forhåndsvisning af Build a Bot-platformen til Discord-automatisering',
         },
         {
           image: samlinoImage,
           title: 'Samlino.dk',
           description: 'Er en sammenlignings platform for at sammenligne priser på hovedsageligt bil forsikringer. men også a-kasser og el. <br> <span class="highlight">Jeg har ikke lavet Samlino.dk, har arbejdet for dem som udvikler.</span>',
           tags: ['Vue.js', 'Python', 'SQL', 'REST API'],
-          demo: 'https://www.samlino.dk/'
+          demo: 'https://www.samlino.dk/',
+          alt: 'Skærmbillede af Samlino.dk sammenligningsplatformens forside',
         }
       ],
       github: 'GitHub',
@@ -335,13 +363,19 @@ const translations = {
 }
 
 export function useLanguage() {
+  const router = useRouter()
   const language = computed(() => currentLanguage.value)
   const t = computed(() => translations[currentLanguage.value])
 
   const setLanguage = (lang) => {
     if (translations[lang]) {
       currentLanguage.value = lang
-      localStorage.setItem('language', lang)
+      applyDocumentLanguage(lang)
+      if (typeof window !== 'undefined') {
+        localStorage.setItem('language', lang)
+        const currentMeta = router?.currentRoute?.value?.meta ?? {}
+        updateSEO({ ...currentMeta, url: window.location.href })
+      }
     }
   }
 
@@ -350,9 +384,16 @@ export function useLanguage() {
   }
 
   // Initialize from localStorage
-  const savedLanguage = localStorage.getItem('language')
+  const savedLanguage = typeof window !== 'undefined' ? localStorage.getItem('language') : null
   if (savedLanguage && translations[savedLanguage]) {
     currentLanguage.value = savedLanguage
+  }
+
+  applyDocumentLanguage(currentLanguage.value)
+
+  if (typeof window !== 'undefined') {
+    const currentMeta = router?.currentRoute?.value?.meta ?? {}
+    updateSEO({ ...currentMeta, url: window.location.href })
   }
 
   return {

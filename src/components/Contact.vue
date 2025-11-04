@@ -17,7 +17,7 @@
               </div>
               <div>
                 <h4>{{ t.contact.email }}</h4>
-                <a href="mailto:your.email@example.com">nvedeby@gmail.com</a>
+                <a href="mailto:nvedeby@gmail.com">nvedeby@gmail.com</a>
               </div>
             </div>
             <div class="contact-method">

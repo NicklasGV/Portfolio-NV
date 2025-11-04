@@ -3,6 +3,7 @@ import socialImageUrl from '@/assets/images/profile.png?url'
 const DEFAULT_TITLE = "Nicklas Vedeby — Portfolio"
 const DEFAULT_DESCRIPTION = "Nicklas Vedeby's portfolio showcasing his journey as a Data Technician and Web Developer, built with Vue.js 3 and Vite."
 const DEFAULT_TYPE = 'website'
+const SITE_URL = import.meta.env.VITE_SITE_URL || ''
 
 const getOgLocale = () => {
   const lang = document?.documentElement?.lang || 'da'
@@ -72,11 +73,20 @@ const upsertLinkTag = (rel, href) => {
 }
 
 const buildAbsoluteUrl = (path = '') => {
+  if (!path) {
+    return undefined
+  }
+
   if (path.startsWith('http')) {
     return path
   }
 
-  const base = window.location.origin
+  const base = SITE_URL || (typeof window !== 'undefined' ? window.location.origin : '')
+
+  if (!base) {
+    return path
+  }
+
   const normalizedPath = path.startsWith('/') ? path : `/${path}`
 
   return `${base}${normalizedPath}`
@@ -96,7 +106,10 @@ export const updateSEO = (meta = {}) => {
     url,
   } = meta
 
-  const canonicalUrl = url || window.location.href
+  const canonicalUrl = url
+    || (SITE_URL
+      ? `${SITE_URL}${window.location.pathname}${window.location.search}`
+      : window.location.href)
   const locale = meta.locale || getOgLocale()
 
   document.title = title

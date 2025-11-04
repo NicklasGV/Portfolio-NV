@@ -22,7 +22,14 @@
           </div>
         </div>
         <div class="about-image">
-          <img src="../assets/images/profile.png" alt="Profile Picture" width="430" height="400"/>
+          <img
+            src="../assets/images/profile.png"
+            :alt="t.about.imageAlt"
+            width="430"
+            height="400"
+            loading="lazy"
+            decoding="async"
+          />
         </div>
       </div>
     </div>
