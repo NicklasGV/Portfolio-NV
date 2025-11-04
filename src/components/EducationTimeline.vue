@@ -8,7 +8,7 @@
           <div class="timeline-content">
             <time class="timeline-year" :datetime="item.year">{{ item.year }}</time>
             <h3 class="timeline-title">{{ item.title }}</h3>
-            <p class="timeline-description">{{ item.description }}</p>
+            <p class="timeline-description" v-html="item.description"></p>
           </div>
         </div>
       </div>
@@ -98,6 +98,12 @@ const { t } = useLanguage()
   margin: 0;
   color: var(--text-secondary);
   line-height: 1.6;
+
+  :deep(.highlight) {
+    color: $primary-blue;
+    font-weight: 600;
+    border-radius: 4px;
+  }
 }
 
 @include mobile {

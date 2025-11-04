@@ -167,6 +167,8 @@ const handleSubmit = async () => {
 .contact-content {
   display: flex;
   justify-content: center;
+  align-items: flex-start;
+  flex-wrap: wrap;
   gap: 4rem;
   max-width: $breakpoint-xl;
   margin: 0 auto;
@@ -183,7 +185,8 @@ const handleSubmit = async () => {
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
-  width: 400px;
+  width: 100%;
+  max-width: 420px;
   margin-inline: auto;
 }
 
@@ -319,9 +322,49 @@ const handleSubmit = async () => {
 }
 
 @include tablet-down {
+  .contact {
+    padding: 70px 1.5rem;
+  }
+
   .contact-content {
-    grid-template-columns: 1fr;
+    flex-direction: column;
+    align-items: center;
+    gap: 2.5rem;
+  }
+
+  .contact-info {
+    width: 100%;
+    max-width: 520px;
+    text-align: center;
+  }
+
+  .contact-method {
+    width: 100%;
+  }
+
+  .contact-method h4,
+  .contact-method a {
+    text-align: left;
+  }
+}
+
+@include mobile {
+  .contact-content {
     gap: 2rem;
+  }
+
+  .contact-method {
+    gap: 0.75rem;
+  }
+
+  .contact-icon {
+    width: 44px;
+    height: 44px;
+
+    svg {
+      width: 22px;
+      height: 22px;
+    }
   }
 }
 </style>

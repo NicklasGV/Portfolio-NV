@@ -194,7 +194,7 @@ const translations = {
         {
           year: 'Maj 2025',
           title: 'Afsluttet Uddannelse',
-          description: 'Gennemførte min datatekniker uddannelse, udstyret med omfattende færdigheder inden for både dataanalyse, webudvikling og ETL processer. Jeg har også fået en masse erfaring med at arbejde i team og med andre udviklere.'
+          description: 'Gennemførte min datatekniker uddannelse, udstyret med omfattende færdigheder inden for både dataanalyse, webudvikling og ETL processer. Jeg har også fået en masse erfaring med at arbejde i team og med andre udviklere. <br> <span class="highlight">Bevis på afslutning, karakter og svendebrev kan tilsendes</span>'
         }
       ]
     },
@@ -207,7 +207,7 @@ const translations = {
           endDate: 'Marts 2021',
           title: 'Fuldtidsansat',
           company: 'Rema 1000',
-          description: 'Jeg arbejde i denne periode som fuldtidsansat i Rema 1000, hvor jeg blandt andet stod for frost afdelingen, både med bestilling men også opfyldning.'
+          description: 'Jeg arbejdede i denne periode som fuldtidsansat i Rema 1000, hvor jeg blandt andet stod for frost afdelingen, både med bestilling men også opfyldning.'
         },
         {
           startDate: 'Dec 2021',

@@ -71,6 +71,14 @@ const { t } = useLanguage()
   display: flex;
   justify-content: center;
   align-items: center;
+
+  img {
+    width: 100%;
+    max-width: 420px;
+    height: auto;
+    border-radius: 20px;
+    object-fit: cover;
+  }
 }
 
 .image-placeholder {
@@ -94,6 +102,16 @@ const { t } = useLanguage()
   .about-content {
     grid-template-columns: 1fr;
     gap: 2rem;
+    justify-items: center;
+    text-align: center;
+  }
+
+  .about-text {
+    max-width: 640px;
+  }
+
+  .lead {
+    font-size: 1.2rem;
   }
 
   .section-title {
