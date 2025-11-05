@@ -35,6 +35,18 @@ const translations = {
       projects: 'Projects',
       contact: 'Contact'
     },
+    hero: {
+      eyebrow: 'Data Technician & Web Developer',
+      title: 'Building <span class="highlight">data-driven</span> web experiences',
+      subtitle: 'I blend data insights with front-end craft to deliver fast, human-friendly products.',
+      primaryCta: 'View my work',
+      secondaryCta: "Let's collaborate",
+      stats: [
+        { value: '3+', label: 'Years exploring data & web' },
+        { value: '3', label: 'Projects & initiatives delivered' },
+        { value: '4', label: 'Languages I can work in' }
+      ]
+    },
     about: {
       title: 'About Me',
       lead: 'Welcome to my portfolio! I\'m a passionate <strong>Data Technician</strong> and <strong>Web Developer</strong> who loves transforming data into insights and building beautiful, functional web experiences.',
@@ -48,9 +60,9 @@ const translations = {
       title: 'Education',
       timeline: [
         {
-          year: 'March 2020',
-          title: 'Started Data Technician Education',
-          description: 'Started my journey into data technology and learned the fundamentals of data analysis, database systems, and programming.'
+          year: 'May 2025',
+          title: 'Completed Education',
+          description: 'Completed my data technician education, equipped with comprehensive skills in data analysis, web development, and ETL processes. I have also gained a lot of experience working in teams and with other developers. <br> <span class="highlight">Proof of completion, grades and certificate can be sent upon request</span>'
         },
         {
           year: '2024-2025',
@@ -58,9 +70,9 @@ const translations = {
           description: 'Worked as an apprentice at Samlino.dk, where I developed my skills in web development, data analysis, and ETL processes.'
         },
         {
-          year: 'May 2025',
-          title: 'Completed Education',
-          description: 'Completed my data technician education, equipped with comprehensive skills in data analysis, web development, and ETL processes. I have also gained a lot of experience working in teams and with other developers. <br> <span class="highlight">Proof of completion, grades and certificate can be sent upon request</span>'
+          year: 'March 2020',
+          title: 'Started Data Technician Education',
+          description: 'Started my journey into data technology and learned the fundamentals of data analysis, database systems, and programming.'
         }
       ]
     },
@@ -69,18 +81,11 @@ const translations = {
       present: 'Present',
       timeline: [
         {
-          startDate: 'Jan 2019',
-          endDate: 'March 2021',
-          title: 'Full-time Employee',
-          company: 'Rema 1000',
-          description: 'I worked in this period as a full-time employee at Rema 1000, where I was responsible for the frozen foods department, both with ordering and restocking.'
-        },
-        {
-          startDate: 'Dec 2021',
-          endDate: 'Jan 2024',
-          title: 'Closing Manager',
-          company: 'Rema 1000',
-          description: 'I worked as a closing manager at Rema 1000 for about 2 years, where I was responsible for leading the young workers who were there, and simultaneously managing the store and its closing.'
+          startDate: 'June 2024',
+          endDate: 'Nov 2025',
+          title: 'Developer',
+          company: 'Samlino.dk',
+          description: 'I have worked as a developer at Samlino where I have developed a lot of things in Python, but for the last 2 months I have focused a lot on the web development of the site and have therefore worked a lot with Vue.js.'
         },
         {
           startDate: 'Jan 2024',
@@ -90,11 +95,18 @@ const translations = {
           description: 'Worked as an apprentice at Samlino.dk, where I developed my skills in web development, data analysis, and ETL processes.'
         },
         {
-          startDate: 'June 2024',
-          endDate: 'Nov 2025',
-          title: 'Developer',
-          company: 'Samlino.dk',
-          description: 'I have worked as a developer at Samlino where I have developed a lot of things in Python, but for the last 2 months I have focused a lot on the web development of the site and have therefore worked a lot with Vue.js.'
+          startDate: 'Dec 2021',
+          endDate: 'Jan 2024',
+          title: 'Closing Manager',
+          company: 'Rema 1000',
+          description: 'I worked as a closing manager at Rema 1000 for about 2 years, where I was responsible for leading the young workers who were there, and simultaneously managing the store and its closing.'
+        },
+        {
+          startDate: 'Jan 2019',
+          endDate: 'March 2021',
+          title: 'Full-time Employee',
+          company: 'Rema 1000',
+          description: 'I worked in this period as a full-time employee at Rema 1000, where I was responsible for the frozen foods department, both with ordering and restocking.'
         }
       ]
     },
@@ -202,6 +214,18 @@ const translations = {
       contact: 'Kontakt',
       cv: 'Download CV'
     },
+    hero: {
+      eyebrow: 'Datatekniker & Webudvikler',
+      title: 'Jeg bygger <span class="highlight">datadrevne</span> webløsninger',
+      subtitle: 'Jeg kombinerer dataindsigt og moderne frontend for at skabe hurtige og menneskelige digitale oplevelser.',
+      primaryCta: 'Se mine projekter',
+      secondaryCta: 'Lad os tage en snak',
+      stats: [
+        { value: '3+', label: 'År med data og web' },
+        { value: '3', label: 'Leverede projekter og initiativer' },
+        { value: '4', label: 'Sprog jeg kan arbejde i' }
+      ]
+    },
     about: {
       title: 'Om Mig',
       lead: 'Velkommen til mit portfolio! Jeg er en passioneret <strong>Datatekniker</strong> og <strong>Webudvikler</strong> der elsker at omdanne data til indsigt og bygge smukke, funktionelle weboplevelser.',
@@ -215,9 +239,9 @@ const translations = {
       title: 'Uddannelse',
       timeline: [
         {
-          year: 'Marts 2020',
-          title: 'Påbegyndte Datatekniker Uddannelse',
-          description: 'Startede min rejse ind i datateknologi og lærte fundamenterne i dataanalyse, databasesystemer og programmering.'
+          year: 'Maj 2025',
+          title: 'Afsluttet Uddannelse',
+          description: 'Gennemførte min datatekniker uddannelse, udstyret med omfattende færdigheder inden for både dataanalyse, webudvikling og ETL processer. Jeg har også fået en masse erfaring med at arbejde i team og med andre udviklere. <br> <span class="highlight">Bevis på afslutning, karakter og svendebrev kan tilsendes</span>'
         },
         {
           year: '2024-2025',
@@ -225,10 +249,10 @@ const translations = {
           description: 'Arbejdede som elev hos Samlino.dk, hvor jeg udviklede mine færdigheder inden for webudvikling og dataanalyse og ETL processer.'
         },
         {
-          year: 'Maj 2025',
-          title: 'Afsluttet Uddannelse',
-          description: 'Gennemførte min datatekniker uddannelse, udstyret med omfattende færdigheder inden for både dataanalyse, webudvikling og ETL processer. Jeg har også fået en masse erfaring med at arbejde i team og med andre udviklere. <br> <span class="highlight">Bevis på afslutning, karakter og svendebrev kan tilsendes</span>'
-        }
+          year: 'Marts 2020',
+          title: 'Påbegyndte Datatekniker Uddannelse',
+          description: 'Startede min rejse ind i datateknologi og lærte fundamenterne i dataanalyse, databasesystemer og programmering.'
+        },
       ]
     },
     workExperience: {
@@ -236,18 +260,11 @@ const translations = {
       present: 'Nuværende',
       timeline: [
         {
-          startDate: 'Jan 2019',
-          endDate: 'Marts 2021',
-          title: 'Fuldtidsansat',
-          company: 'Rema 1000',
-          description: 'Jeg arbejdede i denne periode som fuldtidsansat i Rema 1000, hvor jeg blandt andet stod for frost afdelingen, både med bestilling men også opfyldning.'
-        },
-        {
-          startDate: 'Dec 2021',
-          endDate: 'Jan 2024',
-          title: 'Lukke ansvarlig',
-          company: 'Rema 1000',
-          description: 'Jeg arbejdede som lukke ansvarlig i Rema 1000 i ca 2 år, hvor jeg stod for at lede de ung arbejdere der var. og samtidig stå for butikken og dens lukning.'
+          startDate: 'Juni 2024',
+          endDate: 'Nov 2025',
+          title: 'Udvikler',
+          company: 'Samlino.dk',
+          description: 'Jeg har arbejdet som udvikler hos Samlino hvor jeg har udviklet en del ting i Python, men de sidste 2 måneder har jeg fokuseret meget på webudviklingen af siden og har derfor stået meget med Vue.js.'
         },
         {
           startDate: 'Jan 2024',
@@ -257,11 +274,18 @@ const translations = {
           description: 'Arbejdede som elev hos Samlino.dk, hvor jeg udviklede mine færdigheder inden for webudvikling og dataanalyse og ETL processer.'
         },
         {
-          startDate: 'Juni 2024',
-          endDate: 'Nov 2025',
-          title: 'Udvikler',
-          company: 'Samlino.dk',
-          description: 'Jeg har arbejdet som udvikler hos Samlino hvor jeg har udviklet en del ting i Python, men de sidste 2 måneder har jeg fokuseret meget på webudviklingen af siden og har derfor stået meget med Vue.js.'
+          startDate: 'Dec 2021',
+          endDate: 'Jan 2024',
+          title: 'Lukke ansvarlig',
+          company: 'Rema 1000',
+          description: 'Jeg arbejdede som lukke ansvarlig i Rema 1000 i ca 2 år, hvor jeg stod for at lede de ung arbejdere der var. og samtidig stå for butikken og dens lukning.'
+        },
+        {
+          startDate: 'Jan 2019',
+          endDate: 'Marts 2021',
+          title: 'Fuldtidsansat',
+          company: 'Rema 1000',
+          description: 'Jeg arbejdede i denne periode som fuldtidsansat i Rema 1000, hvor jeg blandt andet stod for frost afdelingen, både med bestilling men også opfyldning.'
         }
       ]
     },

@@ -1,16 +1,9 @@
 <template>
   <RouterView />
-  <teleport to="head">
-    <script
-      type="application/ld+json"
-      :key="'ld-json-person'"
-      v-text="structuredData"
-    />
-  </teleport>
 </template>
 
 <script setup>
-import { computed } from 'vue'
+import { computed, onBeforeUnmount, watch } from 'vue'
 import { RouterView, useRoute } from 'vue-router'
 import profileImageUrl from '@/assets/images/profile.png?url'
 
@@ -77,5 +70,43 @@ const structuredData = computed(() => {
     2,
   )
 })
+
+if (typeof window !== 'undefined') {
+  const scriptId = 'ld-json-person'
+  const selector = `script[data-ld-json="${scriptId}"]`
+
+  const upsertScript = (json) => {
+    const head = document.head || document.getElementsByTagName('head')[0]
+    if (!head) {
+      return
+    }
+
+    let script = head.querySelector(selector)
+    if (!script) {
+      script = document.createElement('script')
+      script.type = 'application/ld+json'
+      script.dataset.ldJson = scriptId
+      head.appendChild(script)
+    }
+
+    script.textContent = json
+  }
+
+  const stop = watch(
+    structuredData,
+    (json) => {
+      if (json) {
+        upsertScript(json)
+      }
+    },
+    { immediate: true },
+  )
+
+  onBeforeUnmount(() => {
+    stop()
+    const existing = document.head.querySelector(selector)
+    existing?.remove()
+  })
+}
 </script>
 

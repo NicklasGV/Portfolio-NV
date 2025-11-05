@@ -1,10 +1,11 @@
 <template>
   <div class="app">
     <Header />
+    <Hero />
     <About />
-    <EducationTimeline />
-    <Skills />
     <WorkExperience />
+    <Skills />
+    <EducationTimeline />
     <Projects />
     <Contact />
     <Footer />
@@ -13,6 +14,7 @@
 
 <script setup>
 import Header from '../components/Header.vue'
+import Hero from '../components/Hero.vue'
 import About from '../components/About.vue'
 import EducationTimeline from '../components/EducationTimeline.vue'
 import Skills from '../components/Skills.vue'
