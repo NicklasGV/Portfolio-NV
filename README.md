@@ -1,7 +1,10 @@
 # Portfolio-NV  
 A clean and responsive personal portfolio built with Vue.js and Vite.
 
-![Vue](https://img.shields.io/badge/Vue.js-3.0-42b883?logo=vuedotjs&logoColor=white)
+![Vite](https://img.shields.io/badge/vite-%23646CFF.svg?style=for-the-badge&logo=vite&logoColor=white)
+![Vue.js](https://img.shields.io/badge/vuejs-%2335495e.svg?style=for-the-badge&logo=vuedotjs&logoColor=%234FC08D)
+![Hostinger](https://img.shields.io/badge/hostinger-%23673DE6.svg?style=for-the-badge&logo=hostinger&logoColor=white)
+<br>
 ![CI](https://github.com/NicklasGV/Portfolio-NV/actions/workflows/deploy.yml/badge.svg)
 ![Last Commit](https://img.shields.io/github/last-commit/NicklasGV/Portfolio-NV.svg)
 
