@@ -73,3 +73,6 @@ This portfolio is more than just a web project. it’s a representation of my co
 ## 📝 License
 
 This project is open-source and available for personal use. Feel free to fork or adapt it for your own portfolio.
+
+![Vue](https://img.shields.io/badge/Vue.js-3.x-42b883?logo=vuedotjs&logoColor=white)
+![CI](https://github.com/NicklasGV/Portfolio-NV/actions/workflows/deploy.yml/badge.svg)
