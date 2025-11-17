@@ -1,82 +1,93 @@
-# Portfolio Site
+# Portfolio Website
 
-A modern, responsive portfolio website showcasing my journey as a Data Technician and Web Developer, built with Vue.js 3 and Vite.
+Welcome to my personal portfolio site—a modern, responsive showcase of my journey as a Data Technician and Web Developer.
 
-## Features
+## 🚀 About
 
-- ✨ Modern, beautiful UI with smooth animations
-- 📱 Fully responsive design for all devices
-- 🎨 Gradient-based color scheme
-- 📊 Skills visualization with progress bars
-- 📅 Education timeline
-- 💼 Projects showcase
-- 📧 Contact form
+This website is built using Vue.js 3 and Vite, and it reflects my professional path: combining data-oriented systems work with full-stack web development. It features a clean, visually engaging design, smooth animations, and a focus on usability across devices.
 
-## Tech Stack
+## ✨ Features
 
-- **Vue.js 3** - Progressive JavaScript framework
-- **Vite** - Next generation frontend tooling
-- **CSS3** - Modern styling with gradients and animations
+Modern UI with subtle, smooth animations
 
-## Getting Started
+Fully responsive layout for desktop, tablet, and mobile
 
-### Prerequisites
+Gradient-based color scheme for a cohesive visual identity
 
-- Node.js (v16 or higher)
-- npm or yarn
+Skills section with progress bars to visualize my competencies
 
-### Installation
+Education timeline to highlight my learning journey
 
-1. Install dependencies:
-```bash
+Projects gallery showcasing my web development work
+
+Contact form for direct outreach
+
+## 🛠 Tech Stack
+
+Vue.js 3 – A progressive JavaScript framework for building UI
+
+Vite – Fast, next-generation build tool for frontend projects
+
+CSS3 – Modern styling: gradients, animations, and responsive design
+
+(Optional) Backend/API for contact form (if applicable)
+
+## 🧰 Getting Started
+Prerequisites
+
+Node.js v16 or higher
+
+npm or yarn
+
+Installation
 npm install
-```
 
-2. Start the development server:
-```bash
+
+Start development server:
+
 npm run dev
-```
 
-3. Start the contact API server (in a separate terminal):
-```bash
+
+If using a separate contact-form API, start it in a new terminal:
+
 npm run server
-```
 
-3. Open your browser and navigate to `http://localhost:5173`
 
-### Build for Production
+Open your browser and navigate to:
 
-```bash
+http://localhost:5173
+
+Build for Production
 npm run build
-```
 
-The built files will be in the `dist` directory.
 
-### Preview Production Build
+The production-ready files will appear in the dist/ directory.
+To preview the production build locally:
 
-```bash
 npm run preview
-```
 
-## Customization
+## 🔧 Customization
+Update Personal Information
 
-### Update Personal Information
+In src/components/About.vue: update your bio/introduction
 
-- Edit `src/components/About.vue` to update your introduction
-- Modify `src/components/EducationTimeline.vue` to reflect your education journey
-- Update `src/components/Skills.vue` to showcase your skills
-- Add your projects in `src/components/Projects.vue`
-- Update contact information in `src/components/Contact.vue`
+In src/components/EducationTimeline.vue: update your education timeline entries
 
-### Styling
+In src/components/Skills.vue: list and adjust your skills and progress values
 
-The color scheme uses a purple gradient. To change it, update the gradient values in:
-- `src/App.vue` (background)
-- Component files (buttons, cards, etc.)
+In src/components/Projects.vue: add or update project entries (title, description, links)
 
-## Project Structure
+In src/components/Contact.vue: update email or contact form handling
 
-```
+Styling / Theme
+
+The site uses a purple-based gradient for its main accent colour. To change the theme:
+
+Edit background gradient in src/App.vue
+
+Update button/card colours in individual component styles or global CSS
+
+## 📁 Project Structure
 portfolio/
 ├── src/
 │   ├── components/
@@ -94,9 +105,11 @@ portfolio/
 ├── package.json
 ├── vite.config.js
 └── README.md
-```
 
-## License
+## 🎯 Why This Project
 
-This project is open source and available for personal use.
+This portfolio is more than just a web project—it’s a representation of my combined expertise in data systems and web development. It acts as both a personal brand asset and a practical demonstration of my technical and design capabilities.
 
+## 📝 License
+
+This project is open-source and available for personal use. Feel free to fork or adapt it for your own portfolio.
