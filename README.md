@@ -66,49 +66,9 @@ To preview the production build locally:
 
 npm run preview
 
-## 🔧 Customization
-Update Personal Information
-
-In src/components/About.vue: update your bio/introduction
-
-In src/components/EducationTimeline.vue: update your education timeline entries
-
-In src/components/Skills.vue: list and adjust your skills and progress values
-
-In src/components/Projects.vue: add or update project entries (title, description, links)
-
-In src/components/Contact.vue: update email or contact form handling
-
-Styling / Theme
-
-The site uses a purple-based gradient for its main accent colour. To change the theme:
-
-Edit background gradient in src/App.vue
-
-Update button/card colours in individual component styles or global CSS
-
-## 📁 Project Structure
-portfolio/
-├── src/
-│   ├── components/
-│   │   ├── Header.vue
-│   │   ├── About.vue
-│   │   ├── EducationTimeline.vue
-│   │   ├── Skills.vue
-│   │   ├── Projects.vue
-│   │   ├── Contact.vue
-│   │   └── Footer.vue
-│   ├── App.vue
-│   ├── main.js
-│   └── style.css
-├── index.html
-├── package.json
-├── vite.config.js
-└── README.md
-
 ## 🎯 Why This Project
 
-This portfolio is more than just a web project—it’s a representation of my combined expertise in data systems and web development. It acts as both a personal brand asset and a practical demonstration of my technical and design capabilities.
+This portfolio is more than just a web project. it’s a representation of my combined expertise in data systems and web development. It acts as both a personal brand asset and a practical demonstration of my technical and design capabilities.
 
 ## 📝 License
 
