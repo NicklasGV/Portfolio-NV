@@ -1,79 +1,77 @@
-# Portfolio Website
-
-Welcome to my personal portfolio site—a modern, responsive showcase of my journey as a Data Technician and Web Developer.
-
-## 🚀 About
-
-This website is built using Vue.js 3 and Vite, and it reflects my professional path: combining data-oriented systems work with full-stack web development. It features a clean, visually engaging design, smooth animations, and a focus on usability across devices.
-
-## ✨ Features
-
-Modern UI with subtle, smooth animations
-
-Fully responsive layout for desktop, tablet, and mobile
-
-Gradient-based color scheme for a cohesive visual identity
-
-Skills section with progress bars to visualize my competencies
-
-Education timeline to highlight my learning journey
-
-Projects gallery showcasing my web development work
-
-Contact form for direct outreach
-
-## 🛠 Tech Stack
-
-Vue.js 3 – A progressive JavaScript framework for building UI
-
-Vite – Fast, next-generation build tool for frontend projects
-
-CSS3 – Modern styling: gradients, animations, and responsive design
-
-(Optional) Backend/API for contact form (if applicable)
-
-## 🧰 Getting Started
-Prerequisites
-
-Node.js v16 or higher
-
-npm or yarn
-
-Installation
-npm install
-
-
-Start development server:
-
-npm run dev
-
-
-If using a separate contact-form API, start it in a new terminal:
-
-npm run server
-
-
-Open your browser and navigate to:
-
-http://localhost:5173
-
-Build for Production
-npm run build
-
-
-The production-ready files will appear in the dist/ directory.
-To preview the production build locally:
-
-npm run preview
-
-## 🎯 Why This Project
-
-This portfolio is more than just a web project. it’s a representation of my combined expertise in data systems and web development. It acts as both a personal brand asset and a practical demonstration of my technical and design capabilities.
-
-## 📝 License
-
-This project is open-source and available for personal use. Feel free to fork or adapt it for your own portfolio.
+# Portfolio-NV  
+A clean and responsive personal portfolio built with Vue.js and Vite.
 
 ![Vue](https://img.shields.io/badge/Vue.js-3.0-42b883?logo=vuedotjs&logoColor=white)
 ![CI](https://github.com/NicklasGV/Portfolio-NV/actions/workflows/deploy.yml/badge.svg)
-![Last Commit](https://img.shields.io/github/last-commit/NicklasGV/Portfolio-NV)
+![Last Commit](https://img.shields.io/github/last-commit/NicklasGV/Portfolio-NV.svg)
+
+---
+
+## Overview  
+Portfolio-NV is a portfolio site designed to present my experience as a **Data Technician** and **Web Developer**. The project focuses on clean design, performance, accessibility, and responsiveness across all devices.
+
+The site includes dedicated sections for skills, education, projects, and direct contact, providing a clear and structured overview of my background and technical capabilities.
+
+---
+
+## Features  
+- Modern and minimal user interface  
+- Fully responsive layout  
+- Gradient-based visual theme  
+- Skills visualization and categorization  
+- Education and certification timeline  
+- Project showcase with descriptions  
+- Integrated contact section  
+
+---
+
+## Tech Stack  
+- **Vue.js 3** – Component-driven front-end framework  
+- **Vite** – Fast development server and bundler  
+- **JavaScript (ES6+)**  
+- **CSS3** – Custom styling, layout, and animations  
+
+---
+
+## Getting Started  
+
+### Prerequisites  
+- Node.js 16 or higher  
+- npm or yarn  
+
+### Installation  
+```bash
+npm install
+```
+
+### Development server  
+```bash
+npm run dev
+```
+
+### Production build  
+```bash
+npm run build
+```
+
+### Preview production build  
+```bash
+npm run preview
+```
+
+---
+
+## Purpose  
+This project serves as both a professional portfolio and a demonstration of my front-end development skills. It reflects my experience working with modern web technologies and building clean, maintainable interfaces.
+
+---
+
+## Contact  
+- Website: https://nicklasvedeby.com
+- Gmail: nvedeby@gmail.com
+- LinkedIn: [Nicklas Vedeby](https://www.linkedin.com/in/nicklas-vedeby-3155351b7/)
+
+---
+
+## License  
+This project is open-source and available for personal use.
