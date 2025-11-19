@@ -4,6 +4,7 @@ import { updateSEO } from '@/utils/seo'
 import protonedmusicImage from '../assets/images/protonedmusic.webp'
 import buildabotImage from '../assets/images/buildabotwide.svg'
 import samlinoImage from '../assets/images/samlino.png'
+import martinRecommendationPdf from '../assets/pdfs/Nicklas-Vedeby-Anbefaling-Martin.pdf'
 
 const currentLanguage = ref('da')
 
@@ -29,16 +30,17 @@ const translations = {
   en: {
     nav: {
       about: 'About',
-      education: 'Education',
-      skills: 'Skills',
       workExperience: 'Work Experience',
+      references: 'References',
+      skills: 'Skills',
+      education: 'Education',
       projects: 'Projects',
       contact: 'Contact'
     },
     hero: {
       eyebrow: 'Data Technician & Web Developer',
-      title: 'Building <span class="highlight">data-driven</span> web experiences',
-      subtitle: 'I blend data insights with front-end craft to deliver fast, human-friendly products.',
+      title: 'Building <span class="highlight">modern</span> web experiences',
+      subtitle: 'I use data insights and modern frontend technologies to create user-friendly and fast web experiences.',
       primaryCta: 'View my work',
       secondaryCta: "Let's collaborate",
       stats: [
@@ -110,6 +112,46 @@ const translations = {
         }
       ]
     },
+    references: {
+      title: 'Recommendations',
+      subtitle: 'What colleagues say about working with me',
+      contactLabels: {
+        email: 'Email',
+        phone: 'Phone'
+      },
+      items: [
+        {
+          quote: 'Nicklas approaches every assignment with a positive, solution-oriented mindset and has grown rapidly as a developer. I give him my full recommendation and wish we could have kept him at Samlino.',
+          name: 'Martin Fjordvald',
+          role: 'Group CTO — Samlino Group',
+          contact: {
+            email: 'martin@samlinogroup.com',
+            phone: '+351910092830'
+          },
+          document: {
+            href: martinRecommendationPdf,
+            label: 'Read full recommendation (PDF)'
+          },
+          date: '19 Nov 2025'
+        }
+      ],
+      otherTitle: 'Other colleague references',
+      others: [
+        {
+          name: 'Jeppe T. Poulsen',
+          role: 'Head of Analytics — Samlino.dk',
+          email: 'jeppe.poulsen@samlino.dk'
+        },
+        {
+          name: 'Kenneth Berle',
+          role: 'Fullstack Developer — Samlino.dk, CEO Fenrir Games Studios',
+          email: 'light@fenrirgamestudio.dk',
+          phone: '+4540711759',
+          personalEmail: 'kenneth@berle.eu',
+          linkedin: 'https://www.linkedin.com/in/kennethberle/'
+        }
+      ]
+    },
     skills: {
       title: 'Skills',
       categories: [
@@ -142,7 +184,8 @@ const translations = {
             { name: 'Cursor AI', level: 75 },
             { name: 'ChatGPT', level: 70 },
             { name: 'Docker', level: 70 },
-            { name: 'AWS System', level: 65 }
+            { name: 'AWS System', level: 65 },
+            { name: 'PRINCE 2', level: 55 }
           ]
         }
       ]
@@ -207,23 +250,24 @@ const translations = {
   da: {
     nav: {
       about: 'Om Mig',
-      education: 'Uddannelse',
-      skills: 'Kompetencer',
       workExperience: 'Erfaring',
+      references: 'Referencer',
+      skills: 'Kompetencer',
+      education: 'Uddannelse',
       projects: 'Projekter',
       contact: 'Kontakt',
       cv: 'Download CV'
     },
     hero: {
       eyebrow: 'Datatekniker & Webudvikler',
-      title: 'Jeg bygger <span class="highlight">datadrevne</span> webløsninger',
-      subtitle: 'Jeg kombinerer dataindsigt og moderne frontend for at skabe hurtige og menneskelige digitale oplevelser.',
+      title: 'Jeg bygger <span class="highlight">moderne</span> webløsninger',
+      subtitle: 'Jeg bruger dataindsigt og moderne frontend-teknologier til at skabe brugervenlige og hurtige weboplevelser.',
       primaryCta: 'Se mine projekter',
       secondaryCta: 'Lad os tage en snak',
       stats: [
-        { value: '3+', label: 'År med data og web' },
-        { value: '3', label: 'Leverede projekter og initiativer' },
-        { value: '4', label: 'Sprog jeg kan arbejde i' }
+        { value: '3+', label: 'Års erfaring med data og web' },
+        { value: '3', label: 'Leveret projekter og initiativer' },
+        { value: '4', label: 'Sprog jeg arbejder i' }
       ]
     },
     about: {
@@ -289,6 +333,46 @@ const translations = {
         }
       ]
     },
+    references: {
+      title: 'Referencer',
+      subtitle: 'Hvad tidligere kolleger siger om at arbejde med mig',
+      contactLabels: {
+        email: 'E-mail',
+        phone: 'Telefon'
+      },
+      items: [
+        {
+          quote: 'Nicklas favner bredt og har taget imod samtlige opgavetyper med positiv og løsningsorienteret attitude, hvilket har gjort, at han tydeligt har udviklet sig som udvikler. Jeg giver derfor Nicklas min klare anbefaling og ville ønske, vi kunne have beholdt ham i virksomheden.',
+          name: 'Martin Fjordvald',
+          role: 'Group CTO — Samlino Group',
+          contact: {
+            email: 'martin@samlinogroup.com',
+            phone: '+351910092830'
+          },
+          document: {
+            href: martinRecommendationPdf,
+            label: 'Læs anbefalingen (PDF)'
+          },
+          date: '19. november 2025'
+        }
+      ],
+      otherTitle: 'Andre kollegers referencer',
+      others: [
+        {
+          name: 'Jeppe T. Poulsen',
+          role: 'Head of Analytics — Samlino.dk',
+          email: 'jeppe.poulsen@samlino.dk'
+        },
+        {
+          name: 'Kenneth Berle',
+          role: 'Fullstack Developer — Samlino.dk, CEO Fenrir Games Studios',
+          email: 'light@fenrirgamestudio.dk',
+          phone: '+4540711759',
+          personalEmail: 'kenneth@berle.eu',
+          linkedin: 'https://www.linkedin.com/in/kennethberle/'
+        }
+      ]
+    },
     skills: {
       title: 'Kompetencer',
       categories: [
@@ -321,7 +405,8 @@ const translations = {
             { name: 'Cursor AI', level: 75 },
             { name: 'ChatGPT', level: 70 },
             { name: 'Docker', level: 70 },
-            { name: 'AWS System', level: 65 }
+            { name: 'AWS System', level: 65 },
+            { name: 'PRINCE 2', level: 55 }
           ]
         }
       ]
