@@ -360,14 +360,14 @@ const referencesSection = computed(() => {
 .more-role {
   margin: 0;
   color: var(--text-secondary);
-  font-size: 0.9rem;
+  font-size: 14px;
 }
 
 .more-contact {
   display: inline-flex;
   align-items: center;
   gap: 0.4rem;
-  font-size: 0.9rem;
+  font-size: 14px;
   color: $primary-blue;
   text-decoration: none;
   font-weight: 500;
@@ -378,6 +378,11 @@ const referencesSection = computed(() => {
 }
 
 @include mobile {
+
+  .more-contact {
+    font-size: 10px;
+  }
+
   .references {
     padding: 60px 1.5rem;
   }
