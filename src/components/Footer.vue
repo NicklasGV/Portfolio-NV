@@ -17,7 +17,7 @@ import { useLanguage } from '../composables/useLanguage'
 
 const { t } = useLanguage()
 const currentYear = new Date().getFullYear()
-const cvUrl = new URL('../assets/pdfs/cv-nicklas-vedeby.pdf', import.meta.url)
+const cvUrl = new URL('../assets/pdfs/CV_nicklas_vedeby.pdf', import.meta.url)
 </script>
 
 <style lang="scss" scoped>
