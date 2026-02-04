@@ -14,7 +14,7 @@
               :href="cvUrl"
               download
               target="_blank"
-              rel="noopener"
+              rel="nofollow noopener noreferrer"
             >
               {{ t.about.downloadCta }}
             </a>

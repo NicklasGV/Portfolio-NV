@@ -1,102 +1,80 @@
-# Portfolio Site
+# Portfolio-NV  
+A clean and responsive personal portfolio built with Vue.js and Vite.
 
-A modern, responsive portfolio website showcasing my journey as a Data Technician and Web Developer, built with Vue.js 3 and Vite.
+![Vite](https://img.shields.io/badge/vite-%23646CFF.svg?style=for-the-badge&logo=vite&logoColor=white)
+![Vue.js](https://img.shields.io/badge/vuejs-%2335495e.svg?style=for-the-badge&logo=vuedotjs&logoColor=%234FC08D)
+![Hostinger](https://img.shields.io/badge/hostinger-%23673DE6.svg?style=for-the-badge&logo=hostinger&logoColor=white)
+<br>
+![CI](https://github.com/NicklasGV/Portfolio-NV/actions/workflows/deploy.yml/badge.svg)
+![Last Commit](https://img.shields.io/github/last-commit/NicklasGV/Portfolio-NV.svg)
 
-## Features
+---
 
-- ✨ Modern, beautiful UI with smooth animations
-- 📱 Fully responsive design for all devices
-- 🎨 Gradient-based color scheme
-- 📊 Skills visualization with progress bars
-- 📅 Education timeline
-- 💼 Projects showcase
-- 📧 Contact form
+## Overview  
+Portfolio-NV is a portfolio site designed to present my experience as a **Data Technician** and **Web Developer**. The project focuses on clean design, performance, accessibility, and responsiveness across all devices.
 
-## Tech Stack
+The site includes dedicated sections for skills, education, projects, and direct contact, providing a clear and structured overview of my background and technical capabilities.
 
-- **Vue.js 3** - Progressive JavaScript framework
-- **Vite** - Next generation frontend tooling
-- **CSS3** - Modern styling with gradients and animations
+---
 
-## Getting Started
+## Features  
+- Modern and minimal user interface  
+- Fully responsive layout  
+- Gradient-based visual theme  
+- Skills visualization and categorization  
+- Education and certification timeline  
+- Project showcase with descriptions  
+- Integrated contact section  
 
-### Prerequisites
+---
 
-- Node.js (v16 or higher)
-- npm or yarn
+## Tech Stack  
+- **Vue.js 3** – Component-driven front-end framework  
+- **Vite** – Fast development server and bundler  
+- **JavaScript (ES6+)**  
+- **CSS3** – Custom styling, layout, and animations  
 
-### Installation
+---
 
-1. Install dependencies:
+## Getting Started  
+
+### Prerequisites  
+- Node.js 16 or higher  
+- npm or yarn  
+
+### Installation  
 ```bash
 npm install
 ```
 
-2. Start the development server:
+### Development server  
 ```bash
 npm run dev
 ```
 
-3. Start the contact API server (in a separate terminal):
-```bash
-npm run server
-```
-
-3. Open your browser and navigate to `http://localhost:5173`
-
-### Build for Production
-
+### Production build  
 ```bash
 npm run build
 ```
 
-The built files will be in the `dist` directory.
-
-### Preview Production Build
-
+### Preview production build  
 ```bash
 npm run preview
 ```
 
-## Customization
+---
 
-### Update Personal Information
+## Purpose  
+This project serves as both a professional portfolio and a demonstration of my front-end development skills. It reflects my experience working with modern web technologies and building clean, maintainable interfaces.
 
-- Edit `src/components/About.vue` to update your introduction
-- Modify `src/components/EducationTimeline.vue` to reflect your education journey
-- Update `src/components/Skills.vue` to showcase your skills
-- Add your projects in `src/components/Projects.vue`
-- Update contact information in `src/components/Contact.vue`
+---
 
-### Styling
+## Contact  
+- Website: https://nicklasvedeby.com
+- Gmail: nvedeby@gmail.com
+- LinkedIn: [Nicklas Vedeby](https://www.linkedin.com/in/nicklas-vedeby-3155351b7/)
 
-The color scheme uses a purple gradient. To change it, update the gradient values in:
-- `src/App.vue` (background)
-- Component files (buttons, cards, etc.)
+---
 
-## Project Structure
-
-```
-portfolio/
-├── src/
-│   ├── components/
-│   │   ├── Header.vue
-│   │   ├── About.vue
-│   │   ├── EducationTimeline.vue
-│   │   ├── Skills.vue
-│   │   ├── Projects.vue
-│   │   ├── Contact.vue
-│   │   └── Footer.vue
-│   ├── App.vue
-│   ├── main.js
-│   └── style.css
-├── index.html
-├── package.json
-├── vite.config.js
-└── README.md
-```
-
-## License
-
-This project is open source and available for personal use.
-
+## License  
+This project is open-source and available for personal use.

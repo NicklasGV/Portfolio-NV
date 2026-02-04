@@ -4,6 +4,7 @@
     <Hero />
     <About />
     <WorkExperience />
+    <References />
     <Skills />
     <EducationTimeline />
     <Projects />
@@ -17,6 +18,7 @@ import Header from '../components/Header.vue'
 import Hero from '../components/Hero.vue'
 import About from '../components/About.vue'
 import EducationTimeline from '../components/EducationTimeline.vue'
+import References from '../components/References.vue'
 import Skills from '../components/Skills.vue'
 import Projects from '../components/Projects.vue'
 import WorkExperience from '../components/workExperience.vue'

@@ -1,4 +1,6 @@
 <template>
+  <Snowfall />
+  <NewYear />
   <RouterView />
 </template>
 
@@ -6,6 +8,8 @@
 import { computed, onBeforeUnmount, watch } from 'vue'
 import { RouterView, useRoute } from 'vue-router'
 import profileImageUrl from '@/assets/images/profile.png?url'
+import Snowfall from '@/components/Snowfall.vue'
+import NewYear from '@/components/NewYear.vue'
 
 const route = useRoute()
 
