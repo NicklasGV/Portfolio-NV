@@ -192,19 +192,13 @@ const translations = {
           skills: [
             { name: 'Git', level: 85 },
             { name: 'REST APIs', level: 80 },
-            { name: 'Shopify', level: 65 },
+            { name: 'Shopify', level: 70 },
             { name: 'Cursor AI', level: 75 },
-            { name: 'ChatGPT', level: 70 },
+            { name: 'ClaudeAI', level: 70 },
+            { name: 'ChatGPT', level: 80 },
             { name: 'Docker', level: 70 },
             { name: 'AWS System', level: 65 },
             { name: 'PRINCE 2', level: 55 }
-          ]
-        },
-        {
-          title: 'Languages',
-          skills: [
-            { name: 'Danish', level: 100 },
-            { name: 'English', level: 75 }
           ]
         }
       ]
@@ -225,7 +219,6 @@ const translations = {
           description: 'A web-based platform for building and testing bots for Discord. This project is mine and a friend\'s, made as a final project in our education. It\'s still being worked on here and there but is currently dormant.',
           tags: ['Angular', 'Discord.js', 'REST API', 'C#'],
           github: 'https://github.com/NicklasGV/Build-a-Bot',
-          demo: 'https://buildabot.dk/',
           alt: 'Preview of the Build a Bot Discord automation platform interface',
         },
         {
@@ -432,19 +425,13 @@ const translations = {
           skills: [
             { name: 'Git', level: 85 },
             { name: 'REST APIs', level: 80 },
-            { name: 'Shopify', level: 65 },
+            { name: 'Shopify', level: 70 },
             { name: 'Cursor AI', level: 75 },
-            { name: 'ChatGPT', level: 70 },
+            { name: 'ChatGPT', level: 80 },
+            { name: 'ClaudeAI', level: 70 },
             { name: 'Docker', level: 70 },
             { name: 'AWS System', level: 65 },
             { name: 'PRINCE 2', level: 55 }
-          ]
-        },
-        {
-          title: 'Sprog',
-          skills: [
-            { name: 'Dansk', level: 100 },
-            { name: 'Engelsk', level: 75 }
           ]
         }
       ]
@@ -466,7 +453,6 @@ const translations = {
           description: 'En webbaseret platform for at bygge og teste bot\'s til Discord. Dette projekt er mit og en vens. Som er lavet som et slut projekt i vores uddannelse. <br> <span class="highlight">Det bygges stadig på her og der men står pt i dvale.</span>',
           tags: ['Angular', 'Discord.js', 'REST API', 'C#'],
           github: 'https://github.com/NicklasGV/Build-a-Bot',
-          demo: 'https://buildabot.dk/',
           alt: 'Forhåndsvisning af Build a Bot-platformen til Discord-automatisering',
         },
         {
