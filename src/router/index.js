@@ -12,7 +12,7 @@ const router = createRouter({
       component: () => import('../pages/Home.vue'),
       meta: {
         title: 'Nicklas Vedeby — Portfolio',
-        description: "Nicklas Vedeby's portfolio showcasing his journey as a Data Technician and Web Developer, featuring case studies, experience, and contact details.",
+        description: "Nicklas Vedeby's portfolio showcasing his journey as a Fullstack Developer, featuring case studies, experience, and contact details.",
         type: 'website',
       },
     },

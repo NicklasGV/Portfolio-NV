@@ -38,7 +38,7 @@ const translations = {
       contact: 'Contact'
     },
     hero: {
-      eyebrow: 'Data Technician & Web Developer',
+      eyebrow: 'Fullstack Developer',
       title: 'Building <span class="highlight">modern</span> web experiences',
       subtitle: 'I use data insights and modern frontend technologies to create user-friendly and fast web experiences.',
       primaryCta: 'View my work',
@@ -51,9 +51,9 @@ const translations = {
     },
     about: {
       title: 'About Me',
-      lead: 'Welcome to my portfolio! I\'m a passionate <strong>Data Technician</strong> and <strong>Web Developer</strong> who loves transforming data into insights and building beautiful, functional web experiences.',
-      text1: 'I began my journey in data technology around 2020 and completed my education in May 2025. Throughout my studies, I\'ve developed expertise in data analysis, database management, and full-stack web development.',
-      text2: 'I\'m constantly learning and exploring new technologies, always striving to create solutions that are both technically sound and user-friendly. Whether it\'s cleaning and analyzing datasets or building responsive web applications, I approach every project with attention to detail and a commitment to excellence.',
+      lead: 'Welcome to my portfolio! I\'m a passionate <strong>Fullstack Developer</strong> who loves building beautiful, functional web experiences from the frontend all the way through the backend.',
+      text1: 'I began my journey in data technology around 2020 and completed my Data Technician education, specializing in programming, in May 2025. As an apprentice and later developer at Samlino, I worked with Nuxt and the Storyblok CMS on the frontend, and with Python on the backend. I\'ve also built my own site from scratch using Angular with a C# API backend.',
+      text2: 'I\'m always eager to learn new ways of building for the web, whether that\'s frontend styling and UX or getting deeper into databases and backend architecture. I approach every project with attention to detail and a genuine drive to figure out the best way to build it.',
       downloadLabel: 'Prefer a PDF of my CV? ',
       downloadCta: 'Grab it here',
       imageAlt: 'Portrait of Nicklas Vedeby, Data Technician and Web Developer',
@@ -83,18 +83,25 @@ const translations = {
       present: 'Present',
       timeline: [
         {
-          startDate: 'June 2024',
-          endDate: 'Nov 2025',
-          title: 'Developer',
-          company: 'Samlino.dk',
-          description: 'I have worked as a developer at Samlino where I have developed a lot of things in Python, but for the last 2 months I have focused a lot on the web development of the site and have therefore worked a lot with Vue.js.'
+          startDate: 'Apr 2026',
+          endDate: null,
+          title: 'Junior Product Developer',
+          company: 'Sophisticated GEEK',
+          description: 'I work at Sophisticated GEEK, where I focus on product development and concept development. I also help maintain websites running on Shopify.'
         },
         {
-          startDate: 'Jan 2024',
+          startDate: 'June 2025',
+          endDate: 'Nov 2025',
+          title: 'Junior Developer',
+          company: 'Samlino.dk',
+          description: 'During this period I worked mostly frontend-focused. I worked on several of our components, both streamlining them and updating them to fit our CMS system.'
+        },
+        {
+          startDate: 'Feb 2024',
           endDate: 'May 2025',
           title: 'Data Technician Apprentice',
           company: 'Samlino.dk',
-          description: 'Worked as an apprentice at Samlino.dk, where I developed my skills in web development, data analysis, and ETL processes.'
+          description: 'Completed my Data Technician education specializing in programming here. I worked with languages like Java, JavaScript, TypeScript, HTML, CSS and Python, and with frameworks such as Angular and Nuxt.'
         },
         {
           startDate: 'Dec 2021',
@@ -169,10 +176,14 @@ const translations = {
           title: 'Web Development',
           skills: [
             { name: 'Vue.js', level: 90 },
+            { name: 'Nuxt', level: 80 },
             { name: 'Angular', level: 90 },
             { name: 'JavaScript', level: 90 },
+            { name: 'TypeScript', level: 80 },
             { name: 'HTML/CSS', level: 95 },
+            { name: 'UI/UX', level: 75 },
             { name: 'Node.js', level: 60 },
+            { name: 'C#', level: 65 },
             { name: 'Responsive Design', level: 90 }
           ]
         },
@@ -181,11 +192,19 @@ const translations = {
           skills: [
             { name: 'Git', level: 85 },
             { name: 'REST APIs', level: 80 },
+            { name: 'Shopify', level: 65 },
             { name: 'Cursor AI', level: 75 },
             { name: 'ChatGPT', level: 70 },
             { name: 'Docker', level: 70 },
             { name: 'AWS System', level: 65 },
             { name: 'PRINCE 2', level: 55 }
+          ]
+        },
+        {
+          title: 'Languages',
+          skills: [
+            { name: 'Danish', level: 100 },
+            { name: 'English', level: 75 }
           ]
         }
       ]
@@ -259,7 +278,7 @@ const translations = {
       cv: 'Download CV'
     },
     hero: {
-      eyebrow: 'Datatekniker & Webudvikler',
+      eyebrow: 'Fullstackudvikler',
       title: 'Jeg bygger <span class="highlight">moderne</span> webløsninger',
       subtitle: 'Jeg bruger dataindsigt og moderne frontend-teknologier til at skabe brugervenlige og hurtige weboplevelser.',
       primaryCta: 'Se mine projekter',
@@ -272,9 +291,9 @@ const translations = {
     },
     about: {
       title: 'Om Mig',
-      lead: 'Velkommen til mit portfolio! Jeg er en passioneret <strong>Datatekniker</strong> og <strong>Webudvikler</strong> der elsker at omdanne data til indsigt og bygge smukke, funktionelle weboplevelser.',
-      text1: 'Jeg startede min rejse inden for datateknologi omkring 2020 og afsluttede min uddannelse i maj 2025. Gennem mine studier har jeg udviklet ekspertise inden for dataanalyse, databaseadministration og full-stack webudvikling.',
-      text2: 'Jeg lærer konstant og udforsker nye teknologier og stræber altid efter at skabe løsninger, der er både tekniske solide og brugervenlige. Uanset om det er rensning og analyse af datasæt eller bygning af responsive webapplikationer, går jeg til hvert projekt med opmærksomhed på detaljer og et engagement for ekspertise.',
+      lead: 'Velkommen til mit portfolio! Jeg er en passioneret <strong>Fullstackudvikler</strong>, der elsker at bygge smukke, funktionelle weboplevelser - fra frontend og hele vejen igennem backend.',
+      text1: 'Jeg startede min rejse inden for datateknologi omkring 2020 og afsluttede min datatekniker uddannelse med speciale i programmering i maj 2025. Som elev og senere udvikler hos Samlino har jeg siddet med Nuxt og Storyblok CMS i frontend, og arbejdet med Python i backend. Jeg har også selv lavet en side fra bunden med Angular og en C# API-backend.',
+      text2: 'Jeg er altid klar på at lære nye måder at webudvikle på, uanset om det er styling og udseende i frontend, eller at dykke dybere ned i databaser og backend-arkitektur. Jeg går til hvert projekt med opmærksomhed på detaljer og en oprigtig lyst til at finde den bedst mulige løsning.',
       downloadLabel: 'Hvis du vil have en PDF af mit CV, ',
       downloadCta: 'kan du hente det her',
       imageAlt: 'Portræt af Nicklas Vedeby, datatekniker og webudvikler',
@@ -304,18 +323,25 @@ const translations = {
       present: 'Nuværende',
       timeline: [
         {
-          startDate: 'Juni 2024',
-          endDate: 'Nov 2025',
-          title: 'Udvikler',
-          company: 'Samlino.dk',
-          description: 'Jeg har arbejdet som udvikler hos Samlino hvor jeg har udviklet en del ting i Python, men de sidste 2 måneder har jeg fokuseret meget på webudviklingen af siden og har derfor stået meget med Vue.js.'
+          startDate: 'Apr. 2026',
+          endDate: null,
+          title: 'Junior Produkt Udvikler',
+          company: 'Sophisticated GEEK',
+          description: 'Jeg arbejder hos Sophisticated GEEK, hvor jeg arbejder med produktudvikling og konceptudvikling. Jeg hjælper også med at holde hjemmesider vedlige, som kører på Shopify.'
         },
         {
-          startDate: 'Jan 2024',
+          startDate: 'Jun. 2025',
+          endDate: 'Nov. 2025',
+          title: 'Junior Udvikler',
+          company: 'Samlino.dk',
+          description: 'Jeg arbejdede i denne periode mest frontend-fokuseret. Jeg sad med en del af de forskellige komponenter, både med at få dem streamlinet, men også opdateret til at passe til vores CMS-system.'
+        },
+        {
+          startDate: 'Feb. 2024',
           endDate: 'Maj 2025',
           title: 'Datatekniker Elev',
           company: 'Samlino.dk',
-          description: 'Arbejdede som elev hos Samlino.dk, hvor jeg udviklede mine færdigheder inden for webudvikling og dataanalyse og ETL processer.'
+          description: 'Her færdiggjorde jeg min uddannelse indenfor Datatekniker med speciale i programmering. Jeg har været igennem sprog som Java, JavaScript, TypeScript, HTML, CSS og Python, og arbejdet med frameworks som Angular og Nuxt.'
         },
         {
           startDate: 'Dec 2021',
@@ -390,10 +416,14 @@ const translations = {
           title: 'Webudvikling',
           skills: [
             { name: 'Vue.js', level: 90 },
+            { name: 'Nuxt', level: 80 },
             { name: 'Angular', level: 90 },
             { name: 'JavaScript', level: 90 },
+            { name: 'TypeScript', level: 80 },
             { name: 'HTML/CSS', level: 95 },
+            { name: 'UI/UX', level: 75 },
             { name: 'Node.js', level: 60 },
+            { name: 'C#', level: 65 },
             { name: 'Responsivt Design', level: 90 }
           ]
         },
@@ -402,11 +432,19 @@ const translations = {
           skills: [
             { name: 'Git', level: 85 },
             { name: 'REST APIs', level: 80 },
+            { name: 'Shopify', level: 65 },
             { name: 'Cursor AI', level: 75 },
             { name: 'ChatGPT', level: 70 },
             { name: 'Docker', level: 70 },
             { name: 'AWS System', level: 65 },
             { name: 'PRINCE 2', level: 55 }
+          ]
+        },
+        {
+          title: 'Sprog',
+          skills: [
+            { name: 'Dansk', level: 100 },
+            { name: 'Engelsk', level: 75 }
           ]
         }
       ]

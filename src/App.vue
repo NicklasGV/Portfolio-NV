@@ -51,15 +51,14 @@ const structuredData = computed(() => {
       '@context': 'https://schema.org',
       '@type': 'Person',
       name: 'Nicklas Vedeby',
-      jobTitle: 'Data Technician & Web Developer',
+      jobTitle: 'Fullstack Developer',
       url: canonical,
       image: toAbsolute(profileImageUrl),
       email: 'mailto:nvedeby@gmail.com',
-      telephone: '+4560524646',
+      telephone: '+4560524647',
       worksFor: {
         '@type': 'Organization',
-        name: 'Samlino.dk',
-        url: 'https://www.samlino.dk/',
+        name: 'Sophisticated GEEK',
       },
       sameAs: [
         'https://www.linkedin.com/in/nicklas-vedeby-3155351b7/',

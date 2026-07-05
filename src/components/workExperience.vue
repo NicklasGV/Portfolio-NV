@@ -28,7 +28,7 @@ const formatDateRange = (startDate, endDate) => {
   if (endDate) {
     return `${startDate} - ${endDate}`
   }
-  return `${startDate} - ${t.workExperience.present || 'Present'}`
+  return `${startDate} - ${t.value.workExperience.present || 'Present'}`
 }
 </script>
 

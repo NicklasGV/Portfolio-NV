@@ -28,7 +28,7 @@
               </div>
               <div>
                 <h4>{{ t.contact.phone }}</h4>
-                <a href="tel:+4560524646">+45 60 52 46 46</a>
+                <a href="tel:+4560524647">+45 60 52 46 47</a>
               </div>
             </div>
             <div class="contact-method">
@@ -57,7 +57,7 @@
             </a>
           </p>
         </div>
-        <!-- <form class="contact-form" @submit.prevent="handleSubmit">
+        <form class="contact-form" @submit.prevent="handleSubmit">
           <div class="form-group">
             <label for="name">{{ t.contact.form.name }}</label>
             <input 
@@ -104,7 +104,7 @@
           >
             {{ status.message }}
           </p>
-        </form> -->
+        </form>
       </div>
     </div>
   </section>
@@ -125,7 +125,8 @@ const form = ref({
 
 const status = ref(null)
 const isSubmitting = ref(false)
-const contactEndpoint = import.meta.env.VITE_CONTACT_ENDPOINT || '/api/contact'
+const WEB3FORMS_ENDPOINT = 'https://api.web3forms.com/submit'
+const WEB3FORMS_ACCESS_KEY = import.meta.env.VITE_WEB3FORMS_ACCESS_KEY || 'f8d22d9f-079c-4f86-ad91-ae38ac4596b1'
 
 const handleSubmit = async () => {
   if (isSubmitting.value) {
@@ -139,12 +140,18 @@ const handleSubmit = async () => {
   }
 
   try {
-    const response = await fetch(contactEndpoint, {
+    const response = await fetch(WEB3FORMS_ENDPOINT, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(form.value),
+      body: JSON.stringify({
+        access_key: WEB3FORMS_ACCESS_KEY,
+        subject: `New portfolio contact from ${form.value.name}`,
+        name: form.value.name,
+        email: form.value.email,
+        message: form.value.message,
+      }),
     })
 
     const result = await response.json().catch(() => ({}))

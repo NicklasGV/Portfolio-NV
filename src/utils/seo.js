@@ -1,7 +1,7 @@
 import socialImageUrl from '@/assets/images/profile.png?url'
 
 const DEFAULT_TITLE = "Nicklas Vedeby — Portfolio"
-const DEFAULT_DESCRIPTION = "Nicklas Vedeby's portfolio showcasing his journey as a Data Technician and Web Developer, built with Vue.js 3 and Vite."
+const DEFAULT_DESCRIPTION = "Nicklas Vedeby's portfolio showcasing his journey as a Fullstack Developer, built with Vue.js 3 and Vite."
 const DEFAULT_TYPE = 'website'
 const SITE_URL = import.meta.env.VITE_SITE_URL || ''
 

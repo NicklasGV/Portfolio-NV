@@ -11,7 +11,7 @@ A clean and responsive personal portfolio built with Vue.js and Vite.
 ---
 
 ## Overview  
-Portfolio-NV is a portfolio site designed to present my experience as a **Data Technician** and **Web Developer**. The project focuses on clean design, performance, accessibility, and responsiveness across all devices.
+Portfolio-NV is a portfolio site designed to present my experience as a **Fullstack Developer**. The project focuses on clean design, performance, accessibility, and responsiveness across all devices.
 
 The site includes dedicated sections for skills, education, projects, and direct contact, providing a clear and structured overview of my background and technical capabilities.
 
