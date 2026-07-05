@@ -76,5 +76,52 @@ This project serves as both a professional portfolio and a demonstration of my f
 
 ---
 
+## Deployment
+
+This project uses **GitHub Actions** to automatically deploy tagged releases.
+
+### Creating a deployment
+
+1. Commit and push your changes to the desired branch.
+2. Create a new Git tag following semantic versioning:
+
+```bash
+git tag v1.0.0
+```
+
+3. Push the tag to GitHub:
+
+```bash
+git push origin v1.0.0
+```
+
+Once the tag is pushed, the GitHub Actions deployment workflow will automatically build and deploy the application.
+
+### Updating an existing tag
+
+If you need to redeploy using the same tag (not recommended for releases), delete the local and remote tag first:
+
+```bash
+git tag -d v1.0.0
+git push origin :refs/tags/v1.0.0
+```
+
+Then recreate and push it:
+
+```bash
+git tag v1.0.0
+git push origin v1.0.0
+```
+
+### Recommended versioning
+
+Use Semantic Versioning (SemVer):
+
+- `v1.0.0` – Major release
+- `v1.1.0` – New features
+- `v1.1.1` – Bug fixes
+
+---
+
 ## License  
 This project is open-source and available for personal use.

@@ -272,6 +272,10 @@ const handleSubmit = async () => {
   padding: 2rem;
   border-radius: 16px;
   transition: background-color 0.3s;
+  width: 800px;
+  @include mobile {
+    width: 100%;
+  }
 }
 
 .form-group {
