@@ -73,9 +73,20 @@ const handlePointerLeave = () => {
   })
 }
 
+const prefersReducedMotion = () =>
+  typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches
+
 onMounted(() => {
-  heroSection.value?.style.setProperty('--cursor-opacity', isFinePointer() ? '0.6' : '0')
   setCursorPosition(50, 50)
+
+  // Following the cursor repaints a viewport-sized blended gradient on every
+  // move, so skip the whole thing when reduced motion is requested.
+  if (prefersReducedMotion()) {
+    heroSection.value?.style.setProperty('--cursor-opacity', '0')
+    return
+  }
+
+  heroSection.value?.style.setProperty('--cursor-opacity', isFinePointer() ? '0.6' : '0')
   heroSection.value?.addEventListener('pointermove', handlePointerMove)
   heroSection.value?.addEventListener('pointerleave', handlePointerLeave)
 })
@@ -302,6 +313,23 @@ h1 {
 
   .stats {
     grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  // These run forever, and the stat cards also carry a backdrop-filter,
+  // which keeps the compositor busy for the whole visit.
+  .orb,
+  .stat {
+    animation: none;
+  }
+
+  .cursor-glow {
+    display: none;
+  }
+
+  .cta:hover {
+    transform: none;
   }
 }
 

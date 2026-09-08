@@ -17,6 +17,17 @@
         <li><a href="#contact" @click="scrollTo('contact')">{{ t.nav.contact }}</a></li>
       </ul>
       <div class="nav-right">
+        <button
+          class="palette-trigger"
+          @click="openPalette"
+          :aria-label="t.palette.openLabel"
+          :title="t.palette.openLabel"
+        >
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+            <path d="M4 17l6-5-6-5M12 19h8" />
+          </svg>
+          <kbd class="palette-trigger__kbd">{{ shortcutLabel }}</kbd>
+        </button>
         <button class="dark-mode-toggle" @click="toggleDarkMode" :aria-label="isDarkMode ? 'Switch to light mode' : 'Switch to dark mode'">
           <svg v-if="isDarkMode" class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
             <circle cx="12" cy="12" r="5"/>
@@ -38,7 +49,7 @@
     </nav>
     <ul class="nav-links mobile" :class="{ active: mobileMenuOpen }">
       <li><a href="#about" @click="scrollTo('about')">{{ t.nav.about }}</a></li>
-      <li><a href="#workExperience" @click="scrollTo('workExperience')">{{ t.nav.workExperience }}</a></li>
+      <li><a href="#work-experience" @click="scrollTo('work-experience')">{{ t.nav.workExperience }}</a></li>
       <li><a href="#references" @click="scrollTo('references')">{{ t.nav.references }}</a></li>
       <li><a href="#skills" @click="scrollTo('skills')">{{ t.nav.skills }}</a></li>
       <li><a href="#education" @click="scrollTo('education')">{{ t.nav.education }}</a></li>
@@ -49,13 +60,20 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { computed, ref } from 'vue'
 import { useLanguage } from '../composables/useLanguage'
 import { useDarkMode } from '../composables/useDarkMode'
+import { useCommandPalette } from '../composables/useCommandPalette'
 
 const { language, t, toggleLanguage } = useLanguage()
 const { isDarkMode, toggleDarkMode } = useDarkMode()
+const { open: openPalette } = useCommandPalette()
 const mobileMenuOpen = ref(false)
+
+const shortcutLabel = computed(() => {
+  const isApple = typeof navigator !== 'undefined' && /Mac|iPod|iPhone|iPad/.test(navigator.platform)
+  return isApple ? '⌘K' : 'Ctrl K'
+})
 
 const toggleMobileMenu = () => {
   mobileMenuOpen.value = !mobileMenuOpen.value
@@ -96,18 +114,59 @@ const scrollTo = (section) => {
 }
 
 .nav {
-  max-width: $breakpoint-xl;
+  max-width: $breakpoint-2xl;
   margin: 0 auto;
   padding: 1rem 2rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 1.5rem;
+}
+
+.nav-brand {
+  flex-shrink: 0;
 }
 
 .nav-right {
   display: flex;
   align-items: center;
-  gap: 1rem;
+  gap: 0.75rem;
+  flex-shrink: 0;
+}
+
+.palette-trigger {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  height: 40px;
+  padding: 0 0.75rem;
+  background: transparent;
+  border: 2px solid var(--text-primary);
+  border-radius: 8px;
+  color: var(--text-primary);
+  font-family: inherit;
+  cursor: pointer;
+  transition: all 0.3s;
+
+  .icon {
+    width: 18px;
+    height: 18px;
+    stroke-width: 2;
+  }
+
+  &:hover {
+    background: var(--bg-tertiary);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px var(--shadow-color);
+  }
+}
+
+.palette-trigger__kbd {
+  color: var(--text-secondary);
+  font-family: 'SFMono-Regular', Menlo, Consolas, monospace;
+  font-size: 0.72rem;
+  letter-spacing: 0.03em;
+  white-space: nowrap;
 }
 
 .dark-mode-toggle {
@@ -157,6 +216,7 @@ const scrollTo = (section) => {
 .nav-brand h1 {
   margin: 0;
   font-size: 1.5rem;
+  white-space: nowrap;
   background: linear-gradient(135deg, $gradient-start 0%, $gradient-end 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -170,6 +230,7 @@ const scrollTo = (section) => {
   .logo-text {
     font-size: 1.5rem;
     font-weight: 600;
+    white-space: nowrap;
     background: linear-gradient(135deg, $gradient-start 0%, $gradient-end 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -227,7 +288,8 @@ const scrollTo = (section) => {
   span {
     width: 25px;
     height: 3px;
-    background: $text-dark;
+    border-radius: 2px;
+    background: var(--text-primary);
     transition: all 0.3s;
   }
 }
@@ -237,13 +299,70 @@ const scrollTo = (section) => {
   display: none;
 }
 
-@include mobile {
+// Seven links plus three controls need real room. Below this the row would start
+// colliding with the buttons, so it collapses into the menu instead.
+@include custom($max: 1199px) {
   .nav-links:not(.mobile) {
     display: none;
   }
 
   .mobile-menu-toggle {
     display: flex;
+  }
+
+  .nav-links.mobile {
+    display: flex;
+    position: fixed;
+    top: 72px;
+    left: 0;
+    right: 0;
+    background: var(--overlay-medium);
+    backdrop-filter: blur(10px);
+    flex-direction: column;
+    padding: 1.5rem 2rem;
+    transform: translateY(-120%);
+    opacity: 0;
+    transition: transform 0.3s, opacity 0.3s;
+    box-shadow: 0 4px 20px var(--shadow-color);
+    pointer-events: none;
+
+    &.active {
+      transform: translateY(0);
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    li {
+      padding: 0.9rem 0;
+      border-bottom: 1px solid var(--bg-tertiary);
+
+      &:last-child {
+        border-bottom: none;
+      }
+    }
+  }
+}
+
+// Tight desktops: keep the button, drop the shortcut hint.
+@include custom($max: 1299px) {
+  .palette-trigger__kbd {
+    display: none;
+  }
+}
+
+@include mobile {
+  .nav {
+    padding: 0.75rem 1.25rem;
+    gap: 0.75rem;
+  }
+
+  .nav-right {
+    gap: 0.5rem;
+  }
+
+  .palette-trigger {
+    height: 36px;
+    padding: 0 0.5rem;
   }
 
   .dark-mode-toggle {
@@ -263,31 +382,13 @@ const scrollTo = (section) => {
   }
 
   .nav-links.mobile {
-    display: flex;
-    position: fixed;
-    top: 60px;
-    left: 0;
-    right: 0;
-    background: var(--overlay-medium);
-    backdrop-filter: blur(10px);
-    flex-direction: column;
-    padding: 2rem;
-    transform: translateY(-100%);
-    opacity: 0;
-    transition: all 0.3s;
-    box-shadow: 0 4px 20px var(--shadow-color);
-    pointer-events: none;
+    top: 64px;
+  }
+}
 
-    &.active {
-      transform: translateY(0);
-      opacity: 1;
-      pointer-events: auto;
-    }
-
-    li {
-      padding: 1rem 0;
-      border-bottom: 1px solid #eee;
-    }
+@media (prefers-reduced-motion: reduce) {
+  .nav-links.mobile {
+    transition: none;
   }
 }
 </style>

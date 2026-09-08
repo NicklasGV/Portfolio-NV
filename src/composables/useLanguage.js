@@ -56,7 +56,7 @@ const translations = {
       text2: 'I\'m always eager to learn new ways of building for the web, whether that\'s frontend styling and UX or getting deeper into databases and backend architecture. I approach every project with attention to detail and a genuine drive to figure out the best way to build it.',
       downloadLabel: 'Prefer a PDF of my CV? ',
       downloadCta: 'Grab it here',
-      imageAlt: 'Portrait of Nicklas Vedeby, Data Technician and Web Developer',
+      imageAlt: 'Portrait of Nicklas Vedeby, Fullstack Developer',
     },
     education: {
       title: 'Education',
@@ -83,11 +83,18 @@ const translations = {
       present: 'Present',
       timeline: [
         {
-          startDate: 'Apr 2026',
+          startDate: 'Sep 2026',
           endDate: null,
+          title: 'Fullstack Developer',
+          company: 'Tribe Happiness',
+          description: 'I work as a fullstack developer at Tribe Happiness, where I build and maintain both ends of the stack — from UI components and styling in the frontend through to APIs, backend logic and data.'
+        },
+        {
+          startDate: 'Apr 2026',
+          endDate: 'Aug 2026',
           title: 'Junior Product Developer',
           company: 'Sophisticated GEEK',
-          description: 'I work at Sophisticated GEEK, where I focus on product development and concept development. I also help maintain websites running on Shopify.'
+          description: 'I worked with product development and concept development, and helped maintain websites running on Shopify.'
         },
         {
           startDate: 'June 2025',
@@ -192,13 +199,19 @@ const translations = {
           skills: [
             { name: 'Git', level: 85 },
             { name: 'REST APIs', level: 80 },
-            { name: 'Shopify', level: 70 },
+            { name: 'Shopify', level: 65 },
             { name: 'Cursor AI', level: 75 },
-            { name: 'ClaudeAI', level: 70 },
-            { name: 'ChatGPT', level: 80 },
+            { name: 'ChatGPT', level: 70 },
             { name: 'Docker', level: 70 },
             { name: 'AWS System', level: 65 },
             { name: 'PRINCE 2', level: 55 }
+          ]
+        },
+        {
+          title: 'Languages',
+          skills: [
+            { name: 'Danish', level: 100 },
+            { name: 'English', level: 75 }
           ]
         }
       ]
@@ -219,6 +232,7 @@ const translations = {
           description: 'A web-based platform for building and testing bots for Discord. This project is mine and a friend\'s, made as a final project in our education. It\'s still being worked on here and there but is currently dormant.',
           tags: ['Angular', 'Discord.js', 'REST API', 'C#'],
           github: 'https://github.com/NicklasGV/Build-a-Bot',
+          demo: 'https://buildabot.dk/',
           alt: 'Preview of the Build a Bot Discord automation platform interface',
         },
         {
@@ -253,6 +267,112 @@ const translations = {
         success: 'Thank you for your message! I\'ll get back to you soon.',
         error: 'Something went wrong. Please try again later.'
       }
+    },
+    terminal: {
+      title: 'Terminal',
+      subtitle: 'Prefer a keyboard? This portfolio ships with a shell. Type a command, hit Enter, and explore my CV the developer way.',
+      windowTitle: 'nicklas@portfolio: ~',
+      clearLabel: 'Clear terminal',
+      inputLabel: 'Terminal command input',
+      tryLabel: 'Try:',
+      boot: [
+        'nv-sh 2.0.0 (portfolio build 2026.09)',
+        'Loading modules: vue@3 · vite@5 · scss ................ ok',
+        'Mounting /home/visitor/nicklas-vedeby ................. ok',
+        "Ready. Type 'help' to see what I can do."
+      ],
+      help: {
+        title: 'Available commands:',
+        footer: 'Tip: ↑/↓ walks your history, Tab autocompletes, Ctrl+L clears, Ctrl+K opens the command palette.'
+      },
+      commands: {
+        help: 'Show this list of commands',
+        whoami: 'Who am I, in short',
+        experience: 'My work history',
+        skills: 'Tech stack with proficiency bars',
+        projects: 'Things I have built',
+        education: 'My education timeline',
+        contact: 'How to reach me',
+        cv: 'Download my CV as PDF',
+        neofetch: 'System info, developer style',
+        ls: 'List the files in this directory',
+        cat: 'Read a file (try: cat about.md)',
+        goto: 'Jump to a section (try: goto projects)',
+        theme: 'Switch theme (theme dark | theme light)',
+        lang: 'Switch language (lang da | lang en)',
+        matrix: 'Enter the matrix',
+        palette: 'Open the command palette',
+        echo: 'Print some text back',
+        history: 'Show the commands you have run',
+        date: 'Show current date and time',
+        clear: 'Clear the screen',
+        'sudo hire-me': 'The most important command'
+      },
+      unknown: "command not found: {cmd} — type 'help' for the list.",
+      uptime: '{years} years, {months} months (since March 2020)',
+      neofetch: {
+        host: 'Host......:',
+        role: 'Role......:',
+        company: 'Company...:',
+        location: 'Location..:',
+        uptime: 'Uptime....:',
+        shell: 'Shell.....:',
+        stack: 'Stack.....:',
+        editor: 'Editor....:',
+        theme: 'Theme.....:',
+        languages: 'Languages.:'
+      },
+      contactHint: 'Or scroll down to the contact form — it lands straight in my inbox.',
+      cvDownloading: 'Downloading CV_nicklas_vedeby.pdf ...',
+      catUsage: 'usage: cat <file> — run ls to see what is here.',
+      secrets: 'cat: .secrets: permission denied (nice try though)',
+      isDirectory: 'cat: {name}: is a directory — try: projects',
+      noSuchFile: 'cat: {name}: no such file or directory',
+      gotoUsage: 'usage: goto <section> — try: about, experience, skills, projects, contact',
+      noSuchSection: 'goto: {name}: no such section',
+      jumping: 'Jumping to {name} ...',
+      themeUsage: 'usage: theme dark | theme light',
+      themeSet: 'Theme set to {name}.',
+      langCurrent: 'Current language: {name}. Usage: lang da | lang en',
+      langUsage: 'usage: lang da | lang en',
+      langSet: 'Language set to {name}.',
+      matrixOn: 'Wake up, Neo... (click anywhere or press Esc to exit)',
+      matrixOff: 'Back to reality.',
+      paletteOpened: 'Command palette opened — try typing a section name.',
+      historyEmpty: 'No commands in history yet.',
+      exit: "There is no exit. But there is a contact form — try 'goto contact'.",
+      sudoDenied: "visitor is not in the sudoers file. This incident will be reported. (try: sudo hire-me)",
+      noSkillCategory: 'skills: {name}: no such category',
+      hire: {
+        granted: '[sudo] password for visitor: ******  ✓ access granted',
+        body: 'Excellent choice. I am a fullstack developer who likes shipping clean, fast interfaces and the backends behind them — and I learn new stacks quickly.'
+      }
+    },
+    palette: {
+      label: 'Command palette',
+      openLabel: 'Open command palette',
+      placeholder: 'Jump to a section, switch theme, download CV ...',
+      empty: 'No matching commands.',
+      footerNavigate: 'navigate',
+      footerSelect: 'select',
+      footerClose: 'close',
+      groups: {
+        navigate: 'Navigate',
+        actions: 'Actions',
+        links: 'Links'
+      },
+      actions: {
+        darkMode: 'Switch to dark mode',
+        lightMode: 'Switch to light mode',
+        switchToDanish: 'Switch language to Danish',
+        switchToEnglish: 'Switch language to English',
+        downloadCv: 'Download CV (PDF)',
+        matrix: 'Enter the matrix',
+        sendEmail: 'Send me an email'
+      }
+    },
+    matrix: {
+      exitHint: 'click anywhere or press esc to exit'
     },
     footer: {
       rights: 'All rights reserved.',
@@ -289,7 +409,7 @@ const translations = {
       text2: 'Jeg er altid klar på at lære nye måder at webudvikle på, uanset om det er styling og udseende i frontend, eller at dykke dybere ned i databaser og backend-arkitektur. Jeg går til hvert projekt med opmærksomhed på detaljer og en oprigtig lyst til at finde den bedst mulige løsning.',
       downloadLabel: 'Hvis du vil have en PDF af mit CV, ',
       downloadCta: 'kan du hente det her',
-      imageAlt: 'Portræt af Nicklas Vedeby, datatekniker og webudvikler',
+      imageAlt: 'Portræt af Nicklas Vedeby, fullstackudvikler',
     },
     education: {
       title: 'Uddannelse',
@@ -316,11 +436,18 @@ const translations = {
       present: 'Nuværende',
       timeline: [
         {
-          startDate: 'Apr. 2026',
+          startDate: 'Sep. 2026',
           endDate: null,
+          title: 'Fullstack Udvikler',
+          company: 'Tribe Happiness',
+          description: 'Jeg arbejder som fullstack udvikler hos Tribe Happiness, hvor jeg både bygger og vedligeholder frontend og backend — fra UI-komponenter og styling til API\'er, backend-logik og data.'
+        },
+        {
+          startDate: 'Apr. 2026',
+          endDate: 'Aug. 2026',
           title: 'Junior Produkt Udvikler',
           company: 'Sophisticated GEEK',
-          description: 'Jeg arbejder hos Sophisticated GEEK, hvor jeg arbejder med produktudvikling og konceptudvikling. Jeg hjælper også med at holde hjemmesider vedlige, som kører på Shopify.'
+          description: 'Jeg arbejdede med produktudvikling og konceptudvikling. Jeg hjalp også med at holde hjemmesider vedlige, som kørte på Shopify.'
         },
         {
           startDate: 'Jun. 2025',
@@ -425,13 +552,19 @@ const translations = {
           skills: [
             { name: 'Git', level: 85 },
             { name: 'REST APIs', level: 80 },
-            { name: 'Shopify', level: 70 },
+            { name: 'Shopify', level: 65 },
             { name: 'Cursor AI', level: 75 },
-            { name: 'ChatGPT', level: 80 },
-            { name: 'ClaudeAI', level: 70 },
+            { name: 'ChatGPT', level: 70 },
             { name: 'Docker', level: 70 },
             { name: 'AWS System', level: 65 },
             { name: 'PRINCE 2', level: 55 }
+          ]
+        },
+        {
+          title: 'Sprog',
+          skills: [
+            { name: 'Dansk', level: 100 },
+            { name: 'Engelsk', level: 75 }
           ]
         }
       ]
@@ -453,6 +586,7 @@ const translations = {
           description: 'En webbaseret platform for at bygge og teste bot\'s til Discord. Dette projekt er mit og en vens. Som er lavet som et slut projekt i vores uddannelse. <br> <span class="highlight">Det bygges stadig på her og der men står pt i dvale.</span>',
           tags: ['Angular', 'Discord.js', 'REST API', 'C#'],
           github: 'https://github.com/NicklasGV/Build-a-Bot',
+          demo: 'https://buildabot.dk/',
           alt: 'Forhåndsvisning af Build a Bot-platformen til Discord-automatisering',
         },
         {
@@ -487,6 +621,112 @@ const translations = {
         success: 'Tak for din besked! Jeg vender tilbage snarest.',
         error: 'Noget gik galt. Prøv venligst igen senere.'
       }
+    },
+    terminal: {
+      title: 'Terminal',
+      subtitle: 'Foretrækker du tastaturet? Dette portfolio har sin egen shell. Skriv en kommando, tryk Enter, og udforsk mit CV på udvikler-manér.',
+      windowTitle: 'nicklas@portfolio: ~',
+      clearLabel: 'Ryd terminal',
+      inputLabel: 'Terminal kommandofelt',
+      tryLabel: 'Prøv:',
+      boot: [
+        'nv-sh 2.0.0 (portfolio build 2026.09)',
+        'Indlæser moduler: vue@3 · vite@5 · scss ............... ok',
+        'Monterer /home/visitor/nicklas-vedeby ................. ok',
+        "Klar. Skriv 'help' for at se hvad jeg kan."
+      ],
+      help: {
+        title: 'Tilgængelige kommandoer:',
+        footer: 'Tip: ↑/↓ går gennem din historik, Tab autoudfylder, Ctrl+L rydder, Ctrl+K åbner kommandopaletten.'
+      },
+      commands: {
+        help: 'Vis denne liste af kommandoer',
+        whoami: 'Hvem jeg er, kort fortalt',
+        experience: 'Min joberfaring',
+        skills: 'Teknologier med niveau-bars',
+        projects: 'Ting jeg har bygget',
+        education: 'Min uddannelse',
+        contact: 'Sådan får du fat i mig',
+        cv: 'Hent mit CV som PDF',
+        neofetch: 'System-info, udvikler-stil',
+        ls: 'Vis filerne i denne mappe',
+        cat: 'Læs en fil (prøv: cat about.md)',
+        goto: 'Hop til en sektion (prøv: goto projects)',
+        theme: 'Skift tema (theme dark | theme light)',
+        lang: 'Skift sprog (lang da | lang en)',
+        matrix: 'Træd ind i matrix',
+        palette: 'Åbn kommandopaletten',
+        echo: 'Skriv en tekst tilbage',
+        history: 'Vis de kommandoer du har kørt',
+        date: 'Vis dato og klokkeslæt',
+        clear: 'Ryd skærmen',
+        'sudo hire-me': 'Den vigtigste kommando'
+      },
+      unknown: "kommando ikke fundet: {cmd} — skriv 'help' for listen.",
+      uptime: '{years} år, {months} måneder (siden marts 2020)',
+      neofetch: {
+        host: 'Host......:',
+        role: 'Rolle.....:',
+        company: 'Firma.....:',
+        location: 'Lokation..:',
+        uptime: 'Oppetid...:',
+        shell: 'Shell.....:',
+        stack: 'Stack.....:',
+        editor: 'Editor....:',
+        theme: 'Tema......:',
+        languages: 'Sprog.....:'
+      },
+      contactHint: 'Eller scroll ned til kontaktformularen — den lander direkte i min indbakke.',
+      cvDownloading: 'Henter CV_nicklas_vedeby.pdf ...',
+      catUsage: 'brug: cat <fil> — kør ls for at se hvad der er her.',
+      secrets: 'cat: .secrets: adgang nægtet (godt forsøgt)',
+      isDirectory: 'cat: {name}: er en mappe — prøv: projects',
+      noSuchFile: 'cat: {name}: ingen sådan fil eller mappe',
+      gotoUsage: 'brug: goto <sektion> — prøv: about, experience, skills, projects, contact',
+      noSuchSection: 'goto: {name}: ingen sådan sektion',
+      jumping: 'Hopper til {name} ...',
+      themeUsage: 'brug: theme dark | theme light',
+      themeSet: 'Tema sat til {name}.',
+      langCurrent: 'Nuværende sprog: {name}. Brug: lang da | lang en',
+      langUsage: 'brug: lang da | lang en',
+      langSet: 'Sprog sat til {name}.',
+      matrixOn: 'Vågn op, Neo... (klik et vilkårligt sted eller tryk Esc for at gå ud)',
+      matrixOff: 'Tilbage til virkeligheden.',
+      paletteOpened: 'Kommandopaletten er åben — prøv at skrive et sektionsnavn.',
+      historyEmpty: 'Ingen kommandoer i historikken endnu.',
+      exit: "Der er ingen udgang. Men der er en kontaktformular — prøv 'goto contact'.",
+      sudoDenied: 'visitor er ikke i sudoers-filen. Hændelsen bliver rapporteret. (prøv: sudo hire-me)',
+      noSkillCategory: 'skills: {name}: ingen sådan kategori',
+      hire: {
+        granted: '[sudo] adgangskode for visitor: ******  ✓ adgang godkendt',
+        body: 'Fremragende valg. Jeg er fullstack udvikler og kan lide at levere rene, hurtige brugerflader — og de backends der ligger bag. Og jeg lærer nye stacks hurtigt.'
+      }
+    },
+    palette: {
+      label: 'Kommandopalet',
+      openLabel: 'Åbn kommandopalet',
+      placeholder: 'Hop til en sektion, skift tema, hent CV ...',
+      empty: 'Ingen kommandoer matcher.',
+      footerNavigate: 'naviger',
+      footerSelect: 'vælg',
+      footerClose: 'luk',
+      groups: {
+        navigate: 'Naviger',
+        actions: 'Handlinger',
+        links: 'Links'
+      },
+      actions: {
+        darkMode: 'Skift til mørkt tema',
+        lightMode: 'Skift til lyst tema',
+        switchToDanish: 'Skift sprog til dansk',
+        switchToEnglish: 'Skift sprog til engelsk',
+        downloadCv: 'Hent CV (PDF)',
+        matrix: 'Træd ind i matrix',
+        sendEmail: 'Send mig en mail'
+      }
+    },
+    matrix: {
+      exitHint: 'klik et vilkårligt sted eller tryk esc for at gå ud'
     },
     footer: {
       rights: 'Alle rettigheder forbeholdes.',

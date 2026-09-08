@@ -3,6 +3,7 @@
     <Header />
     <Hero />
     <About />
+    <Terminal />
     <WorkExperience />
     <References />
     <Skills />
@@ -17,6 +18,7 @@
 import Header from '../components/Header.vue'
 import Hero from '../components/Hero.vue'
 import About from '../components/About.vue'
+import Terminal from '../components/Terminal.vue'
 import EducationTimeline from '../components/EducationTimeline.vue'
 import References from '../components/References.vue'
 import Skills from '../components/Skills.vue'
@@ -30,7 +32,8 @@ import Footer from '../components/Footer.vue'
 .app {
   min-height: 100vh;
   background: linear-gradient(135deg, $gradient-start 0%, $gradient-end 100%);
-  background-attachment: fixed;
+  // Deliberately not background-attachment: fixed — it forces a full-page
+  // repaint on every scroll frame, and every section paints over it anyway.
   transition: background 0.3s;
 }
 

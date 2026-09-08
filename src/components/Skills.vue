@@ -13,9 +13,9 @@
             >
               <span class="skill-name">{{ skill.name }}</span>
               <div class="skill-bar">
-                <div 
-                  class="skill-progress" 
-                  :style="{ width: skill.level + '%' }"
+                <div
+                  class="skill-progress"
+                  :style="{ transform: `scaleX(${skill.level / 100})` }"
                 ></div>
               </div>
               <span class="skill-percentage">{{ skill.level }}%</span>
@@ -94,16 +94,28 @@ const { t } = useLanguage()
 }
 
 .skill-progress {
+  // Scaling a full-width bar keeps this on the compositor; animating `width`
+  // put all ~30 bars through layout on every frame.
+  width: 100%;
   height: 100%;
+  transform-origin: left center;
   background: linear-gradient(135deg, $gradient-start 0%, $gradient-end 100%);
   border-radius: 10px;
-  transition: width 1s ease-out;
+  transition: transform 1s ease-out;
   animation: fillBar 1.5s ease-out;
 }
 
+// No `to`, so each bar animates up to its own inline scaleX value.
 @keyframes fillBar {
   from {
-    width: 0;
+    transform: scaleX(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .skill-progress {
+    transition: none;
+    animation: none;
   }
 }
 

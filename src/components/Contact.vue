@@ -184,10 +184,9 @@ const handleSubmit = async () => {
 }
 
 .contact-content {
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  align-items: start;
   gap: 4rem;
   max-width: $breakpoint-xl;
   margin: 0 auto;
@@ -206,7 +205,7 @@ const handleSubmit = async () => {
   gap: 1.5rem;
   width: 100%;
   max-width: 420px;
-  margin-inline: auto;
+  margin-inline: 0;
 }
 
 .contact-method {
@@ -268,14 +267,13 @@ const handleSubmit = async () => {
 }
 
 .contact-form {
+  width: 100%;
+  box-sizing: border-box;
   background: var(--bg-secondary);
   padding: 2rem;
   border-radius: 16px;
+  box-shadow: 0 4px 20px var(--shadow-color);
   transition: background-color 0.3s;
-  width: 800px;
-  @include mobile {
-    width: 100%;
-  }
 }
 
 .form-group {
@@ -368,8 +366,8 @@ const handleSubmit = async () => {
   }
 
   .contact-content {
-    flex-direction: column;
-    align-items: center;
+    grid-template-columns: minmax(0, 1fr);
+    justify-items: center;
     gap: 2.5rem;
   }
 
@@ -377,6 +375,14 @@ const handleSubmit = async () => {
     width: 100%;
     max-width: 520px;
     text-align: center;
+  }
+
+  .contact-methods {
+    margin-inline: auto;
+  }
+
+  .contact-form {
+    max-width: 520px;
   }
 
   .contact-method {

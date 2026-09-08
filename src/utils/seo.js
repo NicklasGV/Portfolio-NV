@@ -1,4 +1,4 @@
-import socialImageUrl from '@/assets/images/profile.png?url'
+import socialImageUrl from '@/assets/images/profile.jpg?url'
 
 const DEFAULT_TITLE = "Nicklas Vedeby — Portfolio"
 const DEFAULT_DESCRIPTION = "Nicklas Vedeby's portfolio showcasing his journey as a Fullstack Developer, built with Vue.js 3 and Vite."
