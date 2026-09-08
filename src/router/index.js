@@ -22,7 +22,17 @@ const router = createRouter({
       component: () => import('../pages/Arcade.vue'),
       meta: {
         title: 'Arcade — Nicklas Vedeby',
-        description: 'A small top-down pixel shooter built from scratch with Vue and canvas — no engine, no sprite assets.',
+        description: 'Three small games built from scratch with Vue — a pixel shooter, a falling-block puzzle and a sliding-tile puzzle. No engine, no sprite assets.',
+        type: 'website',
+      },
+    },
+    {
+      path: '/arcade/:slug',
+      name: 'arcade-game',
+      component: () => import('../pages/Arcade.vue'),
+      meta: {
+        title: 'Arcade — Nicklas Vedeby',
+        description: 'Three small games built from scratch with Vue — a pixel shooter, a falling-block puzzle and a sliding-tile puzzle. No engine, no sprite assets.',
         type: 'website',
       },
     },

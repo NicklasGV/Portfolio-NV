@@ -16,14 +16,14 @@
         :width="WIDTH"
         :height="HEIGHT"
         role="img"
-        :aria-label="t.arcade.canvasLabel"
+        :aria-label="t.arcade.bugHunt.canvasLabel"
       ></canvas>
 
       <div v-if="state !== 'playing'" class="overlay">
         <div class="overlay__panel">
           <template v-if="state === 'idle'">
-            <h3>{{ t.arcade.readyTitle }}</h3>
-            <p>{{ t.arcade.readyBody }}</p>
+            <h3>{{ t.arcade.bugHunt.readyTitle }}</h3>
+            <p>{{ t.arcade.bugHunt.readyBody }}</p>
           </template>
 
           <template v-else-if="state === 'paused'">
@@ -35,9 +35,9 @@
             <h3>{{ t.arcade.overTitle }}</h3>
             <p class="overlay__score">
               {{ t.arcade.score }} <strong>{{ score }}</strong>
-              <span v-if="score >= highScore && score > 0" class="overlay__best">{{ t.arcade.newBest }}</span>
+              <span v-if="isNewBest" class="overlay__best">{{ t.arcade.newBest }}</span>
             </p>
-            <p>{{ t.arcade.overBody.replace('{wave}', wave) }}</p>
+            <p>{{ t.arcade.bugHunt.overBody.replace('{wave}', wave) }}</p>
           </template>
 
           <button type="button" class="overlay__btn" @click="primaryAction">
@@ -48,29 +48,30 @@
     </div>
 
     <dl class="arcade__controls">
-      <div><dt>WASD / ←↑↓→</dt><dd>{{ t.arcade.controls.move }}</dd></div>
-      <div><dt>{{ t.arcade.controls.mouseKey }}</dt><dd>{{ t.arcade.controls.aim }}</dd></div>
-      <div><dt>Space / {{ t.arcade.controls.clickKey }}</dt><dd>{{ t.arcade.controls.shoot }}</dd></div>
+      <div><dt>WASD / ←↑↓→</dt><dd>{{ t.arcade.bugHunt.controls.move }}</dd></div>
+      <div><dt>{{ t.arcade.bugHunt.controls.mouseKey }}</dt><dd>{{ t.arcade.bugHunt.controls.aim }}</dd></div>
+      <div><dt>Space / {{ t.arcade.bugHunt.controls.clickKey }}</dt><dd>{{ t.arcade.bugHunt.controls.shoot }}</dd></div>
       <div><dt>Esc / P</dt><dd>{{ t.arcade.controls.pause }}</dd></div>
     </dl>
-    <p class="arcade__touch-hint">{{ t.arcade.touchHint }}</p>
+    <p class="arcade__touch-hint">{{ t.arcade.bugHunt.touchHint }}</p>
   </div>
 </template>
 
 <script setup>
 import { onBeforeUnmount, onMounted, ref, watch } from 'vue'
-import { useLanguage } from '../composables/useLanguage'
-import { useCommandPalette } from '../composables/useCommandPalette'
+import { useLanguage } from '../../composables/useLanguage'
+import { useCommandPalette } from '../../composables/useCommandPalette'
+import { useHighScore } from '../../composables/useHighScore'
 
 const { t } = useLanguage()
 const { isOpen: paletteOpen } = useCommandPalette()
+const { best: highScore, submit: submitScore } = useHighScore('bug-hunt')
 
 // Small logical resolution, scaled up with smoothing off: real pixel art,
 // and a backbuffer this size costs almost nothing to redraw.
 const WIDTH = 480
 const HEIGHT = 320
 const MAX_HEALTH = 3
-const STORAGE_KEY = 'arcadeHighScore'
 
 const canvasEl = ref(null)
 const stageEl = ref(null)
@@ -78,7 +79,7 @@ const state = ref('idle')
 const score = ref(0)
 const wave = ref(1)
 const health = ref(MAX_HEALTH)
-const highScore = ref(0)
+const isNewBest = ref(false)
 
 const SPRITES = {
   player: [
@@ -129,22 +130,6 @@ let enemies = []
 let sparks = []
 let firing = false
 let touchTarget = null
-
-const readHighScore = () => {
-  try {
-    return Number(localStorage.getItem(STORAGE_KEY)) || 0
-  } catch {
-    return 0
-  }
-}
-
-const writeHighScore = (value) => {
-  try {
-    localStorage.setItem(STORAGE_KEY, String(value))
-  } catch {
-    // Private mode or blocked storage: the score just does not persist.
-  }
-}
 
 const drawSprite = (sprite, cx, cy, color, scale = 1) => {
   const w = sprite[0].length * scale
@@ -271,11 +256,7 @@ const hitPlayer = () => {
 
 const endGame = () => {
   state.value = 'over'
-
-  if (score.value > highScore.value) {
-    highScore.value = score.value
-    writeHighScore(score.value)
-  }
+  isNewBest.value = submitScore(score.value)
 }
 
 const update = (dt) => {
@@ -457,6 +438,7 @@ const resetGame = () => {
   invuln = 0
   shake = 0
   touchTarget = null
+  isNewBest.value = false
 }
 
 const startGame = () => {
@@ -588,7 +570,6 @@ watch(paletteOpen, (open) => {
 onMounted(() => {
   ctx = canvasEl.value.getContext('2d')
   ctx.imageSmoothingEnabled = false
-  highScore.value = readHighScore()
 
   render()
 

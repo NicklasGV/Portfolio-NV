@@ -277,7 +277,7 @@ const translations = {
         goto: 'Jump to a section (try: goto projects)',
         theme: 'Switch theme (theme dark | theme light)',
         lang: 'Switch language (lang da | lang en)',
-        play: 'Play Bug Hunt, my little arcade game',
+        play: 'Open the arcade (try: play stack-overflow)',
         palette: 'Open the command palette',
         echo: 'Print some text back',
         history: 'Show the commands you have run',
@@ -313,7 +313,9 @@ const translations = {
       langCurrent: 'Current language: {name}. Usage: lang da | lang en',
       langUsage: 'usage: lang da | lang en',
       langSet: 'Language set to {name}.',
-      launchingGame: 'Booting Bug Hunt ...',
+      launchingArcade: 'Opening the arcade. Three games in there:',
+      launchingGame: 'Booting {name} ...',
+      noSuchGame: 'play: {name}: no such game. Run play on its own to see the list.',
       paletteOpened: 'Command palette opened — try typing a section name.',
       historyEmpty: 'No commands in history yet.',
       exit: "There is no exit. But there is a contact form — try 'goto contact'.",
@@ -343,7 +345,7 @@ const translations = {
         switchToDanish: 'Switch language to Danish',
         switchToEnglish: 'Switch language to English',
         downloadCv: 'Download CV (PDF)',
-        arcade: 'Play Bug Hunt (arcade game)',
+        arcade: 'Open the arcade',
         sendEmail: 'Send me an email'
       }
     },
@@ -387,34 +389,83 @@ const translations = {
       ]
     },
     arcade: {
-      eyebrow: 'Easter egg',
-      title: 'Bug Hunt',
-      subtitle: 'A top-down pixel shooter written from scratch — no game engine and no image files. Every sprite is drawn as canvas rectangles from a small text map.',
+      eyebrow: 'Arcade',
+      title: 'The Arcade',
+      subtitle: 'Three small games, all written from scratch — no game engine, no image files, no dependencies. Pick one and lose a few minutes.',
       back: 'Back to the portfolio',
-      builtWith: 'Vue 3 · Canvas 2D · no dependencies · rendered at 480×320 and scaled up, so it stays crisp and cheap to run.',
-      canvasLabel: 'Bug Hunt game area',
+      backToArcade: 'Back to the arcade',
+      play: 'Play',
       score: 'Score',
-      wave: 'Wave',
       best: 'Best',
+      wave: 'Wave',
       health: 'Health',
-      readyTitle: 'Bug Hunt',
-      readyBody: 'The bugs are coming for you. Squash them before they reach you.',
-      pausedTitle: 'Paused',
-      pausedBody: 'Take your time.',
-      overTitle: 'Game over',
-      overBody: 'You made it to wave {wave}.',
       newBest: 'New personal best!',
       start: 'Start game',
       resume: 'Resume',
       again: 'Play again',
-      touchHint: 'On a touch screen: drag to move — you fire automatically.',
+      pausedTitle: 'Paused',
+      pausedBody: 'Take your time.',
+      overTitle: 'Game over',
       controls: {
-        move: 'Move',
-        aim: 'Aim',
-        shoot: 'Shoot',
-        pause: 'Pause',
-        mouseKey: 'Mouse',
-        clickKey: 'Click'
+        pause: 'Pause'
+      },
+      games: {
+        bugHunt: {
+          name: 'Bug Hunt',
+          tagline: 'A top-down shooter. Bugs close in from every edge — squash them before they reach you.',
+          builtWith: 'Canvas 2D · sprites drawn from text maps · rendered at 480×320 and scaled up.'
+        },
+        stackOverflow: {
+          name: 'Stack Overflow',
+          tagline: 'Falling blocks. Clear lines, survive the rising speed, and do not let the stack overflow.',
+          builtWith: 'Canvas 2D · 7-bag randomiser · wall kicks, ghost piece, hold slot and a gravity curve.'
+        },
+        mergeSort: {
+          name: 'Merge Sort',
+          tagline: 'Slide tiles, merge matching pairs, chase 2048. Easy to start, hard to put down.',
+          builtWith: 'No canvas here — reactive DOM with CSS transforms, so tiles keep their identity and slide.'
+        }
+      },
+      bugHunt: {
+        canvasLabel: 'Bug Hunt game area',
+        readyTitle: 'Bug Hunt',
+        readyBody: 'The bugs are coming for you. Squash them before they reach you.',
+        overBody: 'You made it to wave {wave}.',
+        touchHint: 'On a touch screen: drag to move — you fire automatically.',
+        controls: {
+          move: 'Move',
+          aim: 'Aim',
+          shoot: 'Shoot',
+          mouseKey: 'Mouse',
+          clickKey: 'Click'
+        }
+      },
+      stackOverflow: {
+        title: 'Stack Overflow',
+        readyBody: 'Clear lines to score. Every ten lines the gravity gets meaner.',
+        overBody: 'The stack overflowed.',
+        canvasLabel: 'Stack Overflow playing field',
+        lines: 'Lines',
+        level: 'Level',
+        next: 'Next',
+        hold: 'Hold',
+        controls: {
+          move: 'Move',
+          rotate: 'Rotate',
+          soft: 'Soft drop',
+          hard: 'Hard drop',
+          hold: 'Hold piece'
+        }
+      },
+      mergeSort: {
+        boardLabel: 'Merge Sort board',
+        undo: 'Undo',
+        newGame: 'New game',
+        hint: 'Arrow keys or WASD to slide. On touch, swipe. Equal tiles merge into their sum.',
+        wonTitle: 'You hit 2048',
+        wonBody: 'That is the target. You can stop here or keep merging for a bigger score.',
+        lostBody: 'No moves left — the board is full and nothing else can merge.',
+        keepGoing: 'Keep going'
       }
     },
     footer: {
@@ -674,7 +725,7 @@ const translations = {
         goto: 'Hop til en sektion (prøv: goto projects)',
         theme: 'Skift tema (theme dark | theme light)',
         lang: 'Skift sprog (lang da | lang en)',
-        play: 'Spil Bug Hunt, mit lille arkadespil',
+        play: 'Åbn arkaden (prøv: play stack-overflow)',
         palette: 'Åbn kommandopaletten',
         echo: 'Skriv en tekst tilbage',
         history: 'Vis de kommandoer du har kørt',
@@ -710,7 +761,9 @@ const translations = {
       langCurrent: 'Nuværende sprog: {name}. Brug: lang da | lang en',
       langUsage: 'brug: lang da | lang en',
       langSet: 'Sprog sat til {name}.',
-      launchingGame: 'Starter Bug Hunt ...',
+      launchingArcade: 'Åbner arkaden. Tre spil derinde:',
+      launchingGame: 'Starter {name} ...',
+      noSuchGame: 'play: {name}: intet spil med det navn. Kør play alene for at se listen.',
       paletteOpened: 'Kommandopaletten er åben — prøv at skrive et sektionsnavn.',
       historyEmpty: 'Ingen kommandoer i historikken endnu.',
       exit: "Der er ingen udgang. Men der er en kontaktformular — prøv 'goto contact'.",
@@ -740,7 +793,7 @@ const translations = {
         switchToDanish: 'Skift sprog til dansk',
         switchToEnglish: 'Skift sprog til engelsk',
         downloadCv: 'Hent CV (PDF)',
-        arcade: 'Spil Bug Hunt (arkadespil)',
+        arcade: 'Åbn arkaden',
         sendEmail: 'Send mig en mail'
       }
     },
@@ -784,34 +837,83 @@ const translations = {
       ]
     },
     arcade: {
-      eyebrow: 'Easter egg',
-      title: 'Bug Hunt',
-      subtitle: 'En top-down pixel-shooter skrevet fra bunden — ingen game engine og ingen billedfiler. Hver sprite tegnes som canvas-rektangler ud fra et lille tekstkort.',
+      eyebrow: 'Arkade',
+      title: 'Arkaden',
+      subtitle: 'Tre små spil, alle skrevet fra bunden — ingen game engine, ingen billedfiler, ingen afhængigheder. Vælg et og brug et par minutter.',
       back: 'Tilbage til portfolioet',
-      builtWith: 'Vue 3 · Canvas 2D · ingen afhængigheder · renderet i 480×320 og skaleret op, så det forbliver skarpt og billigt at køre.',
-      canvasLabel: 'Bug Hunt spilleområde',
+      backToArcade: 'Tilbage til arkaden',
+      play: 'Spil',
       score: 'Score',
-      wave: 'Bølge',
       best: 'Bedste',
+      wave: 'Bølge',
       health: 'Liv',
-      readyTitle: 'Bug Hunt',
-      readyBody: 'Bug’sene er på vej mod dig. Klem dem, før de når frem.',
-      pausedTitle: 'På pause',
-      pausedBody: 'Tag dig bare god tid.',
-      overTitle: 'Game over',
-      overBody: 'Du nåede til bølge {wave}.',
       newBest: 'Ny personlig rekord!',
       start: 'Start spillet',
       resume: 'Fortsæt',
       again: 'Spil igen',
-      touchHint: 'På touchskærm: træk for at bevæge dig — du skyder automatisk.',
+      pausedTitle: 'På pause',
+      pausedBody: 'Tag dig bare god tid.',
+      overTitle: 'Game over',
       controls: {
-        move: 'Bevæg dig',
-        aim: 'Sigt',
-        shoot: 'Skyd',
-        pause: 'Pause',
-        mouseKey: 'Mus',
-        clickKey: 'Klik'
+        pause: 'Pause'
+      },
+      games: {
+        bugHunt: {
+          name: 'Bug Hunt',
+          tagline: 'En top-down shooter. Bug’s kommer ind fra alle kanter — klem dem, før de når frem.',
+          builtWith: 'Canvas 2D · sprites tegnet ud fra tekstkort · renderet i 480×320 og skaleret op.'
+        },
+        stackOverflow: {
+          name: 'Stack Overflow',
+          tagline: 'Faldende klodser. Ryd linjer, overlev den stigende fart, og lad ikke stakken løbe over.',
+          builtWith: 'Canvas 2D · 7-bag randomizer · wall kicks, ghost-brik, hold-plads og en tyngdekurve.'
+        },
+        mergeSort: {
+          name: 'Merge Sort',
+          tagline: 'Skub brikker, flet ens par sammen, jagt 2048. Nemt at gå i gang med, svært at lægge fra sig.',
+          builtWith: 'Ingen canvas her — reaktivt DOM med CSS-transforms, så brikkerne beholder deres identitet og glider.'
+        }
+      },
+      bugHunt: {
+        canvasLabel: 'Bug Hunt spilleområde',
+        readyTitle: 'Bug Hunt',
+        readyBody: 'Bug’sene er på vej mod dig. Klem dem, før de når frem.',
+        overBody: 'Du nåede til bølge {wave}.',
+        touchHint: 'På touchskærm: træk for at bevæge dig — du skyder automatisk.',
+        controls: {
+          move: 'Bevæg dig',
+          aim: 'Sigt',
+          shoot: 'Skyd',
+          mouseKey: 'Mus',
+          clickKey: 'Klik'
+        }
+      },
+      stackOverflow: {
+        title: 'Stack Overflow',
+        readyBody: 'Ryd linjer for at score. For hver ti linjer bliver tyngdekraften hårdere.',
+        overBody: 'Stakken løb over.',
+        canvasLabel: 'Stack Overflow spillebræt',
+        lines: 'Linjer',
+        level: 'Niveau',
+        next: 'Næste',
+        hold: 'Hold',
+        controls: {
+          move: 'Flyt',
+          rotate: 'Rotér',
+          soft: 'Blødt fald',
+          hard: 'Hårdt fald',
+          hold: 'Gem brik'
+        }
+      },
+      mergeSort: {
+        boardLabel: 'Merge Sort bræt',
+        undo: 'Fortryd',
+        newGame: 'Nyt spil',
+        hint: 'Piletaster eller WASD for at skubbe. På touch: swipe. Ens brikker flettes til deres sum.',
+        wonTitle: 'Du ramte 2048',
+        wonBody: 'Det var målet. Du kan stoppe her eller blive ved med at flette for en større score.',
+        lostBody: 'Ingen træk tilbage — brættet er fyldt, og intet kan flettes.',
+        keepGoing: 'Spil videre'
       }
     },
     footer: {

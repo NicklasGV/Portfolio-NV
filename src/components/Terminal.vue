@@ -363,6 +363,12 @@ const clearScreen = () => {
   focusInput()
 }
 
+const GAME_SLUGS = {
+  'bug-hunt': 'bugHunt',
+  'stack-overflow': 'stackOverflow',
+  'merge-sort': 'mergeSort'
+}
+
 const SECTION_ALIASES = {
   about: 'about',
   experience: 'work-experience',
@@ -475,9 +481,30 @@ const commandHandlers = {
     return [{ text: t.value.terminal.langSet.replace('{name}', requested), cls: 'line--success' }]
   },
 
-  play: () => {
-    setTimeout(() => router.push('/arcade'), 400)
-    return [{ text: t.value.terminal.launchingGame, cls: 'line--success' }]
+  play: (args) => {
+    const slug = args[0]?.toLowerCase()
+    const games = t.value.arcade.games
+
+    if (!slug) {
+      setTimeout(() => router.push('/arcade'), 400)
+      return [
+        { text: t.value.terminal.launchingArcade, cls: 'line--success' },
+        { text: '' },
+        ...Object.entries(GAME_SLUGS).map(([name, key]) => ({
+          html: true,
+          text: `  <span class="cmd">${esc(name.padEnd(16))}</span><span class="dim">${esc(games[key].tagline)}</span>`
+        }))
+      ]
+    }
+
+    const key = GAME_SLUGS[slug]
+
+    if (!key) {
+      return [{ text: t.value.terminal.noSuchGame.replace('{name}', slug), cls: 'line--error' }]
+    }
+
+    setTimeout(() => router.push(`/arcade/${slug}`), 400)
+    return [{ text: t.value.terminal.launchingGame.replace('{name}', games[key].name), cls: 'line--success' }]
   },
 
   palette: () => {
@@ -521,7 +548,7 @@ const commandHandlers = {
   }
 }
 
-const commandNames = () => [...Object.keys(commandHandlers), 'sudo hire-me']
+const commandNames = () => [...Object.keys(commandHandlers), 'sudo hire-me', ...Object.keys(GAME_SLUGS)]
 
 const runCommand = (raw) => {
   const input = raw.trim()
