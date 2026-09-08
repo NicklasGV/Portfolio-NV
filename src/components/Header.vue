@@ -3,9 +3,9 @@
     <nav class="nav">
       <div class="nav-brand">
         <div class="logo-container">
-          <img src="../assets/images/logo.png" alt="Wide Logo - Nicklas Vedeby" class="logo logo-desktop" width="40" height="40" /> <h1 class="logo-text">Nicklas Vedeby</h1>
+          <img src="../assets/images/logo-mark.png" alt="Nicklas Vedeby logo" class="logo logo-desktop" width="40" height="40" /> <h1 class="logo-text">Nicklas Vedeby</h1>
         </div>
-        <img src="../assets/images/logo.png" alt="Narrow Logo - Nicklas Vedeby" class="logo logo-mobile" width="40" height="40" />
+        <img src="../assets/images/logo-mark.png" alt="Nicklas Vedeby logo" class="logo logo-mobile" width="40" height="40" />
       </div>
       <ul class="nav-links">
         <li><a href="#about" @click="scrollTo('about')">{{ t.nav.about }}</a></li>
