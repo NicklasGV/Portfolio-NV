@@ -75,7 +75,7 @@ import { useDarkMode } from '../composables/useDarkMode'
 import { useCommandPalette } from '../composables/useCommandPalette'
 import cvUrl from '../assets/pdfs/CV_nicklas_vedeby.pdf?url'
 
-const { t, language, toggleLanguage } = useLanguage()
+const { t, language, toggleLanguage, localePath } = useLanguage()
 const { isDarkMode, toggleDarkMode } = useDarkMode()
 const { isOpen, open, close, toggle } = useCommandPalette()
 const router = useRouter()
@@ -99,8 +99,8 @@ const ICONS = {
 
 // Sections only exist on the home page, so from anywhere else go there first.
 const scrollToSection = async (id) => {
-  if (route.path !== '/') {
-    await router.push('/')
+  if (route.name !== 'home') {
+    await router.push(localePath())
     await nextTick()
   }
 
@@ -153,10 +153,10 @@ const commands = computed(() => {
       action: toggleLanguage
     },
     { id: 'cv', group: palette.groups.actions, label: palette.actions.downloadCv, icon: ICONS.download, keywords: 'cv resume pdf download hent', action: downloadCv },
-    { id: 'arcade', group: palette.groups.actions, label: palette.actions.arcade, icon: ICONS.game, keywords: 'game arcade play spil games', action: () => router.push('/arcade') },
-    { id: 'bug-hunt', group: palette.groups.actions, label: t.value.arcade.games.bugHunt.name, icon: ICONS.game, keywords: 'game shooter bugs arcade spil', action: () => router.push('/arcade/bug-hunt') },
-    { id: 'stack-overflow', group: palette.groups.actions, label: t.value.arcade.games.stackOverflow.name, icon: ICONS.game, keywords: 'game blocks tetris puzzle arcade spil', action: () => router.push('/arcade/stack-overflow') },
-    { id: 'merge-sort', group: palette.groups.actions, label: t.value.arcade.games.mergeSort.name, icon: ICONS.game, keywords: 'game 2048 tiles puzzle arcade spil', action: () => router.push('/arcade/merge-sort') },
+    { id: 'arcade', group: palette.groups.actions, label: palette.actions.arcade, icon: ICONS.game, keywords: 'game arcade play spil games', action: () => router.push(localePath('/arcade')) },
+    { id: 'bug-hunt', group: palette.groups.actions, label: t.value.arcade.games.bugHunt.name, icon: ICONS.game, keywords: 'game shooter bugs arcade spil', action: () => router.push(localePath('/arcade/bug-hunt')) },
+    { id: 'stack-overflow', group: palette.groups.actions, label: t.value.arcade.games.stackOverflow.name, icon: ICONS.game, keywords: 'game blocks tetris puzzle arcade spil', action: () => router.push(localePath('/arcade/stack-overflow')) },
+    { id: 'merge-sort', group: palette.groups.actions, label: t.value.arcade.games.mergeSort.name, icon: ICONS.game, keywords: 'game 2048 tiles puzzle arcade spil', action: () => router.push(localePath('/arcade/merge-sort')) },
 
     { id: 'github', group: palette.groups.links, label: 'GitHub', icon: ICONS.link, hint: 'github.com/NicklasGV', keywords: 'github code repo source', action: () => openExternal('https://github.com/NicklasGV') },
     { id: 'linkedin', group: palette.groups.links, label: 'LinkedIn', icon: ICONS.link, hint: 'nicklas-vedeby', keywords: 'linkedin social network', action: () => openExternal('https://www.linkedin.com/in/nicklas-vedeby-3155351b7/') },

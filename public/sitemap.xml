@@ -1,33 +1,91 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<!--
+  Every page is listed once per language, and each entry declares the full set
+  of alternates (including itself, which Google requires) so the two versions
+  are treated as translations rather than duplicates.
+-->
+<urlset
+  xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml"
+>
   <url>
-    <loc>https://nicklasvedeby.com/</loc>
+    <loc>https://nicklasvedeby.com/da</loc>
+    <xhtml:link rel="alternate" hreflang="da" href="https://nicklasvedeby.com/da"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nicklasvedeby.com/en"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nicklasvedeby.com/"/>
     <lastmod>2026-09-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.00</priority>
   </url>
   <url>
-    <loc>https://nicklasvedeby.com/arcade</loc>
+    <loc>https://nicklasvedeby.com/en</loc>
+    <xhtml:link rel="alternate" hreflang="da" href="https://nicklasvedeby.com/da"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nicklasvedeby.com/en"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nicklasvedeby.com/"/>
+    <lastmod>2026-09-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1.00</priority>
+  </url>
+
+  <url>
+    <loc>https://nicklasvedeby.com/da/arcade</loc>
+    <xhtml:link rel="alternate" hreflang="da" href="https://nicklasvedeby.com/da/arcade"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nicklasvedeby.com/en/arcade"/>
     <lastmod>2026-09-08</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.50</priority>
   </url>
   <url>
-    <loc>https://nicklasvedeby.com/arcade/bug-hunt</loc>
+    <loc>https://nicklasvedeby.com/en/arcade</loc>
+    <xhtml:link rel="alternate" hreflang="da" href="https://nicklasvedeby.com/da/arcade"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nicklasvedeby.com/en/arcade"/>
     <lastmod>2026-09-08</lastmod>
     <changefreq>yearly</changefreq>
+    <priority>0.50</priority>
+  </url>
+
+  <url>
+    <loc>https://nicklasvedeby.com/da/arcade/bug-hunt</loc>
+    <xhtml:link rel="alternate" hreflang="da" href="https://nicklasvedeby.com/da/arcade/bug-hunt"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nicklasvedeby.com/en/arcade/bug-hunt"/>
+    <lastmod>2026-09-08</lastmod>
     <priority>0.30</priority>
   </url>
   <url>
-    <loc>https://nicklasvedeby.com/arcade/stack-overflow</loc>
+    <loc>https://nicklasvedeby.com/en/arcade/bug-hunt</loc>
+    <xhtml:link rel="alternate" hreflang="da" href="https://nicklasvedeby.com/da/arcade/bug-hunt"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nicklasvedeby.com/en/arcade/bug-hunt"/>
     <lastmod>2026-09-08</lastmod>
-    <changefreq>yearly</changefreq>
+    <priority>0.30</priority>
+  </url>
+
+  <url>
+    <loc>https://nicklasvedeby.com/da/arcade/stack-overflow</loc>
+    <xhtml:link rel="alternate" hreflang="da" href="https://nicklasvedeby.com/da/arcade/stack-overflow"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nicklasvedeby.com/en/arcade/stack-overflow"/>
+    <lastmod>2026-09-08</lastmod>
     <priority>0.30</priority>
   </url>
   <url>
-    <loc>https://nicklasvedeby.com/arcade/merge-sort</loc>
+    <loc>https://nicklasvedeby.com/en/arcade/stack-overflow</loc>
+    <xhtml:link rel="alternate" hreflang="da" href="https://nicklasvedeby.com/da/arcade/stack-overflow"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nicklasvedeby.com/en/arcade/stack-overflow"/>
     <lastmod>2026-09-08</lastmod>
-    <changefreq>yearly</changefreq>
+    <priority>0.30</priority>
+  </url>
+
+  <url>
+    <loc>https://nicklasvedeby.com/da/arcade/merge-sort</loc>
+    <xhtml:link rel="alternate" hreflang="da" href="https://nicklasvedeby.com/da/arcade/merge-sort"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nicklasvedeby.com/en/arcade/merge-sort"/>
+    <lastmod>2026-09-08</lastmod>
+    <priority>0.30</priority>
+  </url>
+  <url>
+    <loc>https://nicklasvedeby.com/en/arcade/merge-sort</loc>
+    <xhtml:link rel="alternate" hreflang="da" href="https://nicklasvedeby.com/da/arcade/merge-sort"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nicklasvedeby.com/en/arcade/merge-sort"/>
+    <lastmod>2026-09-08</lastmod>
     <priority>0.30</priority>
   </url>
 </urlset>

@@ -1,7 +1,7 @@
 <template>
   <div class="arcade-page">
     <div class="container">
-      <RouterLink :to="activeGame ? '/arcade' : '/'" class="back-link">
+      <RouterLink :to="activeGame ? localePath('/arcade') : localePath()" class="back-link">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true">
           <path d="M19 12H5M12 19l-7-7 7-7" />
         </svg>
@@ -29,7 +29,7 @@
 
         <ul class="game-grid">
           <li v-for="game in GAMES" :key="game.slug">
-            <RouterLink :to="`/arcade/${game.slug}`" class="game-card">
+            <RouterLink :to="localePath(`/arcade/${game.slug}`)" class="game-card">
               <span class="game-card__art" aria-hidden="true" :class="`art--${game.key}`">
                 <span v-for="i in 9" :key="i"></span>
               </span>
@@ -52,7 +52,7 @@ import StackOverflow from '../components/games/StackOverflow.vue'
 import MergeSort from '../components/games/MergeSort.vue'
 import { useLanguage } from '../composables/useLanguage'
 
-const { t } = useLanguage()
+const { t, localePath } = useLanguage()
 const route = useRoute()
 
 const GAMES = [

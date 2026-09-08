@@ -2,17 +2,18 @@
   <div class="not-found">
     <main class="panel" aria-labelledby="not-found-title">
       <p class="status" aria-hidden="true">404</p>
-      <h1 id="not-found-title">That page went missing.</h1>
-      <p class="description">
-        Double-check the address or head back to the homepage.
-      </p>
-      <RouterLink to="/" class="primary">Return home</RouterLink>
+      <h1 id="not-found-title">{{ t.notFound.title }}</h1>
+      <p class="description">{{ t.notFound.body }}</p>
+      <RouterLink :to="localePath()" class="primary">{{ t.notFound.cta }}</RouterLink>
     </main>
   </div>
 </template>
 
 <script setup>
 import { RouterLink } from 'vue-router'
+import { useLanguage } from '../composables/useLanguage'
+
+const { t, localePath } = useLanguage()
 </script>
 
 <style lang="scss" scoped>

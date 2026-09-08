@@ -6,7 +6,58 @@ import buildabotImage from '../assets/images/buildabotwide.svg'
 import samlinoImage from '../assets/images/samlino.png'
 import martinRecommendationPdf from '../assets/pdfs/Nicklas-Vedeby-Anbefaling-Martin.pdf'
 
-const currentLanguage = ref('da')
+export const SUPPORTED_LANGUAGES = ['da', 'en']
+const DEFAULT_LANGUAGE = 'da'
+const SITE_URL = import.meta.env.VITE_SITE_URL || ''
+
+const currentLanguage = ref(DEFAULT_LANGUAGE)
+
+export const isSupportedLanguage = (lang) => SUPPORTED_LANGUAGES.includes(lang)
+
+const readSavedLanguage = () => {
+  try {
+    const saved = localStorage.getItem('language')
+    return isSupportedLanguage(saved) ? saved : null
+  } catch {
+    return null
+  }
+}
+
+const saveLanguage = (lang) => {
+  try {
+    localStorage.setItem('language', lang)
+  } catch {
+    // Blocked storage just means the choice is not remembered next visit.
+  }
+}
+
+// Routes that carry a language segment overwrite this in the router guard.
+// It only matters for the 404, which has no language of its own, so a visitor
+// who has chosen English does not get a Danish error page.
+if (typeof window !== 'undefined') {
+  const saved = readSavedLanguage()
+  if (saved) {
+    currentLanguage.value = saved
+  }
+}
+
+// Only used for the bare "/" entry point, which has no language of its own:
+// a previous choice wins, then the browser's preference, then Danish.
+export const detectLanguage = () => {
+  if (typeof window === 'undefined') {
+    return DEFAULT_LANGUAGE
+  }
+
+  const saved = readSavedLanguage()
+  if (saved) {
+    return saved
+  }
+
+  const preferred = (navigator.languages?.length ? navigator.languages : [navigator.language || ''])
+    .map((tag) => tag.slice(0, 2).toLowerCase())
+
+  return preferred.find(isSupportedLanguage) ?? DEFAULT_LANGUAGE
+}
 
 const normalizeDocumentLanguage = (lang) => {
   switch (lang) {
@@ -467,6 +518,11 @@ const translations = {
         lostBody: 'No moves left. The board is full and nothing else can merge.',
         keepGoing: 'Keep going'
       }
+    },
+    notFound: {
+      title: 'That page went missing.',
+      body: 'Double-check the address, or head back to the front page.',
+      cta: 'Return home'
     },
     seo: {
       home: {
@@ -930,6 +986,11 @@ const translations = {
         keepGoing: 'Spil videre'
       }
     },
+    notFound: {
+      title: 'Siden er forsvundet.',
+      body: 'Tjek adressen en ekstra gang, eller gå tilbage til forsiden.',
+      cta: 'Tilbage til forsiden'
+    },
     seo: {
       home: {
         title: 'Nicklas Vedeby | Fullstack Udvikler',
@@ -951,22 +1012,62 @@ const translations = {
   }
 }
 
+// Switches language without navigating. The router guard calls this, which
+// keeps the URL as the single source of truth for which language is showing.
+export const applyLanguage = (lang) => {
+  if (isSupportedLanguage(lang) && lang !== currentLanguage.value) {
+    currentLanguage.value = lang
+    saveLanguage(lang)
+  }
+
+  applyDocumentLanguage(currentLanguage.value)
+}
+
+// Prefixes an in-app path with the active language: localePath('/arcade')
+// gives '/da/arcade'. Reading the ref here also makes template calls reactive.
+export const localePath = (path = '') => `/${currentLanguage.value}${path}`
+
+const stripLanguagePrefix = (path = '/') => {
+  const match = path.match(/^\/(?:da|en)(\/.*)?$/)
+
+  if (match) {
+    return match[1] ?? ''
+  }
+
+  return path === '/' ? '' : path
+}
+
 // Title and description come from the translations, so the tags a crawler
 // renders always match the language the page is actually showing. Routes say
 // which entry they want via meta.seoKey.
-export const applyRouteSEO = (meta = {}, url) => {
-  if (typeof window === 'undefined') {
+export const applyRouteSEO = (route) => {
+  if (typeof window === 'undefined' || !route) {
     return
   }
 
+  const meta = route.meta ?? {}
   const copy = translations[currentLanguage.value]
   const routeSeo = copy?.seo?.[meta.seoKey] ?? {}
+  const base = SITE_URL || window.location.origin
+  const suffix = stripLanguagePrefix(route.path)
+  const isNotFound = meta.seoKey === 'notFound'
+
+  // Each language is its own indexable URL and canonicals to itself. The
+  // alternates tell Google they are translations rather than duplicates, and
+  // x-default points at "/", which picks a language and redirects.
+  const alternates = isNotFound
+    ? []
+    : [
+        ...SUPPORTED_LANGUAGES.map((lang) => ({ hreflang: lang, href: `${base}/${lang}${suffix}` })),
+        { hreflang: 'x-default', href: `${base}/` }
+      ]
 
   updateSEO({
     ...meta,
     ...routeSeo,
     locale: currentLanguage.value === 'en' ? 'en_US' : 'da_DK',
-    url: url ?? window.location.href
+    url: isNotFound ? `${base}${route.path}` : `${base}/${currentLanguage.value}${suffix}`,
+    alternates
   })
 }
 
@@ -975,36 +1076,44 @@ export function useLanguage() {
   const language = computed(() => currentLanguage.value)
   const t = computed(() => translations[currentLanguage.value])
 
+  // Changing language is a navigation now, so the URL and the visible copy can
+  // never disagree. The guard applies the change once the route settles.
   const setLanguage = (lang) => {
-    if (translations[lang]) {
-      currentLanguage.value = lang
-      applyDocumentLanguage(lang)
-      if (typeof window !== 'undefined') {
-        localStorage.setItem('language', lang)
-        applyRouteSEO(router?.currentRoute?.value?.meta ?? {})
-      }
+    if (!isSupportedLanguage(lang) || lang === currentLanguage.value) {
+      return
     }
+
+    saveLanguage(lang)
+
+    const current = router?.currentRoute?.value
+
+    if (current?.params?.lang) {
+      router.push({
+        name: current.name,
+        params: { ...current.params, lang },
+        query: current.query,
+        hash: current.hash
+      })
+      return
+    }
+
+    // Routes without a language segment (the 404) just swap in place.
+    applyLanguage(lang)
+    applyRouteSEO(current)
   }
 
   const toggleLanguage = () => {
     setLanguage(currentLanguage.value === 'en' ? 'da' : 'en')
   }
 
-  // Initialize from localStorage
-  const savedLanguage = typeof window !== 'undefined' ? localStorage.getItem('language') : null
-  if (savedLanguage && translations[savedLanguage]) {
-    currentLanguage.value = savedLanguage
-  }
-
   applyDocumentLanguage(currentLanguage.value)
-
-  applyRouteSEO(router?.currentRoute?.value?.meta ?? {})
 
   return {
     language,
     t,
     setLanguage,
-    toggleLanguage
+    toggleLanguage,
+    localePath
   }
 }
 

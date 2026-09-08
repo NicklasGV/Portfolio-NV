@@ -1,24 +1,40 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import { applyRouteSEO } from '@/composables/useLanguage'
+import { applyLanguage, applyRouteSEO, detectLanguage, isSupportedLanguage } from '@/composables/useLanguage'
 
-const SITE_URL = import.meta.env.VITE_SITE_URL || ''
-
+// Each language is its own URL (/da, /en) so the two versions can be indexed
+// and ranked separately instead of sharing one address.
 const router = createRouter({
   history: createWebHistory(),
   routes: [
+    // Entry point with no language of its own: pick one and redirect. This is
+    // also what hreflang x-default points at.
     {
       path: '/',
+      redirect: () => `/${detectLanguage()}`,
+    },
+
+    // Anything linked before the language prefix existed still resolves.
+    {
+      path: '/arcade',
+      redirect: () => `/${detectLanguage()}/arcade`,
+    },
+    {
+      path: '/arcade/:slug',
+      redirect: (to) => `/${detectLanguage()}/arcade/${to.params.slug}`,
+    },
+
+    {
+      path: '/:lang(da|en)',
       name: 'home',
       component: () => import('../pages/Home.vue'),
-      // seoKey selects the translated title and description, so the tags
-      // follow the language toggle instead of being pinned to English.
+      // seoKey selects the translated title and description.
       meta: {
         seoKey: 'home',
         type: 'website',
       },
     },
     {
-      path: '/arcade',
+      path: '/:lang(da|en)/arcade',
       name: 'arcade',
       component: () => import('../pages/Arcade.vue'),
       meta: {
@@ -27,7 +43,7 @@ const router = createRouter({
       },
     },
     {
-      path: '/arcade/:slug',
+      path: '/:lang(da|en)/arcade/:slug',
       name: 'arcade-game',
       component: () => import('../pages/Arcade.vue'),
       meta: {
@@ -35,6 +51,7 @@ const router = createRouter({
         type: 'website',
       },
     },
+
     {
       path: '/:pathMatch(.*)*',
       name: 'not-found',
@@ -46,16 +63,25 @@ const router = createRouter({
       },
     },
   ],
-  scrollBehavior() {
-    return { top: 0 }
+  scrollBehavior(to, from, savedPosition) {
+    // Switching language stays on the same page, so hold the scroll position
+    // rather than throwing the reader back to the top.
+    if (to.name === from.name && to.params.lang !== from.params.lang) {
+      return false
+    }
+
+    return savedPosition ?? { top: 0 }
   },
 })
 
-router.afterEach((to) => {
-  const base = SITE_URL || (typeof window !== 'undefined' ? window.location.origin : '')
-  const url = base ? `${base}${to.fullPath}` : undefined
+router.beforeEach((to) => {
+  if (isSupportedLanguage(to.params.lang)) {
+    applyLanguage(to.params.lang)
+  }
+})
 
-  applyRouteSEO(to.meta, url)
+router.afterEach((to) => {
+  applyRouteSEO(to)
 })
 
 export default router

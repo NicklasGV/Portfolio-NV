@@ -76,6 +76,26 @@ const upsertLinkTag = (rel, href) => {
   tag.setAttribute('href', href)
 }
 
+// Rebuilt wholesale on every navigation. Editing in place would risk leaving
+// an alternate behind that points at the previous page.
+const upsertAlternates = (alternates = []) => {
+  document.head
+    .querySelectorAll('link[rel="alternate"][hreflang]')
+    .forEach((tag) => tag.remove())
+
+  alternates.forEach(({ hreflang, href }) => {
+    if (!hreflang || !href) {
+      return
+    }
+
+    const link = document.createElement('link')
+    link.setAttribute('rel', 'alternate')
+    link.setAttribute('hreflang', hreflang)
+    link.setAttribute('href', href)
+    document.head.appendChild(link)
+  })
+}
+
 const buildAbsoluteUrl = (path = '') => {
   if (!path) {
     return undefined
@@ -138,6 +158,7 @@ export const updateSEO = (meta = {}) => {
   upsertMetaTag({ property: 'og:site_name', content: 'Nicklas Vedeby' })
 
   upsertLinkTag('canonical', canonicalUrl)
+  upsertAlternates(meta.alternates)
 }
 
 export const getDefaultSEO = () => ({

@@ -93,7 +93,7 @@ import { useDarkMode } from '../composables/useDarkMode'
 import { useCommandPalette } from '../composables/useCommandPalette'
 import cvUrl from '../assets/pdfs/CV_nicklas_vedeby.pdf?url'
 
-const { t, language, setLanguage } = useLanguage()
+const { t, language, setLanguage, localePath } = useLanguage()
 const { isDarkMode, toggleDarkMode } = useDarkMode()
 const { open: openPalette } = useCommandPalette()
 const router = useRouter()
@@ -486,7 +486,7 @@ const commandHandlers = {
     const games = t.value.arcade.games
 
     if (!slug) {
-      setTimeout(() => router.push('/arcade'), 400)
+      setTimeout(() => router.push(localePath('/arcade')), 400)
       return [
         { text: t.value.terminal.launchingArcade, cls: 'line--success' },
         { text: '' },
@@ -503,7 +503,7 @@ const commandHandlers = {
       return [{ text: t.value.terminal.noSuchGame.replace('{name}', slug), cls: 'line--error' }]
     }
 
-    setTimeout(() => router.push(`/arcade/${slug}`), 400)
+    setTimeout(() => router.push(localePath(`/arcade/${slug}`)), 400)
     return [{ text: t.value.terminal.launchingGame.replace('{name}', games[key].name), cls: 'line--success' }]
   },
 

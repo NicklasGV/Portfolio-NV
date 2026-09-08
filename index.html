@@ -12,7 +12,15 @@
   <meta name="author" content="Nicklas Vedeby">
   <meta name="robots" content="index, follow">
   <meta name="theme-color" content="#0b1120">
-  <link rel="canonical" href="https://nicklasvedeby.com/">
+  <!--
+    Static fallbacks describing the Danish front page. utils/seo.js rewrites the
+    canonical and these alternates per route once the app boots, which is what a
+    rendering crawler ends up reading.
+  -->
+  <link rel="canonical" href="https://nicklasvedeby.com/da">
+  <link rel="alternate" hreflang="da" href="https://nicklasvedeby.com/da">
+  <link rel="alternate" hreflang="en" href="https://nicklasvedeby.com/en">
+  <link rel="alternate" hreflang="x-default" href="https://nicklasvedeby.com/">
 
   <!--
     These are duplicated at runtime by utils/seo.js so they follow the language
@@ -26,7 +34,7 @@
   <meta property="og:locale:alternate" content="en_US">
   <meta property="og:title" content="Nicklas Vedeby | Fullstack Udvikler">
   <meta property="og:description" content="Fullstack udvikler i Storkøbenhavn. Erfaring med Vue, Nuxt, TypeScript, Python og SQL. Se mine projekter og referencer.">
-  <meta property="og:url" content="https://nicklasvedeby.com/">
+  <meta property="og:url" content="https://nicklasvedeby.com/da">
   <meta property="og:image" content="https://nicklasvedeby.com/og-image.jpg">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
@@ -52,7 +60,7 @@
     "@type": "Person",
     "name": "Nicklas Vedeby",
     "jobTitle": "Fullstack Developer",
-    "url": "https://nicklasvedeby.com/",
+    "url": "https://nicklasvedeby.com/da",
     "email": "mailto:nvedeby@gmail.com",
     "knowsLanguage": ["da", "en"],
     "worksFor": {
