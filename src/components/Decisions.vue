@@ -162,7 +162,7 @@ const { t } = useLanguage()
     padding: 0.25rem 0.7rem;
     border-radius: 999px;
     background: rgba($primary-blue, 0.12);
-    color: $primary-blue;
+    color: var(--accent);
     font-family: 'SFMono-Regular', Menlo, Consolas, monospace;
     font-size: 0.75rem;
   }

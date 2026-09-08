@@ -537,7 +537,7 @@ onBeforeUnmount(() => {
   letter-spacing: 0.08em;
 
   strong {
-    color: $primary-blue;
+    color: var(--accent);
     font-size: 1rem;
   }
 }

@@ -27,7 +27,7 @@ const upsertIcon = (rel, href, { type, sizes } = {}) => {
 }
 
 const ensureFavicon = () => {
-  // The tab icon is cropped to the letterforms — the circuit nodes turn to
+  // The tab icon is cropped to the letterforms, because the circuit nodes turn to
   // mush below about 64px. The touch icon keeps the full mark.
   upsertIcon('icon', favicon32Url, { type: 'image/png', sizes: '32x32' })
   upsertIcon('icon', favicon48Url, { type: 'image/png', sizes: '48x48' })

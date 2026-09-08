@@ -380,7 +380,7 @@ onBeforeUnmount(() => {
   letter-spacing: 0.08em;
 
   strong {
-    color: $primary-blue;
+    color: var(--accent);
     font-size: 1rem;
   }
 }
@@ -403,8 +403,8 @@ onBeforeUnmount(() => {
   }
 
   &:hover:not(:disabled) {
-    border-color: $primary-blue;
-    color: $primary-blue;
+    border-color: var(--accent);
+    color: var(--accent);
   }
 
   &:disabled {
@@ -414,7 +414,10 @@ onBeforeUnmount(() => {
 }
 
 .board {
-  --gap: 3.2%;
+  // Must be an absolute length. Inside transform: translate() a percentage
+  // resolves against the tile itself, not the board, so a percentage gap comes
+  // out roughly four times too small and every column drifts out of its cell.
+  --gap: clamp(6px, 2vw, 12px);
 
   position: relative;
   aspect-ratio: 1;
@@ -427,7 +430,7 @@ onBeforeUnmount(() => {
   outline: none;
 
   &:focus-visible {
-    border-color: $primary-blue;
+    border-color: var(--accent);
     box-shadow: 0 0 0 3px rgba($primary-blue, 0.3);
   }
 }

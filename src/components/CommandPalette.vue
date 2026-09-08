@@ -332,7 +332,7 @@ defineExpose({ open })
 }
 
 .palette__prompt {
-  color: $primary-blue;
+  color: var(--accent);
   font-family: 'SFMono-Regular', Menlo, Consolas, monospace;
   font-weight: 700;
 }
@@ -397,7 +397,7 @@ defineExpose({ open })
 
   &.is-active {
     background: linear-gradient(135deg, rgba($gradient-start, 0.16) 0%, rgba($gradient-end, 0.16) 100%);
-    color: $primary-blue;
+    color: var(--accent);
   }
 }
 

@@ -239,12 +239,12 @@ const handleSubmit = async () => {
 }
 
 .contact-method a {
-  color: $primary-blue;
+  color: var(--accent);
   text-decoration: none;
   transition: color 0.3s;
 
   &:hover {
-    color: $secondary-blue;
+    color: var(--accent-hover);
   }
 }
 
@@ -255,13 +255,13 @@ const handleSubmit = async () => {
 
   a {
     margin-left: 0.35rem;
-    color: $primary-blue;
+    color: var(--accent);
     font-weight: 600;
     text-decoration: none;
     transition: color 0.3s;
 
     &:hover {
-      color: $secondary-blue;
+      color: var(--accent-hover);
     }
   }
 }
@@ -301,7 +301,7 @@ const handleSubmit = async () => {
 
     &:focus {
       outline: none;
-      border-color: $primary-blue;
+      border-color: var(--accent);
     }
   }
 }
@@ -346,7 +346,7 @@ const handleSubmit = async () => {
 
   &--info {
     border-color: rgba($primary-blue, 0.4);
-    color: $primary-blue;
+    color: var(--accent);
   }
 
   &--success {

@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import { updateSEO } from '@/utils/seo'
+import { applyRouteSEO } from '@/composables/useLanguage'
 
 const SITE_URL = import.meta.env.VITE_SITE_URL || ''
 
@@ -10,9 +10,10 @@ const router = createRouter({
       path: '/',
       name: 'home',
       component: () => import('../pages/Home.vue'),
+      // seoKey selects the translated title and description, so the tags
+      // follow the language toggle instead of being pinned to English.
       meta: {
-        title: 'Nicklas Vedeby — Portfolio',
-        description: "Nicklas Vedeby's portfolio showcasing his journey as a Fullstack Developer, featuring case studies, experience, and contact details.",
+        seoKey: 'home',
         type: 'website',
       },
     },
@@ -21,8 +22,7 @@ const router = createRouter({
       name: 'arcade',
       component: () => import('../pages/Arcade.vue'),
       meta: {
-        title: 'Arcade — Nicklas Vedeby',
-        description: 'Three small games built from scratch with Vue — a pixel shooter, a falling-block puzzle and a sliding-tile puzzle. No engine, no sprite assets.',
+        seoKey: 'arcade',
         type: 'website',
       },
     },
@@ -31,8 +31,7 @@ const router = createRouter({
       name: 'arcade-game',
       component: () => import('../pages/Arcade.vue'),
       meta: {
-        title: 'Arcade — Nicklas Vedeby',
-        description: 'Three small games built from scratch with Vue — a pixel shooter, a falling-block puzzle and a sliding-tile puzzle. No engine, no sprite assets.',
+        seoKey: 'arcade',
         type: 'website',
       },
     },
@@ -41,9 +40,8 @@ const router = createRouter({
       name: 'not-found',
       component: () => import('../pages/NotFound.vue'),
       meta: {
-        title: 'Page Not Found — Nicklas Vedeby',
-        description: 'The page you were looking for could not be found on Nicklas Vedeby\'s portfolio website.',
-        robots: 'noindex, nofollow',
+        seoKey: 'notFound',
+        robots: 'noindex, follow',
         type: 'website',
       },
     },
@@ -57,8 +55,7 @@ router.afterEach((to) => {
   const base = SITE_URL || (typeof window !== 'undefined' ? window.location.origin : '')
   const url = base ? `${base}${to.fullPath}` : undefined
 
-  updateSEO({ ...to.meta, url })
+  applyRouteSEO(to.meta, url)
 })
 
 export default router
-

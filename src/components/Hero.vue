@@ -133,7 +133,7 @@ onBeforeUnmount(() => {
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.2em;
-  color: $primary-blue;
+  color: var(--accent);
 }
 
 h1 {
@@ -189,7 +189,7 @@ h1 {
 
 .cta.secondary {
   border: 2px solid rgba($primary-blue, 0.5);
-  color: $primary-blue;
+  color: var(--accent);
   background: rgba($primary-blue, 0.05);
 }
 

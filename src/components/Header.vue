@@ -256,7 +256,7 @@ const scrollTo = (section) => {
     position: relative;
 
     &:hover {
-      color: $primary-blue;
+      color: var(--accent);
     }
 
     &::after {

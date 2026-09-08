@@ -82,7 +82,7 @@ const activeGame = computed(() => GAMES.find((game) => game.slug === route.param
   align-items: center;
   gap: 0.5rem;
   margin-bottom: 2.5rem;
-  color: $primary-blue;
+  color: var(--accent);
   font-weight: 500;
   text-decoration: none;
   transition: gap 0.2s, color 0.2s;
@@ -95,7 +95,7 @@ const activeGame = computed(() => GAMES.find((game) => game.slug === route.param
 
   &:hover {
     gap: 0.75rem;
-    color: $secondary-blue;
+    color: var(--accent-hover);
   }
 }
 
@@ -106,7 +106,7 @@ const activeGame = computed(() => GAMES.find((game) => game.slug === route.param
 
 .eyebrow {
   margin: 0 0 0.5rem;
-  color: $primary-blue;
+  color: var(--accent);
   font-size: 0.85rem;
   font-weight: 600;
   letter-spacing: 0.2em;
@@ -209,7 +209,7 @@ h1 {
 }
 
 .game-card__cta {
-  color: $primary-blue;
+  color: var(--accent);
   font-weight: 600;
   font-size: 0.92rem;
 }

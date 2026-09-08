@@ -100,7 +100,7 @@ const { t } = useLanguage()
   line-height: 1.6;
 
   :deep(.highlight) {
-    color: $primary-blue;
+    color: var(--accent);
     font-weight: 600;
     border-radius: 4px;
   }

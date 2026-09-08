@@ -97,8 +97,8 @@ const { t } = useLanguage()
   transition: border-color 0.2s, color 0.2s;
 
   &:hover {
-    border-color: $primary-blue;
-    color: $primary-blue;
+    border-color: var(--accent);
+    color: var(--accent);
   }
 }
 

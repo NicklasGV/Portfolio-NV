@@ -981,7 +981,7 @@ onBeforeUnmount(() => {
   border: 1px solid rgba($primary-blue, 0.35);
   border-radius: 999px;
   background: var(--bg-primary);
-  color: $primary-blue;
+  color: var(--accent);
   font-family: 'SFMono-Regular', Menlo, Consolas, monospace;
   font-size: 0.82rem;
   cursor: pointer;

@@ -129,7 +129,7 @@ const { t } = useLanguage()
   font-size: 0.95rem;
 
   :deep(.highlight) {
-    color: $primary-blue;
+    color: var(--accent);
     font-weight: 600;
     border-radius: 4px;
   }
@@ -160,7 +160,7 @@ const { t } = useLanguage()
   padding: 0.5rem 1.5rem;
   background: transparent;
   border: 2px solid $primary-blue;
-  color: $primary-blue;
+  color: var(--accent);
   text-decoration: none;
   border-radius: 8px;
   font-weight: 500;

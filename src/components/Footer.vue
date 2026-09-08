@@ -3,7 +3,7 @@
     <div class="container">
       <img
         src="../assets/images/logo-lockup.jpg"
-        alt="Nicklas Vedeby — Fullstack Developer"
+        alt="Nicklas Vedeby, Fullstack Developer"
         class="footer-logo"
         width="280"
         height="222"

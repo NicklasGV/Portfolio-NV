@@ -34,7 +34,7 @@ import Footer from '../components/Footer.vue'
 .app {
   min-height: 100vh;
   background: linear-gradient(135deg, $gradient-start 0%, $gradient-end 100%);
-  // Deliberately not background-attachment: fixed — it forces a full-page
+  // Deliberately not background-attachment: fixed, because it forces a full-page
   // repaint on every scroll frame, and every section paints over it anyway.
   transition: background 0.3s;
 }
