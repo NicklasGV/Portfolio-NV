@@ -6,7 +6,58 @@ import buildabotImage from '../assets/images/buildabotwide.svg'
 import samlinoImage from '../assets/images/samlino.png'
 import martinRecommendationPdf from '../assets/pdfs/Nicklas-Vedeby-Anbefaling-Martin.pdf'
 
-const currentLanguage = ref('da')
+export const SUPPORTED_LANGUAGES = ['da', 'en']
+const DEFAULT_LANGUAGE = 'da'
+const SITE_URL = import.meta.env.VITE_SITE_URL || ''
+
+const currentLanguage = ref(DEFAULT_LANGUAGE)
+
+export const isSupportedLanguage = (lang) => SUPPORTED_LANGUAGES.includes(lang)
+
+const readSavedLanguage = () => {
+  try {
+    const saved = localStorage.getItem('language')
+    return isSupportedLanguage(saved) ? saved : null
+  } catch {
+    return null
+  }
+}
+
+const saveLanguage = (lang) => {
+  try {
+    localStorage.setItem('language', lang)
+  } catch {
+    // Blocked storage just means the choice is not remembered next visit.
+  }
+}
+
+// Routes that carry a language segment overwrite this in the router guard.
+// It only matters for the 404, which has no language of its own, so a visitor
+// who has chosen English does not get a Danish error page.
+if (typeof window !== 'undefined') {
+  const saved = readSavedLanguage()
+  if (saved) {
+    currentLanguage.value = saved
+  }
+}
+
+// Only used for the bare "/" entry point, which has no language of its own:
+// a previous choice wins, then the browser's preference, then Danish.
+export const detectLanguage = () => {
+  if (typeof window === 'undefined') {
+    return DEFAULT_LANGUAGE
+  }
+
+  const saved = readSavedLanguage()
+  if (saved) {
+    return saved
+  }
+
+  const preferred = (navigator.languages?.length ? navigator.languages : [navigator.language || ''])
+    .map((tag) => tag.slice(0, 2).toLowerCase())
+
+  return preferred.find(isSupportedLanguage) ?? DEFAULT_LANGUAGE
+}
 
 const normalizeDocumentLanguage = (lang) => {
   switch (lang) {
@@ -56,7 +107,7 @@ const translations = {
       text2: 'I\'m always eager to learn new ways of building for the web, whether that\'s frontend styling and UX or getting deeper into databases and backend architecture. I approach every project with attention to detail and a genuine drive to figure out the best way to build it.',
       downloadLabel: 'Prefer a PDF of my CV? ',
       downloadCta: 'Grab it here',
-      imageAlt: 'Portrait of Nicklas Vedeby, Data Technician and Web Developer',
+      imageAlt: 'Portrait of Nicklas Vedeby, Fullstack Developer',
     },
     education: {
       title: 'Education',
@@ -83,11 +134,18 @@ const translations = {
       present: 'Present',
       timeline: [
         {
-          startDate: 'Apr 2026',
+          startDate: 'Sep 2026',
           endDate: null,
+          title: 'Fullstack Developer',
+          company: 'Tribe Happiness',
+          description: 'I work as a fullstack developer at Tribe Happiness, where I build and maintain both ends of the stack, from UI components and styling in the frontend through to APIs, backend logic and data.'
+        },
+        {
+          startDate: 'Apr 2026',
+          endDate: 'Aug 2026',
           title: 'Junior Product Developer',
           company: 'Sophisticated GEEK',
-          description: 'I work at Sophisticated GEEK, where I focus on product development and concept development. I also help maintain websites running on Shopify.'
+          description: 'I worked with product development and concept development, and helped maintain websites running on Shopify.'
         },
         {
           startDate: 'June 2025',
@@ -130,7 +188,7 @@ const translations = {
         {
           quote: 'Nicklas approaches every assignment with a positive, solution-oriented mindset and has grown rapidly as a developer. I give him my full recommendation and wish we could have kept him at Samlino.',
           name: 'Martin Fjordvald',
-          role: 'Group CTO — Samlino Group',
+          role: 'Group CTO, Samlino Group',
           contact: {
             email: 'martin@samlinogroup.com',
             phone: '+351910092830'
@@ -146,12 +204,12 @@ const translations = {
       others: [
         {
           name: 'Jeppe T. Poulsen',
-          role: 'Head of Analytics — Samlino.dk',
+          role: 'Head of Analytics, Samlino.dk',
           email: 'jeppe.poulsen@samlino.dk'
         },
         {
           name: 'Kenneth Berle',
-          role: 'Fullstack Developer — Samlino.dk, CEO Fenrir Games Studios',
+          role: 'Fullstack Developer at Samlino.dk, CEO of Fenrir Games Studios',
           email: 'light@fenrirgamestudio.dk',
           phone: '+4540711759',
           personalEmail: 'kenneth@berle.eu',
@@ -161,45 +219,27 @@ const translations = {
     },
     skills: {
       title: 'Skills',
-      categories: [
+      subtitle: 'Grouped by how much real mileage I have on each, rather than a percentage I assigned to myself.',
+      groups: [
         {
-          title: 'Data Technologies',
-          skills: [
-            { name: 'SQL', level: 90 },
-            { name: 'Python', level: 85 },
-            { name: 'Data Analysis', level: 88 },
-            { name: 'ETL Processes', level: 80 },
-            { name: 'DB Performance Tuning', level: 80 }
-          ]
+          title: 'In production',
+          description: 'Used on work that shipped and that I kept maintaining afterwards.',
+          items: ['Vue.js', 'Nuxt', 'JavaScript', 'TypeScript', 'HTML/CSS', 'SCSS', 'Python', 'SQL', 'REST APIs', 'Storyblok CMS', 'Shopify', 'Git', 'UI/UX']
         },
         {
-          title: 'Web Development',
-          skills: [
-            { name: 'Vue.js', level: 90 },
-            { name: 'Nuxt', level: 80 },
-            { name: 'Angular', level: 90 },
-            { name: 'JavaScript', level: 90 },
-            { name: 'TypeScript', level: 80 },
-            { name: 'HTML/CSS', level: 95 },
-            { name: 'UI/UX', level: 75 },
-            { name: 'Node.js', level: 60 },
-            { name: 'C#', level: 65 },
-            { name: 'Responsive Design', level: 90 }
-          ]
+          title: 'Built with',
+          description: 'Used to build and finish my own projects and coursework.',
+          items: ['Angular', 'C#', '.NET', 'Node.js', 'Vite', 'Discord.js', 'Docker', 'ETL pipelines', 'Database tuning']
         },
         {
-          title: 'Tools & Technologies',
-          skills: [
-            { name: 'Git', level: 85 },
-            { name: 'REST APIs', level: 80 },
-            { name: 'Shopify', level: 70 },
-            { name: 'Cursor AI', level: 75 },
-            { name: 'ClaudeAI', level: 70 },
-            { name: 'ChatGPT', level: 80 },
-            { name: 'Docker', level: 70 },
-            { name: 'AWS System', level: 65 },
-            { name: 'PRINCE 2', level: 55 }
-          ]
+          title: 'Exploring',
+          description: 'On my desk right now, and genuinely still learning these.',
+          items: ['AWS', 'Automated testing', 'PRINCE2']
+        },
+        {
+          title: 'Languages',
+          description: 'Written and spoken.',
+          items: ['Danish (native)', 'English (professional)']
         }
       ]
     },
@@ -219,6 +259,7 @@ const translations = {
           description: 'A web-based platform for building and testing bots for Discord. This project is mine and a friend\'s, made as a final project in our education. It\'s still being worked on here and there but is currently dormant.',
           tags: ['Angular', 'Discord.js', 'REST API', 'C#'],
           github: 'https://github.com/NicklasGV/Build-a-Bot',
+          demo: 'https://buildabot.dk/',
           alt: 'Preview of the Build a Bot Discord automation platform interface',
         },
         {
@@ -252,6 +293,249 @@ const translations = {
         sending: 'Sending your message...',
         success: 'Thank you for your message! I\'ll get back to you soon.',
         error: 'Something went wrong. Please try again later.'
+      }
+    },
+    terminal: {
+      title: 'Terminal',
+      subtitle: 'Prefer a keyboard? This portfolio ships with a shell. Type a command, hit Enter, and explore my CV the developer way.',
+      windowTitle: 'nicklas@portfolio: ~',
+      clearLabel: 'Clear terminal',
+      inputLabel: 'Terminal command input',
+      tryLabel: 'Try:',
+      boot: [
+        'nv-sh 2.0.0 (portfolio build 2026.09)',
+        'Loading modules: vue@3 · vite@5 · scss ................ ok',
+        'Mounting /home/visitor/nicklas-vedeby ................. ok',
+        "Ready. Type 'help' to see what I can do."
+      ],
+      help: {
+        title: 'Available commands:',
+        footer: 'Tip: ↑/↓ walks your history, Tab autocompletes, Ctrl+L clears, Ctrl+K opens the command palette.'
+      },
+      commands: {
+        help: 'Show this list of commands',
+        whoami: 'Who am I, in short',
+        experience: 'My work history',
+        skills: 'What I work with, grouped by real experience',
+        projects: 'Things I have built',
+        education: 'My education timeline',
+        decisions: 'Engineering calls I made, and the trade-offs',
+        contact: 'How to reach me',
+        cv: 'Download my CV as PDF',
+        neofetch: 'System info, developer style',
+        ls: 'List the files in this directory',
+        cat: 'Read a file (try: cat about.md)',
+        goto: 'Jump to a section (try: goto projects)',
+        theme: 'Switch theme (theme dark | theme light)',
+        lang: 'Switch language (lang da | lang en)',
+        play: 'Open the arcade (try: play stack-overflow)',
+        palette: 'Open the command palette',
+        echo: 'Print some text back',
+        history: 'Show the commands you have run',
+        date: 'Show current date and time',
+        clear: 'Clear the screen',
+        'sudo hire-me': 'The most important command'
+      },
+      unknown: "command not found: {cmd}. Type 'help' for the list.",
+      uptime: '{years} years, {months} months (since March 2020)',
+      neofetch: {
+        host: 'Host......:',
+        role: 'Role......:',
+        company: 'Company...:',
+        location: 'Location..:',
+        uptime: 'Uptime....:',
+        shell: 'Shell.....:',
+        stack: 'Stack.....:',
+        editor: 'Editor....:',
+        theme: 'Theme.....:',
+        languages: 'Languages.:'
+      },
+      contactHint: 'Or scroll down to the contact form. It lands straight in my inbox.',
+      cvDownloading: 'Downloading CV_nicklas_vedeby.pdf ...',
+      catUsage: 'usage: cat <file>. Run ls to see what is here.',
+      secrets: 'cat: .secrets: permission denied (nice try though)',
+      isDirectory: 'cat: {name}: is a directory. Try: projects',
+      noSuchFile: 'cat: {name}: no such file or directory',
+      gotoUsage: 'usage: goto <section>. Try: about, experience, skills, projects, contact',
+      noSuchSection: 'goto: {name}: no such section',
+      jumping: 'Jumping to {name} ...',
+      themeUsage: 'usage: theme dark | theme light',
+      themeSet: 'Theme set to {name}.',
+      langCurrent: 'Current language: {name}. Usage: lang da | lang en',
+      langUsage: 'usage: lang da | lang en',
+      langSet: 'Language set to {name}.',
+      launchingArcade: 'Opening the arcade. Three games in there:',
+      launchingGame: 'Booting {name} ...',
+      noSuchGame: 'play: {name}: no such game. Run play on its own to see the list.',
+      paletteOpened: 'Command palette opened. Try typing a section name.',
+      historyEmpty: 'No commands in history yet.',
+      exit: "There is no exit. But there is a contact form, so try 'goto contact'.",
+      sudoDenied: "visitor is not in the sudoers file. This incident will be reported. (try: sudo hire-me)",
+      noSkillCategory: 'skills: {name}: no such category',
+      hire: {
+        granted: '[sudo] password for visitor: ******  ✓ access granted',
+        body: 'Excellent choice. I am a fullstack developer who likes shipping clean, fast interfaces and the backends behind them, and I learn new stacks quickly.'
+      }
+    },
+    palette: {
+      label: 'Command palette',
+      openLabel: 'Open command palette',
+      placeholder: 'Jump to a section, switch theme, download CV ...',
+      empty: 'No matching commands.',
+      footerNavigate: 'navigate',
+      footerSelect: 'select',
+      footerClose: 'close',
+      groups: {
+        navigate: 'Navigate',
+        actions: 'Actions',
+        links: 'Links'
+      },
+      actions: {
+        darkMode: 'Switch to dark mode',
+        lightMode: 'Switch to light mode',
+        switchToDanish: 'Switch language to Danish',
+        switchToEnglish: 'Switch language to English',
+        downloadCv: 'Download CV (PDF)',
+        arcade: 'Open the arcade',
+        sendEmail: 'Send me an email'
+      }
+    },
+    decisions: {
+      title: 'Engineering Decisions',
+      subtitle: 'A portfolio is easy to make look finished. These are the calls behind this one: the constraint, what I chose, and what it cost me.',
+      labels: {
+        context: 'Constraint',
+        decision: 'Decision',
+        tradeoff: 'Trade-off'
+      },
+      records: [
+        {
+          title: 'A working contact form with no server to run',
+          context: 'I had the form working against my own Express and Nodemailer backend. Then I checked the hosting properly: the plan serves static files over FTP and will not run Node without moving to a more expensive tier.',
+          decision: 'I deleted the backend and moved the form to a client-side form API. The submit handler posts straight from the browser, and the mail still lands in my inbox.',
+          tradeoff: 'I gave up control of the mail templating and took on a third-party dependency. In exchange the feature shipped on hosting I already pay for, with no server to patch, monitor or keep alive.',
+          tags: ['Node.js', 'Express', 'Nodemailer', 'Web3Forms']
+        },
+        {
+          title: 'Deploying to shared hosting from CI',
+          context: 'The host gives me FTP and nothing else: no containers, no build step on the server, no deploy hooks.',
+          decision: 'A GitHub Actions workflow builds the site and uploads dist/ over FTP, triggered by pushing a semver tag rather than by every commit to main.',
+          tradeoff: 'No preview environments and no one-click rollback. But releases are deliberate and versioned: main can move freely, and only a tag ships.',
+          tags: ['GitHub Actions', 'CI/CD', 'FTP', 'SemVer']
+        },
+        {
+          title: 'Two languages without an i18n library',
+          context: 'The whole site has to exist in Danish and English, including anything I add to it later.',
+          decision: 'One reactive translation store in a composable. Components never hold copy; they read it from t, and the language toggle swaps the object underneath them.',
+          tradeoff: 'No pluralisation or locale-aware formatting for free, and all copy lives in one large file. The upside is no dependency, no bundle cost, and every feature bilingual by construction, including the terminal on the front page.',
+          tags: ['Vue 3', 'Composition API', 'i18n']
+        },
+        {
+          title: 'Fixing the jank instead of adding more polish',
+          context: 'The page felt heavy to scroll and it was not obvious why.',
+          decision: 'Three real causes: a fixed-attachment background repainting the full page on every scroll frame, ~30 skill bars animating width and so forcing layout every frame, and decorative animations running for the entire visit. The bars moved to transform, the fixed attachment went, and the decoration now sits behind prefers-reduced-motion.',
+          tradeoff: 'The background no longer parallaxes, and viewers who ask for reduced motion get a calmer page than I originally designed. Both were worth losing.',
+          tags: ['Performance', 'Rendering', 'Accessibility']
+        }
+      ]
+    },
+    arcade: {
+      eyebrow: 'Arcade',
+      title: 'The Arcade',
+      subtitle: 'Three small games, all written from scratch: no game engine, no image files, no dependencies. Pick one and lose a few minutes.',
+      back: 'Back to the portfolio',
+      backToArcade: 'Back to the arcade',
+      play: 'Play',
+      score: 'Score',
+      best: 'Best',
+      wave: 'Wave',
+      health: 'Health',
+      newBest: 'New personal best!',
+      start: 'Start game',
+      resume: 'Resume',
+      again: 'Play again',
+      pausedTitle: 'Paused',
+      pausedBody: 'Take your time.',
+      overTitle: 'Game over',
+      controls: {
+        pause: 'Pause'
+      },
+      games: {
+        bugHunt: {
+          name: 'Bug Hunt',
+          tagline: 'A top-down shooter. Bugs close in from every edge, so squash them before they reach you.',
+          builtWith: 'Canvas 2D · sprites drawn from text maps · rendered at 480×320 and scaled up.'
+        },
+        stackOverflow: {
+          name: 'Stack Overflow',
+          tagline: 'Falling blocks. Clear lines, survive the rising speed, and do not let the stack overflow.',
+          builtWith: 'Canvas 2D · 7-bag randomiser · wall kicks, ghost piece, hold slot and a gravity curve.'
+        },
+        mergeSort: {
+          name: 'Merge Sort',
+          tagline: 'Slide tiles, merge matching pairs, chase 2048. Easy to start, hard to put down.',
+          builtWith: 'No canvas here. Reactive DOM with CSS transforms, so tiles keep their identity and slide.'
+        }
+      },
+      bugHunt: {
+        canvasLabel: 'Bug Hunt game area',
+        readyTitle: 'Bug Hunt',
+        readyBody: 'The bugs are coming for you. Squash them before they reach you.',
+        overBody: 'You made it to wave {wave}.',
+        touchHint: 'On a touch screen: drag to move, and you fire automatically.',
+        controls: {
+          move: 'Move',
+          aim: 'Aim',
+          shoot: 'Shoot',
+          mouseKey: 'Mouse',
+          clickKey: 'Click'
+        }
+      },
+      stackOverflow: {
+        title: 'Stack Overflow',
+        readyBody: 'Clear lines to score. Every ten lines the gravity gets meaner.',
+        overBody: 'The stack overflowed.',
+        canvasLabel: 'Stack Overflow playing field',
+        lines: 'Lines',
+        level: 'Level',
+        next: 'Next',
+        hold: 'Hold',
+        controls: {
+          move: 'Move',
+          rotate: 'Rotate',
+          soft: 'Soft drop',
+          hard: 'Hard drop',
+          hold: 'Hold piece'
+        }
+      },
+      mergeSort: {
+        boardLabel: 'Merge Sort board',
+        undo: 'Undo',
+        newGame: 'New game',
+        hint: 'Arrow keys or WASD to slide. On touch, swipe. Equal tiles merge into their sum.',
+        wonTitle: 'You hit 2048',
+        wonBody: 'That is the target. You can stop here or keep merging for a bigger score.',
+        lostBody: 'No moves left. The board is full and nothing else can merge.',
+        keepGoing: 'Keep going'
+      }
+    },
+    notFound: {
+      title: 'That page went missing.',
+      body: 'Double-check the address, or head back to the front page.',
+      cta: 'Return home'
+    },
+    seo: {
+      home: {
+        title: 'Nicklas Vedeby | Fullstack Developer',
+        description: 'Fullstack developer in Greater Copenhagen. Experienced with Vue, Nuxt, TypeScript, Python and SQL. See my projects and references, and get in touch.'
+      },
+      arcade: {
+        title: 'Arcade | Nicklas Vedeby',
+        description: 'Three browser games written from scratch in Vue: a pixel shooter, a falling-block puzzle and a sliding-tile puzzle. No game engine, no image files.'
+      },
+      notFound: {
+        title: 'Page not found | Nicklas Vedeby',
+        description: 'That page does not exist. Head back to the front page for projects, experience and contact details.'
       }
     },
     footer: {
@@ -289,7 +573,7 @@ const translations = {
       text2: 'Jeg er altid klar på at lære nye måder at webudvikle på, uanset om det er styling og udseende i frontend, eller at dykke dybere ned i databaser og backend-arkitektur. Jeg går til hvert projekt med opmærksomhed på detaljer og en oprigtig lyst til at finde den bedst mulige løsning.',
       downloadLabel: 'Hvis du vil have en PDF af mit CV, ',
       downloadCta: 'kan du hente det her',
-      imageAlt: 'Portræt af Nicklas Vedeby, datatekniker og webudvikler',
+      imageAlt: 'Portræt af Nicklas Vedeby, fullstackudvikler',
     },
     education: {
       title: 'Uddannelse',
@@ -316,11 +600,18 @@ const translations = {
       present: 'Nuværende',
       timeline: [
         {
-          startDate: 'Apr. 2026',
+          startDate: 'Sep. 2026',
           endDate: null,
+          title: 'Fullstack Udvikler',
+          company: 'Tribe Happiness',
+          description: 'Jeg arbejder som fullstack udvikler hos Tribe Happiness, hvor jeg både bygger og vedligeholder frontend og backend, fra UI-komponenter og styling til API\'er, backend-logik og data.'
+        },
+        {
+          startDate: 'Apr. 2026',
+          endDate: 'Aug. 2026',
           title: 'Junior Produkt Udvikler',
           company: 'Sophisticated GEEK',
-          description: 'Jeg arbejder hos Sophisticated GEEK, hvor jeg arbejder med produktudvikling og konceptudvikling. Jeg hjælper også med at holde hjemmesider vedlige, som kører på Shopify.'
+          description: 'Jeg arbejdede med produktudvikling og konceptudvikling. Jeg hjalp også med at holde hjemmesider vedlige, som kørte på Shopify.'
         },
         {
           startDate: 'Jun. 2025',
@@ -363,7 +654,7 @@ const translations = {
         {
           quote: 'Nicklas favner bredt og har taget imod samtlige opgavetyper med positiv og løsningsorienteret attitude, hvilket har gjort, at han tydeligt har udviklet sig som udvikler. Jeg giver derfor Nicklas min klare anbefaling og ville ønske, vi kunne have beholdt ham i virksomheden.',
           name: 'Martin Fjordvald',
-          role: 'Group CTO — Samlino Group',
+          role: 'Group CTO, Samlino Group',
           contact: {
             email: 'martin@samlinogroup.com',
             phone: '+351910092830'
@@ -379,12 +670,12 @@ const translations = {
       others: [
         {
           name: 'Jeppe T. Poulsen',
-          role: 'Head of Analytics — Samlino.dk',
+          role: 'Head of Analytics, Samlino.dk',
           email: 'jeppe.poulsen@samlino.dk'
         },
         {
           name: 'Kenneth Berle',
-          role: 'Fullstack Developer — Samlino.dk, CEO Fenrir Games Studios',
+          role: 'Fullstack Developer at Samlino.dk, CEO of Fenrir Games Studios',
           email: 'light@fenrirgamestudio.dk',
           phone: '+4540711759',
           personalEmail: 'kenneth@berle.eu',
@@ -394,45 +685,27 @@ const translations = {
     },
     skills: {
       title: 'Kompetencer',
-      categories: [
+      subtitle: 'Grupperet efter hvor mange rigtige kilometer jeg har på hver enkelt, i stedet for en procent jeg selv har fundet på.',
+      groups: [
         {
-          title: 'Data Teknologier',
-          skills: [
-            { name: 'SQL', level: 90 },
-            { name: 'Python', level: 85 },
-            { name: 'Dataanalyse', level: 88 },
-            { name: 'ETL Processer', level: 80 },
-            { name: 'DB Performance Tuning', level: 80 }
-          ]
+          title: 'I produktion',
+          description: 'Brugt på arbejde der er gået live, og som jeg har vedligeholdt bagefter.',
+          items: ['Vue.js', 'Nuxt', 'JavaScript', 'TypeScript', 'HTML/CSS', 'SCSS', 'Python', 'SQL', 'REST APIs', 'Storyblok CMS', 'Shopify', 'Git', 'UI/UX']
         },
         {
-          title: 'Webudvikling',
-          skills: [
-            { name: 'Vue.js', level: 90 },
-            { name: 'Nuxt', level: 80 },
-            { name: 'Angular', level: 90 },
-            { name: 'JavaScript', level: 90 },
-            { name: 'TypeScript', level: 80 },
-            { name: 'HTML/CSS', level: 95 },
-            { name: 'UI/UX', level: 75 },
-            { name: 'Node.js', level: 60 },
-            { name: 'C#', level: 65 },
-            { name: 'Responsivt Design', level: 90 }
-          ]
+          title: 'Bygget med',
+          description: 'Brugt til at bygge og gøre mine egne projekter og skoleprojekter færdige.',
+          items: ['Angular', 'C#', '.NET', 'Node.js', 'Vite', 'Discord.js', 'Docker', 'ETL-pipelines', 'Database tuning']
         },
         {
-          title: 'Værktøjer & Teknologier',
-          skills: [
-            { name: 'Git', level: 85 },
-            { name: 'REST APIs', level: 80 },
-            { name: 'Shopify', level: 70 },
-            { name: 'Cursor AI', level: 75 },
-            { name: 'ChatGPT', level: 80 },
-            { name: 'ClaudeAI', level: 70 },
-            { name: 'Docker', level: 70 },
-            { name: 'AWS System', level: 65 },
-            { name: 'PRINCE 2', level: 55 }
-          ]
+          title: 'Under oplæring',
+          description: 'Det jeg sidder med lige nu, og stadig er i gang med at lære.',
+          items: ['AWS', 'Automatiseret test', 'PRINCE2']
+        },
+        {
+          title: 'Sprog',
+          description: 'Skriftligt og mundtligt.',
+          items: ['Dansk (modersmål)', 'Engelsk (professionelt niveau)']
         }
       ]
     },
@@ -453,6 +726,7 @@ const translations = {
           description: 'En webbaseret platform for at bygge og teste bot\'s til Discord. Dette projekt er mit og en vens. Som er lavet som et slut projekt i vores uddannelse. <br> <span class="highlight">Det bygges stadig på her og der men står pt i dvale.</span>',
           tags: ['Angular', 'Discord.js', 'REST API', 'C#'],
           github: 'https://github.com/NicklasGV/Build-a-Bot',
+          demo: 'https://buildabot.dk/',
           alt: 'Forhåndsvisning af Build a Bot-platformen til Discord-automatisering',
         },
         {
@@ -488,6 +762,249 @@ const translations = {
         error: 'Noget gik galt. Prøv venligst igen senere.'
       }
     },
+    terminal: {
+      title: 'Terminal',
+      subtitle: 'Foretrækker du tastaturet? Dette portfolio har sin egen shell. Skriv en kommando, tryk Enter, og udforsk mit CV på udvikler-manér.',
+      windowTitle: 'nicklas@portfolio: ~',
+      clearLabel: 'Ryd terminal',
+      inputLabel: 'Terminal kommandofelt',
+      tryLabel: 'Prøv:',
+      boot: [
+        'nv-sh 2.0.0 (portfolio build 2026.09)',
+        'Indlæser moduler: vue@3 · vite@5 · scss ............... ok',
+        'Monterer /home/visitor/nicklas-vedeby ................. ok',
+        "Klar. Skriv 'help' for at se hvad jeg kan."
+      ],
+      help: {
+        title: 'Tilgængelige kommandoer:',
+        footer: 'Tip: ↑/↓ går gennem din historik, Tab autoudfylder, Ctrl+L rydder, Ctrl+K åbner kommandopaletten.'
+      },
+      commands: {
+        help: 'Vis denne liste af kommandoer',
+        whoami: 'Hvem jeg er, kort fortalt',
+        experience: 'Min joberfaring',
+        skills: 'Hvad jeg arbejder med, grupperet efter erfaring',
+        projects: 'Ting jeg har bygget',
+        education: 'Min uddannelse',
+        decisions: 'Tekniske valg jeg har truffet, og afvejningerne',
+        contact: 'Sådan får du fat i mig',
+        cv: 'Hent mit CV som PDF',
+        neofetch: 'System-info, udvikler-stil',
+        ls: 'Vis filerne i denne mappe',
+        cat: 'Læs en fil (prøv: cat about.md)',
+        goto: 'Hop til en sektion (prøv: goto projects)',
+        theme: 'Skift tema (theme dark | theme light)',
+        lang: 'Skift sprog (lang da | lang en)',
+        play: 'Åbn arkaden (prøv: play stack-overflow)',
+        palette: 'Åbn kommandopaletten',
+        echo: 'Skriv en tekst tilbage',
+        history: 'Vis de kommandoer du har kørt',
+        date: 'Vis dato og klokkeslæt',
+        clear: 'Ryd skærmen',
+        'sudo hire-me': 'Den vigtigste kommando'
+      },
+      unknown: "kommando ikke fundet: {cmd}. Skriv 'help' for listen.",
+      uptime: '{years} år, {months} måneder (siden marts 2020)',
+      neofetch: {
+        host: 'Host......:',
+        role: 'Rolle.....:',
+        company: 'Firma.....:',
+        location: 'Lokation..:',
+        uptime: 'Oppetid...:',
+        shell: 'Shell.....:',
+        stack: 'Stack.....:',
+        editor: 'Editor....:',
+        theme: 'Tema......:',
+        languages: 'Sprog.....:'
+      },
+      contactHint: 'Eller scroll ned til kontaktformularen. Den lander direkte i min indbakke.',
+      cvDownloading: 'Henter CV_nicklas_vedeby.pdf ...',
+      catUsage: 'brug: cat <fil>. Kør ls for at se hvad der er her.',
+      secrets: 'cat: .secrets: adgang nægtet (godt forsøgt)',
+      isDirectory: 'cat: {name}: er en mappe. Prøv: projects',
+      noSuchFile: 'cat: {name}: ingen sådan fil eller mappe',
+      gotoUsage: 'brug: goto <sektion>. Prøv: about, experience, skills, projects, contact',
+      noSuchSection: 'goto: {name}: ingen sådan sektion',
+      jumping: 'Hopper til {name} ...',
+      themeUsage: 'brug: theme dark | theme light',
+      themeSet: 'Tema sat til {name}.',
+      langCurrent: 'Nuværende sprog: {name}. Brug: lang da | lang en',
+      langUsage: 'brug: lang da | lang en',
+      langSet: 'Sprog sat til {name}.',
+      launchingArcade: 'Åbner arkaden. Tre spil derinde:',
+      launchingGame: 'Starter {name} ...',
+      noSuchGame: 'play: {name}: intet spil med det navn. Kør play alene for at se listen.',
+      paletteOpened: 'Kommandopaletten er åben. Prøv at skrive et sektionsnavn.',
+      historyEmpty: 'Ingen kommandoer i historikken endnu.',
+      exit: "Der er ingen udgang. Men der er en kontaktformular, så prøv 'goto contact'.",
+      sudoDenied: 'visitor er ikke i sudoers-filen. Hændelsen bliver rapporteret. (prøv: sudo hire-me)',
+      noSkillCategory: 'skills: {name}: ingen sådan kategori',
+      hire: {
+        granted: '[sudo] adgangskode for visitor: ******  ✓ adgang godkendt',
+        body: 'Fremragende valg. Jeg er fullstack udvikler og kan lide at levere rene, hurtige brugerflader, og de backends der ligger bag. Og jeg lærer nye stacks hurtigt.'
+      }
+    },
+    palette: {
+      label: 'Kommandopalet',
+      openLabel: 'Åbn kommandopalet',
+      placeholder: 'Hop til en sektion, skift tema, hent CV ...',
+      empty: 'Ingen kommandoer matcher.',
+      footerNavigate: 'naviger',
+      footerSelect: 'vælg',
+      footerClose: 'luk',
+      groups: {
+        navigate: 'Naviger',
+        actions: 'Handlinger',
+        links: 'Links'
+      },
+      actions: {
+        darkMode: 'Skift til mørkt tema',
+        lightMode: 'Skift til lyst tema',
+        switchToDanish: 'Skift sprog til dansk',
+        switchToEnglish: 'Skift sprog til engelsk',
+        downloadCv: 'Hent CV (PDF)',
+        arcade: 'Åbn arkaden',
+        sendEmail: 'Send mig en mail'
+      }
+    },
+    decisions: {
+      title: 'Tekniske valg',
+      subtitle: 'Det er nemt at få et portfolio til at se færdigt ud. Her er valgene bag dette: begrænsningen, hvad jeg valgte, og hvad det kostede.',
+      labels: {
+        context: 'Begrænsning',
+        decision: 'Valg',
+        tradeoff: 'Afvejning'
+      },
+      records: [
+        {
+          title: 'En kontaktformular der virker, uden en server at drive',
+          context: 'Jeg havde formularen kørende mod min egen Express- og Nodemailer-backend. Så kiggede jeg ordentligt på hostingen: planen serverer statiske filer over FTP og kører ikke Node uden at skifte til en dyrere pakke.',
+          decision: 'Jeg slettede backenden og flyttede formularen til et client-side form-API. Submit-handleren poster direkte fra browseren, og mailen lander stadig i min indbakke.',
+          tradeoff: 'Jeg gav kontrollen over mail-templating fra mig og tog en tredjeparts-afhængighed ind. Til gengæld kom funktionen live på den hosting jeg allerede betaler for, uden en server der skal patches, overvåges og holdes i live.',
+          tags: ['Node.js', 'Express', 'Nodemailer', 'Web3Forms']
+        },
+        {
+          title: 'Deployment til shared hosting fra CI',
+          context: 'Hosten giver mig FTP og ikke andet: ingen containere, intet build-step på serveren, ingen deploy hooks.',
+          decision: 'Et GitHub Actions-workflow bygger siden og uploader dist/ over FTP, udløst af et semver-tag frem for hvert commit på main.',
+          tradeoff: 'Ingen preview-miljøer og ingen rollback med ét klik. Til gengæld er releases bevidste og versionerede: main må gerne bevæge sig, og kun et tag går live.',
+          tags: ['GitHub Actions', 'CI/CD', 'FTP', 'SemVer']
+        },
+        {
+          title: 'To sprog uden et i18n-bibliotek',
+          context: 'Hele siden skal findes på dansk og engelsk, også alt det jeg tilføjer senere.',
+          decision: 'Ét reaktivt oversættelses-store i en composable. Komponenterne indeholder aldrig tekst; de læser den fra t, og sprogskifteren bytter objektet ud under dem.',
+          tradeoff: 'Ingen gratis pluralisering eller lokal formatering, og al tekst ligger i én stor fil. Til gengæld ingen afhængighed, ingen bundle-omkostning, og hver ny funktion er tosproget by design, også terminalen på forsiden.',
+          tags: ['Vue 3', 'Composition API', 'i18n']
+        },
+        {
+          title: 'At fjerne hakkene i stedet for at pynte mere',
+          context: 'Siden føltes tung at scrolle, og det var ikke tydeligt hvorfor.',
+          decision: 'Tre reelle årsager: en fixed baggrund der gentegnede hele siden ved hver scroll-frame, ~30 kompetence-bars der animerede width og dermed tvang layout hver frame, og dekorative animationer der kørte hele besøget. Bar’erne bruger nu transform, den fixed baggrund er væk, og dekorationen ligger bag prefers-reduced-motion.',
+          tradeoff: 'Baggrunden parallakser ikke længere, og besøgende der beder om mindre bevægelse får en roligere side end den jeg oprindeligt designede. Begge dele var det værd.',
+          tags: ['Performance', 'Rendering', 'Tilgængelighed']
+        }
+      ]
+    },
+    arcade: {
+      eyebrow: 'Arkade',
+      title: 'Arkaden',
+      subtitle: 'Tre små spil, alle skrevet fra bunden: ingen game engine, ingen billedfiler, ingen afhængigheder. Vælg et og brug et par minutter.',
+      back: 'Tilbage til portfolioet',
+      backToArcade: 'Tilbage til arkaden',
+      play: 'Spil',
+      score: 'Score',
+      best: 'Bedste',
+      wave: 'Bølge',
+      health: 'Liv',
+      newBest: 'Ny personlig rekord!',
+      start: 'Start spillet',
+      resume: 'Fortsæt',
+      again: 'Spil igen',
+      pausedTitle: 'På pause',
+      pausedBody: 'Tag dig bare god tid.',
+      overTitle: 'Game over',
+      controls: {
+        pause: 'Pause'
+      },
+      games: {
+        bugHunt: {
+          name: 'Bug Hunt',
+          tagline: 'En top-down shooter. Bug’s kommer ind fra alle kanter, så klem dem, før de når frem.',
+          builtWith: 'Canvas 2D · sprites tegnet ud fra tekstkort · renderet i 480×320 og skaleret op.'
+        },
+        stackOverflow: {
+          name: 'Stack Overflow',
+          tagline: 'Faldende klodser. Ryd linjer, overlev den stigende fart, og lad ikke stakken løbe over.',
+          builtWith: 'Canvas 2D · 7-bag randomizer · wall kicks, ghost-brik, hold-plads og en tyngdekurve.'
+        },
+        mergeSort: {
+          name: 'Merge Sort',
+          tagline: 'Skub brikker, flet ens par sammen, jagt 2048. Nemt at gå i gang med, svært at lægge fra sig.',
+          builtWith: 'Ingen canvas her. Reaktivt DOM med CSS-transforms, så brikkerne beholder deres identitet og glider.'
+        }
+      },
+      bugHunt: {
+        canvasLabel: 'Bug Hunt spilleområde',
+        readyTitle: 'Bug Hunt',
+        readyBody: 'Bug’sene er på vej mod dig. Klem dem, før de når frem.',
+        overBody: 'Du nåede til bølge {wave}.',
+        touchHint: 'På touchskærm: træk for at bevæge dig, og du skyder automatisk.',
+        controls: {
+          move: 'Bevæg dig',
+          aim: 'Sigt',
+          shoot: 'Skyd',
+          mouseKey: 'Mus',
+          clickKey: 'Klik'
+        }
+      },
+      stackOverflow: {
+        title: 'Stack Overflow',
+        readyBody: 'Ryd linjer for at score. For hver ti linjer bliver tyngdekraften hårdere.',
+        overBody: 'Stakken løb over.',
+        canvasLabel: 'Stack Overflow spillebræt',
+        lines: 'Linjer',
+        level: 'Niveau',
+        next: 'Næste',
+        hold: 'Hold',
+        controls: {
+          move: 'Flyt',
+          rotate: 'Rotér',
+          soft: 'Blødt fald',
+          hard: 'Hårdt fald',
+          hold: 'Gem brik'
+        }
+      },
+      mergeSort: {
+        boardLabel: 'Merge Sort bræt',
+        undo: 'Fortryd',
+        newGame: 'Nyt spil',
+        hint: 'Piletaster eller WASD for at skubbe. På touch: swipe. Ens brikker flettes til deres sum.',
+        wonTitle: 'Du ramte 2048',
+        wonBody: 'Det var målet. Du kan stoppe her eller blive ved med at flette for en større score.',
+        lostBody: 'Ingen træk tilbage. Brættet er fyldt, og intet kan flettes.',
+        keepGoing: 'Spil videre'
+      }
+    },
+    notFound: {
+      title: 'Siden er forsvundet.',
+      body: 'Tjek adressen en ekstra gang, eller gå tilbage til forsiden.',
+      cta: 'Tilbage til forsiden'
+    },
+    seo: {
+      home: {
+        title: 'Nicklas Vedeby | Fullstack Udvikler',
+        description: 'Fullstack udvikler i Storkøbenhavn. Erfaring med Vue, Nuxt, TypeScript, Python og SQL. Se mine projekter og referencer, og skriv hvis du søger en udvikler.'
+      },
+      arcade: {
+        title: 'Arkade | Nicklas Vedeby',
+        description: 'Tre browserspil skrevet fra bunden i Vue: en pixel-shooter, et puslespil med faldende klodser og et med glidende brikker. Ingen game engine, ingen billedfiler.'
+      },
+      notFound: {
+        title: 'Siden blev ikke fundet | Nicklas Vedeby',
+        description: 'Siden findes ikke. Gå tilbage til forsiden for projekter, erfaring og kontaktoplysninger.'
+      }
+    },
     footer: {
       rights: 'Alle rettigheder forbeholdes.',
       downloadCv: 'Download CV'
@@ -495,45 +1012,108 @@ const translations = {
   }
 }
 
+// Switches language without navigating. The router guard calls this, which
+// keeps the URL as the single source of truth for which language is showing.
+export const applyLanguage = (lang) => {
+  if (isSupportedLanguage(lang) && lang !== currentLanguage.value) {
+    currentLanguage.value = lang
+    saveLanguage(lang)
+  }
+
+  applyDocumentLanguage(currentLanguage.value)
+}
+
+// Prefixes an in-app path with the active language: localePath('/arcade')
+// gives '/da/arcade'. Reading the ref here also makes template calls reactive.
+export const localePath = (path = '') => `/${currentLanguage.value}${path}`
+
+const stripLanguagePrefix = (path = '/') => {
+  const match = path.match(/^\/(?:da|en)(\/.*)?$/)
+
+  if (match) {
+    return match[1] ?? ''
+  }
+
+  return path === '/' ? '' : path
+}
+
+// Title and description come from the translations, so the tags a crawler
+// renders always match the language the page is actually showing. Routes say
+// which entry they want via meta.seoKey.
+export const applyRouteSEO = (route) => {
+  if (typeof window === 'undefined' || !route) {
+    return
+  }
+
+  const meta = route.meta ?? {}
+  const copy = translations[currentLanguage.value]
+  const routeSeo = copy?.seo?.[meta.seoKey] ?? {}
+  const base = SITE_URL || window.location.origin
+  const suffix = stripLanguagePrefix(route.path)
+  const isNotFound = meta.seoKey === 'notFound'
+
+  // Each language is its own indexable URL and canonicals to itself. The
+  // alternates tell Google they are translations rather than duplicates, and
+  // x-default points at "/", which picks a language and redirects.
+  const alternates = isNotFound
+    ? []
+    : [
+        ...SUPPORTED_LANGUAGES.map((lang) => ({ hreflang: lang, href: `${base}/${lang}${suffix}` })),
+        { hreflang: 'x-default', href: `${base}/` }
+      ]
+
+  updateSEO({
+    ...meta,
+    ...routeSeo,
+    locale: currentLanguage.value === 'en' ? 'en_US' : 'da_DK',
+    url: isNotFound ? `${base}${route.path}` : `${base}/${currentLanguage.value}${suffix}`,
+    alternates
+  })
+}
+
 export function useLanguage() {
   const router = useRouter()
   const language = computed(() => currentLanguage.value)
   const t = computed(() => translations[currentLanguage.value])
 
+  // Changing language is a navigation now, so the URL and the visible copy can
+  // never disagree. The guard applies the change once the route settles.
   const setLanguage = (lang) => {
-    if (translations[lang]) {
-      currentLanguage.value = lang
-      applyDocumentLanguage(lang)
-      if (typeof window !== 'undefined') {
-        localStorage.setItem('language', lang)
-        const currentMeta = router?.currentRoute?.value?.meta ?? {}
-        updateSEO({ ...currentMeta, url: window.location.href })
-      }
+    if (!isSupportedLanguage(lang) || lang === currentLanguage.value) {
+      return
     }
+
+    saveLanguage(lang)
+
+    const current = router?.currentRoute?.value
+
+    if (current?.params?.lang) {
+      router.push({
+        name: current.name,
+        params: { ...current.params, lang },
+        query: current.query,
+        hash: current.hash
+      })
+      return
+    }
+
+    // Routes without a language segment (the 404) just swap in place.
+    applyLanguage(lang)
+    applyRouteSEO(current)
   }
 
   const toggleLanguage = () => {
     setLanguage(currentLanguage.value === 'en' ? 'da' : 'en')
   }
 
-  // Initialize from localStorage
-  const savedLanguage = typeof window !== 'undefined' ? localStorage.getItem('language') : null
-  if (savedLanguage && translations[savedLanguage]) {
-    currentLanguage.value = savedLanguage
-  }
-
   applyDocumentLanguage(currentLanguage.value)
-
-  if (typeof window !== 'undefined') {
-    const currentMeta = router?.currentRoute?.value?.meta ?? {}
-    updateSEO({ ...currentMeta, url: window.location.href })
-  }
 
   return {
     language,
     t,
     setLanguage,
-    toggleLanguage
+    toggleLanguage,
+    localePath
   }
 }
 

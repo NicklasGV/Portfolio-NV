@@ -1,22 +1,35 @@
-// Color Palette - Blue Theme (SCSS variables for build-time)
-$primary-blue: #2563eb;
-$primary-blue-dark: #1e40af;
-$primary-blue-light: #3b82f6;
-$secondary-blue: #1d4ed8;
-$accent-blue: #60a5fa;
-$accent-blue-light: #93c5fd;
+// Colour palette, tuned to the NV logo: cyan through violet.
+//
+// The variable names still say "blue" because they are referenced across every
+// component; the values are now the brand's cyan-violet family. Renaming them
+// would touch a dozen files without changing a single pixel.
+$brand-cyan: #22d3ee;
+$brand-violet: #8b5cf6;
+$brand-magenta: #d946ef;
 
-// Gradient Colors
-$gradient-start: #2563eb;
-$gradient-end: #1e40af;
-$gradient-light-start: #dbeafe;
-$gradient-light-end: #bfdbfe;
+// Violet-500 is the one tone that clears 3:1 on both the light and the dark
+// section backgrounds, so it is the safe choice for gradients, borders and
+// fills. Accent *text* uses --accent instead, which swaps per theme.
+$primary-blue: #8b5cf6;
+$primary-blue-dark: #6d28d9;
+$primary-blue-light: #a78bfa;
+$secondary-blue: #6d28d9;
+$accent-blue: #22d3ee;
+$accent-blue-light: #67e8f9;
+
+// The gradient is clipped to text for every section heading, so its light end
+// has to stay readable on a pale background. A vivid cyan fails that at large
+// sizes, which is why this starts at cyan-600 rather than the logo's cyan-400.
+$gradient-start: #0891b2;
+$gradient-end: #8b5cf6;
+$gradient-light-start: #f5f3ff;
+$gradient-light-end: #ede9fe;
 
 // Background Colors
 $bg-white: #fafafa;
 $bg-light: #f0f4f8;
 $bg-dark: #1a1a1a;
-$bg-gray: #e8edf3;
+$bg-gray: #e6e2f5;
 
 // Text Colors
 $text-dark: #2d3748;
@@ -26,10 +39,10 @@ $text-white: #ffffff;
 
 // Border & Shadow Colors
 $border-light: rgba(255, 255, 255, 0.5);
-$shadow-color: rgba(37, 99, 235, 0.08);
-$shadow-color-hover: rgba(37, 99, 235, 0.12);
-$shadow-color-strong: rgba(37, 99, 235, 0.25);
-$shadow-color-button: rgba(37, 99, 235, 0.35);
+$shadow-color: rgba(124, 58, 237, 0.08);
+$shadow-color-hover: rgba(124, 58, 237, 0.14);
+$shadow-color-strong: rgba(124, 58, 237, 0.25);
+$shadow-color-button: rgba(124, 58, 237, 0.35);
 
 // Utility Colors
 $overlay-light: rgba(255, 255, 255, 0.95);
@@ -42,11 +55,17 @@ $overlay-medium: rgba(255, 255, 255, 0.98);
   --bg-secondary: #{$gradient-light-end};
   --bg-tertiary: #{$bg-gray};
   --bg-inverse: #{$bg-dark};
-  --glow-inner: rgba(37, 99, 235, 0.6);
-  --glow-middle: rgba(29, 78, 216, 0.35);
-  --glow-outer: rgba(29, 78, 216, 0);
+  --glow-inner: rgba(124, 58, 237, 0.5);
+  --glow-middle: rgba(8, 145, 178, 0.3);
+  --glow-outer: rgba(8, 145, 178, 0);
   --glow-blend-mode: multiply;
   
+  // Accent used for text. A single mid violet cannot clear 4.5:1 against both
+  // a near-white and a near-black background, so each theme gets its own end
+  // of the ramp: 6.0:1 here, 5.4:1 in dark mode.
+  --accent: #6d28d9;
+  --accent-hover: #5b21b6;
+
   // Text (softer contrast)
   --text-primary: #{$text-dark};
   --text-secondary: #{$text-medium};
@@ -70,6 +89,9 @@ $overlay-medium: rgba(255, 255, 255, 0.98);
   --bg-tertiary: #334155;
   --bg-inverse: #{$bg-white};
   
+  --accent: #a78bfa;
+  --accent-hover: #c4b5fd;
+
   // Text (dark mode)
   --text-primary: #f1f5f9;
   --text-secondary: #cbd5e1;
@@ -84,9 +106,9 @@ $overlay-medium: rgba(255, 255, 255, 0.98);
   --shadow-color: rgba(0, 0, 0, 0.3);
   --shadow-color-hover: rgba(0, 0, 0, 0.4);
   --shadow-color-strong: rgba(0, 0, 0, 0.5);
-  --glow-inner: rgba(96, 165, 250, 0.45);
-  --glow-middle: rgba(59, 130, 246, 0.25);
-  --glow-outer: rgba(37, 99, 235, 0);
+  --glow-inner: rgba(34, 211, 238, 0.4);
+  --glow-middle: rgba(139, 92, 246, 0.28);
+  --glow-outer: rgba(139, 92, 246, 0);
   --glow-blend-mode: screen;
 }
 

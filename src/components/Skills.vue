@@ -2,25 +2,15 @@
   <section id="skills" class="section skills">
     <div class="container">
       <h2 class="section-title">{{ t.skills.title }}</h2>
+      <p class="skills-subtitle">{{ t.skills.subtitle }}</p>
+
       <div class="skills-grid">
-        <div class="skill-category" v-for="category in t.skills.categories" :key="category.title">
-          <h3 class="category-title">{{ category.title }}</h3>
-          <div class="skills-list">
-            <div 
-              class="skill-item" 
-              v-for="skill in category.skills" 
-              :key="skill.name"
-            >
-              <span class="skill-name">{{ skill.name }}</span>
-              <div class="skill-bar">
-                <div 
-                  class="skill-progress" 
-                  :style="{ width: skill.level + '%' }"
-                ></div>
-              </div>
-              <span class="skill-percentage">{{ skill.level }}%</span>
-            </div>
-          </div>
+        <div class="skill-group" v-for="group in t.skills.groups" :key="group.title">
+          <h3 class="group-title">{{ group.title }}</h3>
+          <p class="group-description">{{ group.description }}</p>
+          <ul class="tag-list">
+            <li v-for="item in group.items" :key="item" class="tag">{{ item }}</li>
+          </ul>
         </div>
       </div>
     </div>
@@ -40,87 +30,98 @@ const { t } = useLanguage()
   transition: background-color 0.3s;
 }
 
-.skills-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 3rem;
+.container {
   max-width: $breakpoint-xl;
   margin: 0 auto;
 }
 
-.skill-category {
-  background: var(--bg-secondary);
-  padding: 2rem;
-  border-radius: 16px;
-  box-shadow: 0 4px 20px var(--shadow-color);
-  transition: transform 0.3s, background-color 0.3s, box-shadow 0.3s;
-
-  &:hover {
-    transform: translateY(-5px);
-  }
-}
-
-.category-title {
-  margin: 0 0 1.5rem 0;
-  font-size: 1.5rem;
-  color: var(--text-primary);
+.skills-subtitle {
+  max-width: 620px;
+  margin: -1.5rem auto 3rem;
+  color: var(--text-secondary);
+  font-size: 1.05rem;
+  line-height: 1.7;
   text-align: center;
 }
 
-.skills-list {
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+}
+
+.skill-group {
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
-}
+  padding: 2rem;
+  background: var(--bg-secondary);
+  border-radius: 16px;
+  box-shadow: 0 4px 20px var(--shadow-color);
+  transition: transform 0.3s, box-shadow 0.3s, background-color 0.3s;
 
-.skill-item {
-  display: grid;
-  grid-template-columns: 120px 1fr 50px;
-  gap: 1rem;
-  align-items: center;
-}
-
-.skill-name {
-  font-weight: 500;
-  color: var(--text-primary);
-}
-
-.skill-bar {
-  height: 10px;
-  background: $border-light;
-  border-radius: 10px;
-  overflow: hidden;
-  position: relative;
-}
-
-.skill-progress {
-  height: 100%;
-  background: linear-gradient(135deg, $gradient-start 0%, $gradient-end 100%);
-  border-radius: 10px;
-  transition: width 1s ease-out;
-  animation: fillBar 1.5s ease-out;
-}
-
-@keyframes fillBar {
-  from {
-    width: 0;
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 30px var(--shadow-color-hover);
   }
 }
 
-.skill-percentage {
-  font-size: 0.9rem;
-  color: var(--text-secondary);
-  text-align: right;
+.group-title {
+  margin: 0 0 0.5rem;
+  font-size: 1.25rem;
+  color: var(--text-primary);
+}
+
+.group-description {
+  margin: 0 0 1.5rem;
+  color: var(--text-tertiary);
+  font-size: 0.92rem;
+  line-height: 1.6;
+}
+
+.tag-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: auto 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.tag {
+  padding: 0.35rem 0.8rem;
+  border: 1px solid rgba($primary-blue, 0.3);
+  border-radius: 999px;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  font-size: 0.85rem;
+  transition: border-color 0.2s, color 0.2s;
+
+  &:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+}
+
+@include tablet-down {
+  .skills {
+    padding: 70px 1.5rem;
+  }
 }
 
 @include mobile {
   .skills-grid {
     grid-template-columns: 1fr;
+    gap: 1.5rem;
   }
 
-  .skill-item {
-    grid-template-columns: 100px 1fr 45px;
-    gap: 0.5rem;
+  .skill-group {
+    padding: 1.5rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .skill-group:hover {
+    transform: none;
   }
 }
 </style>

@@ -23,7 +23,7 @@
         </div>
         <div class="about-image">
           <img
-            src="../assets/images/profile.png"
+            src="../assets/images/profile.jpg"
             :alt="t.about.imageAlt"
             width="430"
             height="400"

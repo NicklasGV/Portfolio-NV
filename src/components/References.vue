@@ -298,7 +298,7 @@ const referencesSection = computed(() => {
   font-weight: 600;
   font-size: 0.9rem;
   text-decoration: none;
-  color: $primary-blue;
+  color: var(--accent);
   border: 2px solid $primary-blue;
   transition: transform 0.3s, box-shadow 0.3s, background-color 0.3s, color 0.3s;
 
@@ -368,7 +368,7 @@ const referencesSection = computed(() => {
   align-items: center;
   gap: 0.4rem;
   font-size: 14px;
-  color: $primary-blue;
+  color: var(--accent);
   text-decoration: none;
   font-weight: 500;
 

@@ -2,14 +2,16 @@
   <Snowfall />
   <NewYear />
   <RouterView />
+  <CommandPalette />
 </template>
 
 <script setup>
 import { computed, onBeforeUnmount, watch } from 'vue'
 import { RouterView, useRoute } from 'vue-router'
-import profileImageUrl from '@/assets/images/profile.png?url'
+import profileImageUrl from '@/assets/images/profile.jpg?url'
 import Snowfall from '@/components/Snowfall.vue'
 import NewYear from '@/components/NewYear.vue'
+import CommandPalette from '@/components/CommandPalette.vue'
 
 const route = useRoute()
 
@@ -58,7 +60,7 @@ const structuredData = computed(() => {
       telephone: '+4560524647',
       worksFor: {
         '@type': 'Organization',
-        name: 'Sophisticated GEEK',
+        name: 'Tribe Happiness',
       },
       sameAs: [
         'https://www.linkedin.com/in/nicklas-vedeby-3155351b7/',

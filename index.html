@@ -3,21 +3,85 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Nicklas Vedeby's Portfolio</title>
+
+  <title>Nicklas Vedeby | Fullstack Udvikler</title>
   <meta
     name="description"
-    content="Nicklas Vedeby's portfolio showcasing his journey as a Fullstack Developer, built with Vue.js 3 and Vite."
+    content="Fullstack udvikler i Storkøbenhavn. Erfaring med Vue, Nuxt, TypeScript, Python og SQL. Se mine projekter og referencer, og skriv hvis du søger en udvikler."
   >
   <meta name="author" content="Nicklas Vedeby">
-  <meta name="theme-color" content="#111827">
   <meta name="robots" content="index, follow">
+  <meta name="theme-color" content="#0b1120">
+  <!--
+    Static fallbacks describing the Danish front page. utils/seo.js rewrites the
+    canonical and these alternates per route once the app boots, which is what a
+    rendering crawler ends up reading.
+  -->
+  <link rel="canonical" href="https://nicklasvedeby.com/da">
+  <link rel="alternate" hreflang="da" href="https://nicklasvedeby.com/da">
+  <link rel="alternate" hreflang="en" href="https://nicklasvedeby.com/en">
+  <link rel="alternate" hreflang="x-default" href="https://nicklasvedeby.com/">
+
+  <!--
+    These are duplicated at runtime by utils/seo.js so they follow the language
+    toggle and the current route. They are repeated statically because social
+    crawlers (LinkedIn, Facebook, Slack) do not run JavaScript, and would
+    otherwise see a page with no title, description or preview image.
+  -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Nicklas Vedeby">
+  <meta property="og:locale" content="da_DK">
+  <meta property="og:locale:alternate" content="en_US">
+  <meta property="og:title" content="Nicklas Vedeby | Fullstack Udvikler">
+  <meta property="og:description" content="Fullstack udvikler i Storkøbenhavn. Erfaring med Vue, Nuxt, TypeScript, Python og SQL. Se mine projekter og referencer.">
+  <meta property="og:url" content="https://nicklasvedeby.com/da">
+  <meta property="og:image" content="https://nicklasvedeby.com/og-image.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Nicklas Vedeby, Fullstack Developer">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Nicklas Vedeby | Fullstack Udvikler">
+  <meta name="twitter:description" content="Fullstack udvikler i Storkøbenhavn. Erfaring med Vue, Nuxt, TypeScript, Python og SQL. Se mine projekter og referencer.">
+  <meta name="twitter:image" content="https://nicklasvedeby.com/og-image.jpg">
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <!--
+    Person schema, served statically so it is readable without JavaScript.
+    App.vue reuses this same element by its data-ld-json attribute and enriches
+    it at runtime, so there is only ever one Person on the page.
+  -->
+  <script type="application/ld+json" data-ld-json="ld-json-person">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Nicklas Vedeby",
+    "jobTitle": "Fullstack Developer",
+    "url": "https://nicklasvedeby.com/da",
+    "email": "mailto:nvedeby@gmail.com",
+    "knowsLanguage": ["da", "en"],
+    "worksFor": {
+      "@type": "Organization",
+      "name": "Tribe Happiness"
+    },
+    "knowsAbout": ["Vue.js", "Nuxt", "TypeScript", "JavaScript", "Python", "SQL", "C#", "Fullstack Development"],
+    "sameAs": [
+      "https://www.linkedin.com/in/nicklas-vedeby-3155351b7/",
+      "https://github.com/NicklasGV"
+    ],
+    "address": {
+      "@type": "PostalAddress",
+      "addressRegion": "Hovedstaden",
+      "addressCountry": "DK"
+    }
+  }
+  </script>
 </head>
 <body>
   <div id="app"></div>
   <script type="module" src="/src/main.js"></script>
 </body>
 </html>
-
