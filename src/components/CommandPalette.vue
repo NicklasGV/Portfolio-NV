@@ -69,16 +69,17 @@
 
 <script setup>
 import { computed, nextTick, onBeforeUnmount, onMounted, ref, watch } from 'vue'
+import { useRoute, useRouter } from 'vue-router'
 import { useLanguage } from '../composables/useLanguage'
 import { useDarkMode } from '../composables/useDarkMode'
 import { useCommandPalette } from '../composables/useCommandPalette'
-import { useMatrixRain } from '../composables/useMatrixRain'
 import cvUrl from '../assets/pdfs/CV_nicklas_vedeby.pdf?url'
 
 const { t, language, toggleLanguage } = useLanguage()
 const { isDarkMode, toggleDarkMode } = useDarkMode()
 const { isOpen, open, close, toggle } = useCommandPalette()
-const { toggle: toggleMatrix } = useMatrixRain()
+const router = useRouter()
+const route = useRoute()
 
 const query = ref('')
 const activeIndex = ref(0)
@@ -93,10 +94,16 @@ const ICONS = {
   download: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>',
   terminal: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M4 17l6-5-6-5M12 19h8"/></svg>',
   link: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14L21 3"/></svg>',
-  egg: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M12 2c3.5 4 6 7.5 6 11a6 6 0 0 1-12 0c0-3.5 2.5-7 6-11z"/></svg>'
+  game: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M6 11h4M8 9v4M15 12h.01M18 10h.01"/><rect x="2" y="6" width="20" height="12" rx="4"/></svg>'
 }
 
-const scrollToSection = (id) => {
+// Sections only exist on the home page, so from anywhere else go there first.
+const scrollToSection = async (id) => {
+  if (route.path !== '/') {
+    await router.push('/')
+    await nextTick()
+  }
+
   document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' })
 }
 
@@ -125,6 +132,7 @@ const commands = computed(() => {
     { id: 'skills', group: palette.groups.navigate, label: nav.skills, icon: ICONS.jump, keywords: 'skills stack kompetencer tech', action: () => scrollToSection('skills') },
     { id: 'education', group: palette.groups.navigate, label: nav.education, icon: ICONS.jump, keywords: 'education uddannelse school', action: () => scrollToSection('education') },
     { id: 'projects', group: palette.groups.navigate, label: nav.projects, icon: ICONS.jump, keywords: 'projects projekter work', action: () => scrollToSection('projects') },
+    { id: 'decisions', group: palette.groups.navigate, label: t.value.decisions.title, icon: ICONS.jump, keywords: 'decisions beslutninger architecture engineering tradeoffs', action: () => scrollToSection('decisions') },
     { id: 'terminal', group: palette.groups.navigate, label: t.value.terminal.title, icon: ICONS.terminal, keywords: 'terminal shell console cli', action: () => scrollToSection('terminal') },
     { id: 'contact', group: palette.groups.navigate, label: nav.contact, icon: ICONS.jump, keywords: 'contact kontakt email mail hire', action: () => scrollToSection('contact') },
 
@@ -145,7 +153,7 @@ const commands = computed(() => {
       action: toggleLanguage
     },
     { id: 'cv', group: palette.groups.actions, label: palette.actions.downloadCv, icon: ICONS.download, keywords: 'cv resume pdf download hent', action: downloadCv },
-    { id: 'matrix', group: palette.groups.actions, label: palette.actions.matrix, icon: ICONS.egg, keywords: 'matrix rain easter egg secret', action: toggleMatrix },
+    { id: 'arcade', group: palette.groups.actions, label: palette.actions.arcade, icon: ICONS.game, keywords: 'game arcade play spil shooter bug hunt', action: () => router.push('/arcade') },
 
     { id: 'github', group: palette.groups.links, label: 'GitHub', icon: ICONS.link, hint: 'github.com/NicklasGV', keywords: 'github code repo source', action: () => openExternal('https://github.com/NicklasGV') },
     { id: 'linkedin', group: palette.groups.links, label: 'LinkedIn', icon: ICONS.link, hint: 'nicklas-vedeby', keywords: 'linkedin social network', action: () => openExternal('https://www.linkedin.com/in/nicklas-vedeby-3155351b7/') },
@@ -294,8 +302,9 @@ defineExpose({ open })
   justify-content: center;
   align-items: flex-start;
   padding: 12vh 1rem 1rem;
-  background: rgba(2, 6, 23, 0.55);
-  backdrop-filter: blur(6px);
+  // A viewport-sized backdrop-filter has to re-blur everything underneath on
+  // every frame; a slightly darker flat scrim reads the same and costs nothing.
+  background: rgba(2, 6, 23, 0.72);
 }
 
 .palette {
@@ -308,7 +317,7 @@ defineExpose({ open })
   background: var(--overlay-medium);
   border: 1px solid rgba($primary-blue, 0.25);
   border-radius: 16px;
-  box-shadow: 0 24px 80px rgba(2, 6, 23, 0.45);
+  box-shadow: 0 16px 40px rgba(2, 6, 23, 0.45);
 }
 
 .palette__search {

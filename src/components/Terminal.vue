@@ -87,16 +87,16 @@
 
 <script setup>
 import { computed, nextTick, onBeforeUnmount, onMounted, ref } from 'vue'
+import { useRouter } from 'vue-router'
 import { useLanguage } from '../composables/useLanguage'
 import { useDarkMode } from '../composables/useDarkMode'
-import { useMatrixRain } from '../composables/useMatrixRain'
 import { useCommandPalette } from '../composables/useCommandPalette'
 import cvUrl from '../assets/pdfs/CV_nicklas_vedeby.pdf?url'
 
 const { t, language, setLanguage } = useLanguage()
 const { isDarkMode, toggleDarkMode } = useDarkMode()
-const { toggle: toggleMatrix } = useMatrixRain()
 const { open: openPalette } = useCommandPalette()
+const router = useRouter()
 
 const shellEl = ref(null)
 const bodyEl = ref(null)
@@ -110,7 +110,7 @@ const isBooting = ref(true)
 const history = ref([])
 const historyIndex = ref(-1)
 
-const suggestions = ['help', 'whoami', 'experience', 'skills', 'neofetch', 'sudo hire-me']
+const suggestions = ['help', 'whoami', 'experience', 'decisions', 'neofetch', 'play', 'sudo hire-me']
 const promptLabel = 'visitor@nicklasvedeby:~$'
 const CAREER_START = new Date('2020-03-01')
 
@@ -161,11 +161,6 @@ const formatRange = (item) =>
 
 const stripHtml = (value) => String(value).replace(/<[^>]*>/g, '')
 
-const bar = (level) => {
-  const filled = Math.round(level / 5)
-  return `${'█'.repeat(filled)}${'░'.repeat(20 - filled)}`
-}
-
 const uptime = () => {
   const now = new Date()
   let months = (now.getFullYear() - CAREER_START.getFullYear()) * 12 + (now.getMonth() - CAREER_START.getMonth())
@@ -183,7 +178,7 @@ const NEOFETCH_ART = [
   ' ╚═╝  ╚═══╝  ╚═══╝  '
 ]
 
-const FILES = ['about.md', 'experience.json', 'skills.yaml', 'projects/', 'education.log', 'contact.vcf', 'cv.pdf', '.secrets']
+const FILES = ['about.md', 'experience.json', 'skills.yaml', 'decisions.md', 'projects/', 'education.log', 'contact.vcf', 'cv.pdf', '.secrets']
 
 const buildWhoami = () => [
   { text: stripHtml(t.value.about.lead), cls: 'line--bright' },
@@ -212,27 +207,46 @@ const buildExperience = () => {
 }
 
 const buildSkills = (filter) => {
-  const categories = t.value.skills.categories.filter(
-    (category) => !filter || category.title.toLowerCase().includes(filter.toLowerCase())
+  const groups = t.value.skills.groups.filter(
+    (group) => !filter || group.title.toLowerCase().includes(filter.toLowerCase())
   )
 
-  if (!categories.length) {
+  if (!groups.length) {
     return [{ text: t.value.terminal.noSkillCategory.replace('{name}', filter), cls: 'line--error' }]
   }
 
   const output = []
 
-  categories.forEach((category, index) => {
-    output.push({ text: `${category.title}`, cls: 'line--accent' })
-    category.skills.forEach((skill) => {
-      output.push({ text: `  ${skill.name.padEnd(20)}${bar(skill.level)} ${String(skill.level).padStart(3)}%` })
-    })
-    if (index < categories.length - 1) {
+  groups.forEach((group, index) => {
+    output.push({ text: group.title, cls: 'line--accent' })
+    output.push({ text: `  ${group.description}`, cls: 'line--dim' })
+    output.push({ text: `  ${group.items.join(' · ')}` })
+
+    if (index < groups.length - 1) {
       output.push({ text: '' })
     }
   })
 
   return output
+}
+
+const buildDecisions = () => {
+  const { records, labels } = t.value.decisions
+
+  // Label lengths differ per language, so pad to a shared column width.
+  const width = Math.max(labels.context.length, labels.decision.length, labels.tradeoff.length) + 2
+  const label = (text) => `<span class="dim">${esc(text.padEnd(width))}</span>`
+
+  return records.flatMap((record, index) => {
+    const block = [
+      { text: `${String(index + 1).padStart(2, '0')}  ${record.title}`, cls: 'line--accent' },
+      { html: true, text: `  ${label(labels.context)}${esc(record.context)}` },
+      { html: true, text: `  ${label(labels.decision)}${esc(record.decision)}` },
+      { html: true, text: `  ${label(labels.tradeoff)}${esc(record.tradeoff)}` }
+    ]
+
+    return index < records.length - 1 ? [...block, { text: '' }] : block
+  })
 }
 
 const buildProjects = () => {
@@ -357,6 +371,7 @@ const SECTION_ALIASES = {
   skills: 'skills',
   education: 'education',
   projects: 'projects',
+  decisions: 'decisions',
   contact: 'contact',
   terminal: 'terminal',
   top: 'hero',
@@ -372,6 +387,7 @@ const commandHandlers = {
   projects: buildProjects,
   education: buildEducation,
   contact: buildContact,
+  decisions: buildDecisions,
   neofetch: buildNeofetch,
 
   cv: () => {
@@ -392,6 +408,7 @@ const commandHandlers = {
       'about.md': buildWhoami,
       'experience.json': buildExperience,
       'skills.yaml': () => buildSkills(),
+      'decisions.md': buildDecisions,
       'education.log': buildEducation,
       'contact.vcf': buildContact,
       'cv.pdf': () => commandHandlers.cv([])
@@ -458,9 +475,9 @@ const commandHandlers = {
     return [{ text: t.value.terminal.langSet.replace('{name}', requested), cls: 'line--success' }]
   },
 
-  matrix: () => {
-    const active = toggleMatrix()
-    return [{ text: active ? t.value.terminal.matrixOn : t.value.terminal.matrixOff, cls: 'line--success' }]
+  play: () => {
+    setTimeout(() => router.push('/arcade'), 400)
+    return [{ text: t.value.terminal.launchingGame, cls: 'line--success' }]
   },
 
   palette: () => {

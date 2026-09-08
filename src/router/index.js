@@ -17,6 +17,16 @@ const router = createRouter({
       },
     },
     {
+      path: '/arcade',
+      name: 'arcade',
+      component: () => import('../pages/Arcade.vue'),
+      meta: {
+        title: 'Arcade — Nicklas Vedeby',
+        description: 'A small top-down pixel shooter built from scratch with Vue and canvas — no engine, no sprite assets.',
+        type: 'website',
+      },
+    },
+    {
       path: '/:pathMatch(.*)*',
       name: 'not-found',
       component: () => import('../pages/NotFound.vue'),

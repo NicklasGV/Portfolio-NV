@@ -168,51 +168,27 @@ const translations = {
     },
     skills: {
       title: 'Skills',
-      categories: [
+      subtitle: 'Grouped by how much real mileage I have on each, rather than a percentage I assigned to myself.',
+      groups: [
         {
-          title: 'Data Technologies',
-          skills: [
-            { name: 'SQL', level: 90 },
-            { name: 'Python', level: 85 },
-            { name: 'Data Analysis', level: 88 },
-            { name: 'ETL Processes', level: 80 },
-            { name: 'DB Performance Tuning', level: 80 }
-          ]
+          title: 'In production',
+          description: 'Used on work that shipped and that I kept maintaining afterwards.',
+          items: ['Vue.js', 'Nuxt', 'JavaScript', 'TypeScript', 'HTML/CSS', 'SCSS', 'Python', 'SQL', 'REST APIs', 'Storyblok CMS', 'Shopify', 'Git', 'UI/UX']
         },
         {
-          title: 'Web Development',
-          skills: [
-            { name: 'Vue.js', level: 90 },
-            { name: 'Nuxt', level: 80 },
-            { name: 'Angular', level: 90 },
-            { name: 'JavaScript', level: 90 },
-            { name: 'TypeScript', level: 80 },
-            { name: 'HTML/CSS', level: 95 },
-            { name: 'UI/UX', level: 75 },
-            { name: 'Node.js', level: 60 },
-            { name: 'C#', level: 65 },
-            { name: 'Responsive Design', level: 90 }
-          ]
+          title: 'Built with',
+          description: 'Used to build and finish my own projects and coursework.',
+          items: ['Angular', 'C#', '.NET', 'Node.js', 'Vite', 'Discord.js', 'Docker', 'ETL pipelines', 'Database tuning']
         },
         {
-          title: 'Tools & Technologies',
-          skills: [
-            { name: 'Git', level: 85 },
-            { name: 'REST APIs', level: 80 },
-            { name: 'Shopify', level: 65 },
-            { name: 'Cursor AI', level: 75 },
-            { name: 'ChatGPT', level: 70 },
-            { name: 'Docker', level: 70 },
-            { name: 'AWS System', level: 65 },
-            { name: 'PRINCE 2', level: 55 }
-          ]
+          title: 'Exploring',
+          description: 'On my desk right now — genuinely still learning these.',
+          items: ['AWS', 'Automated testing', 'PRINCE2']
         },
         {
           title: 'Languages',
-          skills: [
-            { name: 'Danish', level: 100 },
-            { name: 'English', level: 75 }
-          ]
+          description: 'Written and spoken.',
+          items: ['Danish — native', 'English — professional']
         }
       ]
     },
@@ -289,9 +265,10 @@ const translations = {
         help: 'Show this list of commands',
         whoami: 'Who am I, in short',
         experience: 'My work history',
-        skills: 'Tech stack with proficiency bars',
+        skills: 'What I work with, grouped by real experience',
         projects: 'Things I have built',
         education: 'My education timeline',
+        decisions: 'Engineering calls I made, and the trade-offs',
         contact: 'How to reach me',
         cv: 'Download my CV as PDF',
         neofetch: 'System info, developer style',
@@ -300,7 +277,7 @@ const translations = {
         goto: 'Jump to a section (try: goto projects)',
         theme: 'Switch theme (theme dark | theme light)',
         lang: 'Switch language (lang da | lang en)',
-        matrix: 'Enter the matrix',
+        play: 'Play Bug Hunt, my little arcade game',
         palette: 'Open the command palette',
         echo: 'Print some text back',
         history: 'Show the commands you have run',
@@ -336,8 +313,7 @@ const translations = {
       langCurrent: 'Current language: {name}. Usage: lang da | lang en',
       langUsage: 'usage: lang da | lang en',
       langSet: 'Language set to {name}.',
-      matrixOn: 'Wake up, Neo... (click anywhere or press Esc to exit)',
-      matrixOff: 'Back to reality.',
+      launchingGame: 'Booting Bug Hunt ...',
       paletteOpened: 'Command palette opened — try typing a section name.',
       historyEmpty: 'No commands in history yet.',
       exit: "There is no exit. But there is a contact form — try 'goto contact'.",
@@ -367,12 +343,79 @@ const translations = {
         switchToDanish: 'Switch language to Danish',
         switchToEnglish: 'Switch language to English',
         downloadCv: 'Download CV (PDF)',
-        matrix: 'Enter the matrix',
+        arcade: 'Play Bug Hunt (arcade game)',
         sendEmail: 'Send me an email'
       }
     },
-    matrix: {
-      exitHint: 'click anywhere or press esc to exit'
+    decisions: {
+      title: 'Engineering Decisions',
+      subtitle: 'A portfolio is easy to make look finished. These are the calls behind this one: the constraint, what I chose, and what it cost me.',
+      labels: {
+        context: 'Constraint',
+        decision: 'Decision',
+        tradeoff: 'Trade-off'
+      },
+      records: [
+        {
+          title: 'A working contact form with no server to run',
+          context: 'I had the form working against my own Express and Nodemailer backend. Then I checked the hosting properly: the plan serves static files over FTP and will not run Node without moving to a more expensive tier.',
+          decision: 'I deleted the backend and moved the form to a client-side form API. The submit handler posts straight from the browser, and the mail still lands in my inbox.',
+          tradeoff: 'I gave up control of the mail templating and took on a third-party dependency. In exchange the feature shipped on hosting I already pay for, with no server to patch, monitor or keep alive.',
+          tags: ['Node.js', 'Express', 'Nodemailer', 'Web3Forms']
+        },
+        {
+          title: 'Deploying to shared hosting from CI',
+          context: 'The host gives me FTP and nothing else — no containers, no build step on the server, no deploy hooks.',
+          decision: 'A GitHub Actions workflow builds the site and uploads dist/ over FTP, triggered by pushing a semver tag rather than by every commit to main.',
+          tradeoff: 'No preview environments and no one-click rollback. But releases are deliberate and versioned: main can move freely, and only a tag ships.',
+          tags: ['GitHub Actions', 'CI/CD', 'FTP', 'SemVer']
+        },
+        {
+          title: 'Two languages without an i18n library',
+          context: 'The whole site has to exist in Danish and English, including anything I add to it later.',
+          decision: 'One reactive translation store in a composable. Components never hold copy — they read it from t, and the language toggle swaps the object underneath them.',
+          tradeoff: 'No pluralisation or locale-aware formatting for free, and all copy lives in one large file. The upside is no dependency, no bundle cost, and every feature bilingual by construction — including the terminal on the front page.',
+          tags: ['Vue 3', 'Composition API', 'i18n']
+        },
+        {
+          title: 'Fixing the jank instead of adding more polish',
+          context: 'The page felt heavy to scroll and it was not obvious why.',
+          decision: 'Three real causes: a fixed-attachment background repainting the full page on every scroll frame, ~30 skill bars animating width and so forcing layout every frame, and decorative animations running for the entire visit. The bars moved to transform, the fixed attachment went, and the decoration now sits behind prefers-reduced-motion.',
+          tradeoff: 'The background no longer parallaxes, and viewers who ask for reduced motion get a calmer page than I originally designed. Both were worth losing.',
+          tags: ['Performance', 'Rendering', 'Accessibility']
+        }
+      ]
+    },
+    arcade: {
+      eyebrow: 'Easter egg',
+      title: 'Bug Hunt',
+      subtitle: 'A top-down pixel shooter written from scratch — no game engine and no image files. Every sprite is drawn as canvas rectangles from a small text map.',
+      back: 'Back to the portfolio',
+      builtWith: 'Vue 3 · Canvas 2D · no dependencies · rendered at 480×320 and scaled up, so it stays crisp and cheap to run.',
+      canvasLabel: 'Bug Hunt game area',
+      score: 'Score',
+      wave: 'Wave',
+      best: 'Best',
+      health: 'Health',
+      readyTitle: 'Bug Hunt',
+      readyBody: 'The bugs are coming for you. Squash them before they reach you.',
+      pausedTitle: 'Paused',
+      pausedBody: 'Take your time.',
+      overTitle: 'Game over',
+      overBody: 'You made it to wave {wave}.',
+      newBest: 'New personal best!',
+      start: 'Start game',
+      resume: 'Resume',
+      again: 'Play again',
+      touchHint: 'On a touch screen: drag to move — you fire automatically.',
+      controls: {
+        move: 'Move',
+        aim: 'Aim',
+        shoot: 'Shoot',
+        pause: 'Pause',
+        mouseKey: 'Mouse',
+        clickKey: 'Click'
+      }
     },
     footer: {
       rights: 'All rights reserved.',
@@ -521,51 +564,27 @@ const translations = {
     },
     skills: {
       title: 'Kompetencer',
-      categories: [
+      subtitle: 'Grupperet efter hvor mange rigtige kilometer jeg har på hver enkelt — i stedet for en procent jeg selv har fundet på.',
+      groups: [
         {
-          title: 'Data Teknologier',
-          skills: [
-            { name: 'SQL', level: 90 },
-            { name: 'Python', level: 85 },
-            { name: 'Dataanalyse', level: 88 },
-            { name: 'ETL Processer', level: 80 },
-            { name: 'DB Performance Tuning', level: 80 }
-          ]
+          title: 'I produktion',
+          description: 'Brugt på arbejde der er gået live, og som jeg har vedligeholdt bagefter.',
+          items: ['Vue.js', 'Nuxt', 'JavaScript', 'TypeScript', 'HTML/CSS', 'SCSS', 'Python', 'SQL', 'REST APIs', 'Storyblok CMS', 'Shopify', 'Git', 'UI/UX']
         },
         {
-          title: 'Webudvikling',
-          skills: [
-            { name: 'Vue.js', level: 90 },
-            { name: 'Nuxt', level: 80 },
-            { name: 'Angular', level: 90 },
-            { name: 'JavaScript', level: 90 },
-            { name: 'TypeScript', level: 80 },
-            { name: 'HTML/CSS', level: 95 },
-            { name: 'UI/UX', level: 75 },
-            { name: 'Node.js', level: 60 },
-            { name: 'C#', level: 65 },
-            { name: 'Responsivt Design', level: 90 }
-          ]
+          title: 'Bygget med',
+          description: 'Brugt til at bygge og gøre mine egne projekter og skoleprojekter færdige.',
+          items: ['Angular', 'C#', '.NET', 'Node.js', 'Vite', 'Discord.js', 'Docker', 'ETL-pipelines', 'Database tuning']
         },
         {
-          title: 'Værktøjer & Teknologier',
-          skills: [
-            { name: 'Git', level: 85 },
-            { name: 'REST APIs', level: 80 },
-            { name: 'Shopify', level: 65 },
-            { name: 'Cursor AI', level: 75 },
-            { name: 'ChatGPT', level: 70 },
-            { name: 'Docker', level: 70 },
-            { name: 'AWS System', level: 65 },
-            { name: 'PRINCE 2', level: 55 }
-          ]
+          title: 'Under oplæring',
+          description: 'Det jeg sidder med lige nu — og stadig er i gang med at lære.',
+          items: ['AWS', 'Automatiseret test', 'PRINCE2']
         },
         {
           title: 'Sprog',
-          skills: [
-            { name: 'Dansk', level: 100 },
-            { name: 'Engelsk', level: 75 }
-          ]
+          description: 'Skriftligt og mundtligt.',
+          items: ['Dansk — modersmål', 'Engelsk — professionelt niveau']
         }
       ]
     },
@@ -643,9 +662,10 @@ const translations = {
         help: 'Vis denne liste af kommandoer',
         whoami: 'Hvem jeg er, kort fortalt',
         experience: 'Min joberfaring',
-        skills: 'Teknologier med niveau-bars',
+        skills: 'Hvad jeg arbejder med, grupperet efter erfaring',
         projects: 'Ting jeg har bygget',
         education: 'Min uddannelse',
+        decisions: 'Tekniske valg jeg har truffet, og afvejningerne',
         contact: 'Sådan får du fat i mig',
         cv: 'Hent mit CV som PDF',
         neofetch: 'System-info, udvikler-stil',
@@ -654,7 +674,7 @@ const translations = {
         goto: 'Hop til en sektion (prøv: goto projects)',
         theme: 'Skift tema (theme dark | theme light)',
         lang: 'Skift sprog (lang da | lang en)',
-        matrix: 'Træd ind i matrix',
+        play: 'Spil Bug Hunt, mit lille arkadespil',
         palette: 'Åbn kommandopaletten',
         echo: 'Skriv en tekst tilbage',
         history: 'Vis de kommandoer du har kørt',
@@ -690,8 +710,7 @@ const translations = {
       langCurrent: 'Nuværende sprog: {name}. Brug: lang da | lang en',
       langUsage: 'brug: lang da | lang en',
       langSet: 'Sprog sat til {name}.',
-      matrixOn: 'Vågn op, Neo... (klik et vilkårligt sted eller tryk Esc for at gå ud)',
-      matrixOff: 'Tilbage til virkeligheden.',
+      launchingGame: 'Starter Bug Hunt ...',
       paletteOpened: 'Kommandopaletten er åben — prøv at skrive et sektionsnavn.',
       historyEmpty: 'Ingen kommandoer i historikken endnu.',
       exit: "Der er ingen udgang. Men der er en kontaktformular — prøv 'goto contact'.",
@@ -721,12 +740,79 @@ const translations = {
         switchToDanish: 'Skift sprog til dansk',
         switchToEnglish: 'Skift sprog til engelsk',
         downloadCv: 'Hent CV (PDF)',
-        matrix: 'Træd ind i matrix',
+        arcade: 'Spil Bug Hunt (arkadespil)',
         sendEmail: 'Send mig en mail'
       }
     },
-    matrix: {
-      exitHint: 'klik et vilkårligt sted eller tryk esc for at gå ud'
+    decisions: {
+      title: 'Tekniske valg',
+      subtitle: 'Det er nemt at få et portfolio til at se færdigt ud. Her er valgene bag dette: begrænsningen, hvad jeg valgte, og hvad det kostede.',
+      labels: {
+        context: 'Begrænsning',
+        decision: 'Valg',
+        tradeoff: 'Afvejning'
+      },
+      records: [
+        {
+          title: 'En kontaktformular der virker — uden en server at drive',
+          context: 'Jeg havde formularen kørende mod min egen Express- og Nodemailer-backend. Så kiggede jeg ordentligt på hostingen: planen serverer statiske filer over FTP og kører ikke Node uden at skifte til en dyrere pakke.',
+          decision: 'Jeg slettede backenden og flyttede formularen til et client-side form-API. Submit-handleren poster direkte fra browseren, og mailen lander stadig i min indbakke.',
+          tradeoff: 'Jeg gav kontrollen over mail-templating fra mig og tog en tredjeparts-afhængighed ind. Til gengæld kom funktionen live på den hosting jeg allerede betaler for, uden en server der skal patches, overvåges og holdes i live.',
+          tags: ['Node.js', 'Express', 'Nodemailer', 'Web3Forms']
+        },
+        {
+          title: 'Deployment til shared hosting fra CI',
+          context: 'Hosten giver mig FTP og ikke andet — ingen containere, intet build-step på serveren, ingen deploy hooks.',
+          decision: 'Et GitHub Actions-workflow bygger siden og uploader dist/ over FTP, udløst af et semver-tag frem for hvert commit på main.',
+          tradeoff: 'Ingen preview-miljøer og ingen rollback med ét klik. Til gengæld er releases bevidste og versionerede: main må gerne bevæge sig, og kun et tag går live.',
+          tags: ['GitHub Actions', 'CI/CD', 'FTP', 'SemVer']
+        },
+        {
+          title: 'To sprog uden et i18n-bibliotek',
+          context: 'Hele siden skal findes på dansk og engelsk — også alt det jeg tilføjer senere.',
+          decision: 'Ét reaktivt oversættelses-store i en composable. Komponenterne indeholder aldrig tekst; de læser den fra t, og sprogskifteren bytter objektet ud under dem.',
+          tradeoff: 'Ingen gratis pluralisering eller lokal formatering, og al tekst ligger i én stor fil. Til gengæld ingen afhængighed, ingen bundle-omkostning, og hver ny funktion er tosproget by design — også terminalen på forsiden.',
+          tags: ['Vue 3', 'Composition API', 'i18n']
+        },
+        {
+          title: 'At fjerne hakkene i stedet for at pynte mere',
+          context: 'Siden føltes tung at scrolle, og det var ikke tydeligt hvorfor.',
+          decision: 'Tre reelle årsager: en fixed baggrund der gentegnede hele siden ved hver scroll-frame, ~30 kompetence-bars der animerede width og dermed tvang layout hver frame, og dekorative animationer der kørte hele besøget. Bar’erne bruger nu transform, den fixed baggrund er væk, og dekorationen ligger bag prefers-reduced-motion.',
+          tradeoff: 'Baggrunden parallakser ikke længere, og besøgende der beder om mindre bevægelse får en roligere side end den jeg oprindeligt designede. Begge dele var det værd.',
+          tags: ['Performance', 'Rendering', 'Tilgængelighed']
+        }
+      ]
+    },
+    arcade: {
+      eyebrow: 'Easter egg',
+      title: 'Bug Hunt',
+      subtitle: 'En top-down pixel-shooter skrevet fra bunden — ingen game engine og ingen billedfiler. Hver sprite tegnes som canvas-rektangler ud fra et lille tekstkort.',
+      back: 'Tilbage til portfolioet',
+      builtWith: 'Vue 3 · Canvas 2D · ingen afhængigheder · renderet i 480×320 og skaleret op, så det forbliver skarpt og billigt at køre.',
+      canvasLabel: 'Bug Hunt spilleområde',
+      score: 'Score',
+      wave: 'Bølge',
+      best: 'Bedste',
+      health: 'Liv',
+      readyTitle: 'Bug Hunt',
+      readyBody: 'Bug’sene er på vej mod dig. Klem dem, før de når frem.',
+      pausedTitle: 'På pause',
+      pausedBody: 'Tag dig bare god tid.',
+      overTitle: 'Game over',
+      overBody: 'Du nåede til bølge {wave}.',
+      newBest: 'Ny personlig rekord!',
+      start: 'Start spillet',
+      resume: 'Fortsæt',
+      again: 'Spil igen',
+      touchHint: 'På touchskærm: træk for at bevæge dig — du skyder automatisk.',
+      controls: {
+        move: 'Bevæg dig',
+        aim: 'Sigt',
+        shoot: 'Skyd',
+        pause: 'Pause',
+        mouseKey: 'Mus',
+        clickKey: 'Klik'
+      }
     },
     footer: {
       rights: 'Alle rettigheder forbeholdes.',

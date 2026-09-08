@@ -3,7 +3,6 @@
   <NewYear />
   <RouterView />
   <CommandPalette />
-  <MatrixRain />
 </template>
 
 <script setup>
@@ -13,7 +12,6 @@ import profileImageUrl from '@/assets/images/profile.jpg?url'
 import Snowfall from '@/components/Snowfall.vue'
 import NewYear from '@/components/NewYear.vue'
 import CommandPalette from '@/components/CommandPalette.vue'
-import MatrixRain from '@/components/MatrixRain.vue'
 
 const route = useRoute()
 
