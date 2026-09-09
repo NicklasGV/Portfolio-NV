@@ -2,7 +2,7 @@ name: Update bio age
 
 on:
   schedule:
-    - cron: "0 6 1 * *" # Daily at 06:00 UTC
+    - cron: "17 6 12 6,12 *"   # Daily at 06:00 UTC
   workflow_dispatch:
 
 permissions: {}
