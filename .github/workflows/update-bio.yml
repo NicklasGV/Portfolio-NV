@@ -1,0 +1,50 @@
+name: Update bio age
+
+on:
+  schedule:
+    - cron: "0 6 1 * *" # Daily at 06:00 UTC
+  workflow_dispatch:
+
+permissions: {}
+
+jobs:
+  update-bio:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Update age
+        env:
+          GH_TOKEN: ${{ secrets.BIO_TOKEN }}
+          BIRTH_DATE: ${{ secrets.BIRTH_DATE }}
+        shell: python
+        run: |
+          import json
+          import os
+          import re
+          import subprocess
+          from datetime import date, datetime, timezone
+
+          birthday = date.fromisoformat(os.environ["BIRTH_DATE"])
+          today = datetime.now(timezone.utc).date()
+          if birthday > today:
+              raise ValueError("BIRTH_DATE cannot be in the future.")
+
+          age = today.year - birthday.year - (
+              (today.month, today.day) < (birthday.month, birthday.day)
+          )
+
+          profile = json.loads(subprocess.check_output(
+              ["gh", "api", "/user"], text=True, timeout=30
+          ))
+          bio = profile.get("bio") or ""
+          updated, matches = re.subn(
+              r"^\d+(?=\s+years old\b)", str(age), bio,
+              count=1, flags=re.IGNORECASE
+          )
+          if not matches:
+              raise ValueError("Bio must start with '<number> Years old'.")
+
+          if updated != bio:
+              subprocess.run([
+                  "gh", "api", "--method", "PATCH", "/user",
+                  "-f", f"bio={updated}", "--silent"
+              ], check=True, timeout=30)
