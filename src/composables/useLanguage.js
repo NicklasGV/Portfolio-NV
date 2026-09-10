@@ -8,7 +8,7 @@ import martinRecommendationPdf from '../assets/pdfs/Nicklas-Vedeby-Anbefaling-Ma
 
 export const SUPPORTED_LANGUAGES = ['da', 'en']
 const DEFAULT_LANGUAGE = 'da'
-const SITE_URL = import.meta.env.VITE_SITE_URL || ''
+import { SITE_URL } from '@/utils/site'
 
 const currentLanguage = ref(DEFAULT_LANGUAGE)
 
