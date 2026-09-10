@@ -4,6 +4,7 @@ import { updateSEO } from '@/utils/seo'
 import protonedmusicImage from '../assets/images/protonedmusic.webp'
 import buildabotImage from '../assets/images/buildabotwide.svg'
 import samlinoImage from '../assets/images/samlino.png'
+import arcadeImage from '../assets/images/arcade.png'
 import martinRecommendationPdf from '../assets/pdfs/Nicklas-Vedeby-Anbefaling-Martin.pdf'
 
 export const SUPPORTED_LANGUAGES = ['da', 'en']
@@ -86,7 +87,8 @@ const translations = {
       skills: 'Skills',
       education: 'Education',
       projects: 'Projects',
-      contact: 'Contact'
+      contact: 'Contact',
+      skipToContent: 'Skip to content'
     },
     hero: {
       eyebrow: 'Fullstack Developer',
@@ -95,9 +97,12 @@ const translations = {
       primaryCta: 'View my work',
       secondaryCta: "Let's collaborate",
       stats: [
-        { value: '3+', label: 'Years exploring data & web' },
-        { value: '3', label: 'Projects & initiatives delivered' },
-        { value: '4', label: 'Languages I can work in' }
+        // Since March 2020, per the education timeline further down the page.
+        { value: '6+', label: 'Years building with code' },
+        // JavaScript, TypeScript, Python, SQL and C#, all listed under Skills.
+        { value: '5', label: 'Languages I ship in' },
+        // Bug Hunt, Stack Overflow and Merge Sort, all playable on this site.
+        { value: '3', label: 'Games built from scratch' }
       ]
     },
     about: {
@@ -247,26 +252,36 @@ const translations = {
       title: 'Projects',
       items: [
         {
-          image: protonedmusicImage,
-          title: 'Protoned Music',
-          description: 'A web-based platform for a customer\'s music production, where the customer could create events, sell tickets, merch, and more. <br> <span class="highlight">Unfortunately, the customer has chosen to shut down, and the project is therefore no longer available.</span>',
-          tags: ['Angular', 'SQL', 'C#', '.NET'],
-          alt: 'Screenshot from the Protoned Music events and ticketing platform',
+          image: arcadeImage,
+          title: 'The Arcade',
+          description: 'Three games built from scratch and running on this site: a top-down shooter, a falling-block puzzle and a sliding-tile puzzle. No game engine, no sprite files. Two of them run on canvas with their own game loop and fixed timestep; the third uses reactive DOM with CSS transforms, so each solves the rendering problem a different way.',
+          tags: ['Vue 3', 'Canvas 2D', 'Game loop', 'Zero dependencies'],
+          route: '/arcade',
+          linkLabel: 'Play them',
+          alt: 'Pixel art from the three arcade games: falling blocks, a bug and numbered tiles',
         },
         {
           image: buildabotImage,
           title: 'Build a Bot',
-          description: 'A web-based platform for building and testing bots for Discord. This project is mine and a friend\'s, made as a final project in our education. It\'s still being worked on here and there but is currently dormant.',
+          description: 'A platform for building and testing Discord bots, built with a friend as our final project in our education. Angular on the front end, a C# REST API behind it, and Discord.js driving the bots themselves. Active development is paused, but the site is up and the source is public.',
           tags: ['Angular', 'Discord.js', 'REST API', 'C#'],
           github: 'https://github.com/NicklasGV/Build-a-Bot',
           demo: 'https://buildabot.dk/',
           alt: 'Preview of the Build a Bot Discord automation platform interface',
         },
         {
+          image: protonedmusicImage,
+          title: 'Protoned Music',
+          description: 'An events and ticketing platform for a music producer, covering event creation, ticket sales and merch. Angular front end on a C# and SQL back end. The customer has since closed the business, so the site is no longer online.',
+          tags: ['Angular', 'SQL', 'C#', '.NET'],
+          github: 'https://github.com/NicklasGV/ProtonedMusic',
+          alt: 'Screenshot from the Protoned Music events and ticketing platform',
+        },
+        {
           image: samlinoImage,
           title: 'Samlino.dk',
-          description: 'Is a comparison platform for comparing prices on mainly car insurance, but also unemployment funds and electricity. <br> <span class="highlight">I did not create Samlino.dk, I have worked for them as a developer.</span>',
-          tags: ['Vue.js', 'Python', 'SQL', 'REST API'],
+          description: 'A Danish price comparison platform for car insurance, unemployment funds and electricity. I worked here as a developer rather than building it: mostly frontend components in Vue and Nuxt against a Storyblok CMS, with Python on the back end.',
+          tags: ['Vue.js', 'Nuxt', 'Python', 'REST API'],
           demo: 'https://www.samlino.dk/',
           alt: 'Screenshot of the Samlino.dk comparison platform homepage',
         }
@@ -552,7 +567,8 @@ const translations = {
       education: 'Uddannelse',
       projects: 'Projekter',
       contact: 'Kontakt',
-      cv: 'Download CV'
+      cv: 'Download CV',
+      skipToContent: 'Spring til indhold'
     },
     hero: {
       eyebrow: 'Fullstackudvikler',
@@ -561,9 +577,9 @@ const translations = {
       primaryCta: 'Se mine projekter',
       secondaryCta: 'Lad os tage en snak',
       stats: [
-        { value: '3+', label: 'Års erfaring med data og web' },
-        { value: '3', label: 'Leveret projekter og initiativer' },
-        { value: '4', label: 'Sprog jeg arbejder i' }
+        { value: '6+', label: 'År med kode i hænderne' },
+        { value: '5', label: 'Sprog jeg leverer i' },
+        { value: '3', label: 'Spil bygget fra bunden' }
       ]
     },
     about: {
@@ -713,27 +729,36 @@ const translations = {
       title: 'Projekter',
       items: [
         {
-          image: protonedmusicImage,
-          title: 'Protoned Music',
-          description: 'Mit første "rigtige" projekt bygget sammen med nogle venner fra studiet. <br> En webbaseret platform for en kundes musik produktion, hvor kunden kunne skabe events, sælge billetter, merch og andet. <br> <span class="highlight">Kunden har desværre valgt at lukke ned, og projektet er derfor ikke længere tilgængeligt.</span>',
-          tags: ['Angular', 'SQL', 'C#', '.NET'],
-          github: 'https://github.com/NicklasGV/ProtonedMusic',
-          alt: 'Skærmbillede af Protoned Music platformen til events og billetsalg',
+          image: arcadeImage,
+          title: 'Arkaden',
+          description: 'Tre spil bygget fra bunden og kørende her på siden: en top-down shooter, et puslespil med faldende klodser og et med glidende brikker. Ingen game engine, ingen sprite-filer. To af dem kører på canvas med deres eget game loop og fast timestep, mens det tredje bruger reaktivt DOM med CSS-transforms, så hvert spil løser rendering-opgaven på sin egen måde.',
+          tags: ['Vue 3', 'Canvas 2D', 'Game loop', 'Ingen afhængigheder'],
+          route: '/arcade',
+          linkLabel: 'Spil dem',
+          alt: 'Pixelgrafik fra de tre arkadespil: faldende klodser, en bug og nummererede brikker',
         },
         {
           image: buildabotImage,
           title: 'Build a Bot',
-          description: 'En webbaseret platform for at bygge og teste bot\'s til Discord. Dette projekt er mit og en vens. Som er lavet som et slut projekt i vores uddannelse. <br> <span class="highlight">Det bygges stadig på her og der men står pt i dvale.</span>',
+          description: 'En platform til at bygge og teste Discord-bots, lavet sammen med en ven som vores afsluttende projekt på uddannelsen. Angular i frontend, et C# REST API bagved, og Discord.js der driver selve botsene. Udviklingen er sat på pause, men siden kører, og koden ligger offentligt.',
           tags: ['Angular', 'Discord.js', 'REST API', 'C#'],
           github: 'https://github.com/NicklasGV/Build-a-Bot',
           demo: 'https://buildabot.dk/',
           alt: 'Forhåndsvisning af Build a Bot-platformen til Discord-automatisering',
         },
         {
+          image: protonedmusicImage,
+          title: 'Protoned Music',
+          description: 'Mit første rigtige projekt, bygget sammen med nogle venner fra studiet. En platform til events og billetsalg for en musikproducent, med oprettelse af events, billetsalg og merch. Angular i frontend på en C#- og SQL-backend. Kunden har siden lukket ned, så siden er ikke længere online.',
+          tags: ['Angular', 'SQL', 'C#', '.NET'],
+          github: 'https://github.com/NicklasGV/ProtonedMusic',
+          alt: 'Skærmbillede af Protoned Music platformen til events og billetsalg',
+        },
+        {
           image: samlinoImage,
           title: 'Samlino.dk',
-          description: 'Er en sammenlignings platform for at sammenligne priser på hovedsageligt bil forsikringer. men også a-kasser og el. <br> <span class="highlight">Jeg har ikke lavet Samlino.dk, har arbejdet for dem som udvikler.</span>',
-          tags: ['Vue.js', 'Python', 'SQL', 'REST API'],
+          description: 'En dansk sammenligningsplatform for bilforsikringer, a-kasser og el. Jeg har ikke bygget Samlino.dk, men arbejdet der som udvikler: mest frontend-komponenter i Vue og Nuxt op mod et Storyblok CMS, med Python i backend.',
+          tags: ['Vue.js', 'Nuxt', 'Python', 'REST API'],
           demo: 'https://www.samlino.dk/',
           alt: 'Skærmbillede af Samlino.dk sammenligningsplatformens forside',
         }

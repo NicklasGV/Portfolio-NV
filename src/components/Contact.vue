@@ -58,6 +58,20 @@
           </p>
         </div>
         <form class="contact-form" @submit.prevent="handleSubmit">
+          <!--
+            Honeypot. Hidden from people and from screen readers, but a bot that
+            fills every field it finds will trip it, and Web3Forms drops the
+            submission server side when this arrives non-empty.
+          -->
+          <input
+            v-model="botField"
+            type="checkbox"
+            name="botcheck"
+            class="botcheck"
+            tabindex="-1"
+            autocomplete="off"
+            aria-hidden="true"
+          />
           <div class="form-group">
             <label for="name">{{ t.contact.form.name }}</label>
             <input 
@@ -125,6 +139,7 @@ const form = ref({
 
 const status = ref(null)
 const isSubmitting = ref(false)
+const botField = ref(false)
 const WEB3FORMS_ENDPOINT = 'https://api.web3forms.com/submit'
 const WEB3FORMS_ACCESS_KEY = import.meta.env.VITE_WEB3FORMS_ACCESS_KEY || 'f8d22d9f-079c-4f86-ad91-ae38ac4596b1'
 
@@ -151,6 +166,7 @@ const handleSubmit = async () => {
         name: form.value.name,
         email: form.value.email,
         message: form.value.message,
+        botcheck: botField.value,
       }),
     })
 
@@ -274,6 +290,21 @@ const handleSubmit = async () => {
   border-radius: 16px;
   box-shadow: 0 4px 20px var(--shadow-color);
   transition: background-color 0.3s;
+}
+
+// Kept out of the layout and out of the accessibility tree entirely, rather
+// than display:none, which some bots specifically look for and skip.
+.botcheck {
+  position: absolute !important;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  border: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
 }
 
 .form-group {

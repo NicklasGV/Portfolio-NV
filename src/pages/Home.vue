@@ -1,6 +1,8 @@
 <template>
   <div class="app">
+    <a class="skip-link" :href="`#${MAIN_ID}`">{{ t.nav.skipToContent }}</a>
     <Header />
+    <main :id="MAIN_ID">
     <Hero />
     <About />
     <Terminal />
@@ -11,6 +13,7 @@
     <Projects />
     <Decisions />
     <Contact />
+    </main>
     <Footer />
   </div>
 </template>
@@ -28,6 +31,12 @@ import Decisions from '../components/Decisions.vue'
 import WorkExperience from '../components/workExperience.vue'
 import Contact from '../components/Contact.vue'
 import Footer from '../components/Footer.vue'
+import { useLanguage } from '../composables/useLanguage'
+
+const { t } = useLanguage()
+
+// The skip link's target, so the anchor and the landmark cannot drift apart.
+const MAIN_ID = 'main-content'
 </script>
 
 <style lang="scss">

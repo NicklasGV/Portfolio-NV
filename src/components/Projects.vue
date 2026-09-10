@@ -32,18 +32,29 @@
               </span>
             </div>
             <div class="project-links">
-              <a 
-                v-if="project.github" 
-                :href="project.github" 
-                target="_blank" 
+              <a
+                v-if="project.github"
+                :href="project.github"
+                target="_blank"
+                rel="noopener noreferrer"
                 class="project-link"
               >
                 {{ t.projects.github }}
               </a>
-              <a 
-                v-if="project.demo" 
-                :href="project.demo" 
-                target="_blank" 
+              <!-- Projects that live on this site route in-app rather than
+                   opening a new tab, and can name their own link. -->
+              <RouterLink
+                v-if="project.route"
+                :to="localePath(project.route)"
+                class="project-link"
+              >
+                {{ project.linkLabel || t.projects.demo }}
+              </RouterLink>
+              <a
+                v-else-if="project.demo"
+                :href="project.demo"
+                target="_blank"
+                rel="noopener noreferrer"
                 class="project-link"
               >
                 {{ t.projects.demo }}
@@ -57,9 +68,10 @@
 </template>
 
 <script setup>
+import { RouterLink } from 'vue-router'
 import { useLanguage } from '../composables/useLanguage'
 
-const { t } = useLanguage()
+const { t, localePath } = useLanguage()
 </script>
 
 <style lang="scss" scoped>

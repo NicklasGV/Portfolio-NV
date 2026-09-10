@@ -5,8 +5,14 @@ A clean and responsive personal portfolio built with Vue.js and Vite.
 ![Vue.js](https://img.shields.io/badge/vuejs-%2335495e.svg?style=for-the-badge&logo=vuedotjs&logoColor=%234FC08D)
 ![Hostinger](https://img.shields.io/badge/hostinger-%23673DE6.svg?style=for-the-badge&logo=hostinger&logoColor=white)
 <br>
+[![Live release](https://img.shields.io/github/v/tag/NicklasGV/Portfolio-NV?sort=semver&label=live%20release&color=8b5cf6)](https://github.com/NicklasGV/Portfolio-NV/tags)
 ![CI](https://github.com/NicklasGV/Portfolio-NV/actions/workflows/deploy.yml/badge.svg)
 ![Last Commit](https://img.shields.io/github/last-commit/NicklasGV/Portfolio-NV.svg)
+
+> The **live release** badge tracks the newest semver tag. Deployment only runs
+> on a tag push, so that tag is exactly what is serving at
+> [nicklasvedeby.com](https://nicklasvedeby.com) right now. If `main` is ahead of
+> it, those commits are merged but not yet shipped.
 
 ---
 
