@@ -11,6 +11,11 @@
   RewriteEngine On
   RewriteBase /
 
+  # Canonical host. www serves the very same site, so without this Google sees
+  # two copies of every page. Non-www is the version already indexed.
+  RewriteCond %{HTTP_HOST} ^www\.(.+)$ [NC]
+  RewriteRule ^ https://%1%{REQUEST_URI} [R=301,L]
+
   # Leave real files and directories alone (assets, sitemap.xml, robots.txt).
   RewriteCond %{REQUEST_FILENAME} -f [OR]
   RewriteCond %{REQUEST_FILENAME} -d

@@ -7,7 +7,7 @@ const socialImageUrl = '/og-image.jpg'
 const DEFAULT_TITLE = 'Nicklas Vedeby | Fullstack Udvikler'
 const DEFAULT_DESCRIPTION = 'Fullstack udvikler i Storkøbenhavn. Erfaring med Vue, Nuxt, TypeScript, Python og SQL. Se mine projekter og referencer, og skriv hvis du søger en udvikler.'
 const DEFAULT_TYPE = 'website'
-const SITE_URL = import.meta.env.VITE_SITE_URL || ''
+import { SITE_URL } from './site'
 
 const getOgLocale = () => {
   const lang = document?.documentElement?.lang || 'da'

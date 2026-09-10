@@ -9,13 +9,14 @@
 import { computed, onBeforeUnmount, watch } from 'vue'
 import { RouterView, useRoute } from 'vue-router'
 import profileImageUrl from '@/assets/images/profile.jpg?url'
+import { resolveOrigin } from '@/utils/site'
 import Snowfall from '@/components/Snowfall.vue'
 import NewYear from '@/components/NewYear.vue'
 import CommandPalette from '@/components/CommandPalette.vue'
 
 const route = useRoute()
 
-const siteUrl = import.meta.env.VITE_SITE_URL || (typeof window !== 'undefined' ? window.location.origin : '')
+const siteUrl = resolveOrigin()
 
 const toAbsolute = (path) => {
   if (!path) {
