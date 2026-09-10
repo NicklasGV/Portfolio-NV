@@ -61,7 +61,13 @@
 <IfModule mod_deflate.c>
   AddOutputFilterByType DEFLATE text/html text/css text/plain text/xml
   AddOutputFilterByType DEFLATE application/javascript application/json
-  AddOutputFilterByType DEFLATE image/svg+xml
+  AddOutputFilterByType DEFLATE application/xml text/xsl image/svg+xml
+</IfModule>
+
+# The sitemap's stylesheet. X-Content-Type-Options is nosniff, so the browser
+# will refuse to apply it unless the server names the type correctly.
+<IfModule mod_mime.c>
+  AddType text/xsl .xsl
 </IfModule>
 
 ErrorDocument 404 /index.html

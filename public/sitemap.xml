@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="/sitemap.xsl"?>
 <!--
   Every page is listed once per language, and each entry declares the full set
   of alternates (including itself, which Google requires) so the two versions
