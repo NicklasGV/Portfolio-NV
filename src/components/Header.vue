@@ -56,11 +56,14 @@
       <li><a href="#projects" @click="scrollTo('projects')">{{ t.nav.projects }}</a></li>
       <li><a href="#contact" @click="scrollTo('contact')">{{ t.nav.contact }}</a></li>
     </ul>
+    <div class="scroll-progress" aria-hidden="true">
+      <span :style="{ transform: `scaleX(${scrollProgress})` }"></span>
+    </div>
   </header>
 </template>
 
 <script setup>
-import { computed, ref } from 'vue'
+import { computed, onBeforeUnmount, onMounted, ref } from 'vue'
 import { useLanguage } from '../composables/useLanguage'
 import { useDarkMode } from '../composables/useDarkMode'
 import { useCommandPalette } from '../composables/useCommandPalette'
@@ -69,6 +72,41 @@ const { language, t, toggleLanguage } = useLanguage()
 const { isDarkMode, toggleDarkMode } = useDarkMode()
 const { open: openPalette } = useCommandPalette()
 const mobileMenuOpen = ref(false)
+
+// How far through the page you are, drawn as a hairline under the nav. It is
+// driven by transform rather than width so it never triggers layout, and the
+// scroll handler only schedules a frame instead of reading and writing on
+// every one of the dozens of scroll events a single wheel flick fires.
+const scrollProgress = ref(0)
+let progressFrame = null
+
+const measureProgress = () => {
+  progressFrame = null
+  const scrollable = document.documentElement.scrollHeight - window.innerHeight
+
+  scrollProgress.value = scrollable > 0 ? Math.min(1, Math.max(0, window.scrollY / scrollable)) : 0
+}
+
+const handleScroll = () => {
+  if (progressFrame === null) {
+    progressFrame = requestAnimationFrame(measureProgress)
+  }
+}
+
+onMounted(() => {
+  measureProgress()
+  window.addEventListener('scroll', handleScroll, { passive: true })
+  window.addEventListener('resize', handleScroll, { passive: true })
+})
+
+onBeforeUnmount(() => {
+  window.removeEventListener('scroll', handleScroll)
+  window.removeEventListener('resize', handleScroll)
+
+  if (progressFrame !== null) {
+    cancelAnimationFrame(progressFrame)
+  }
+})
 
 const shortcutLabel = computed(() => {
   const isApple = typeof navigator !== 'undefined' && /Mac|iPod|iPhone|iPad/.test(navigator.platform)
@@ -101,6 +139,23 @@ const scrollTo = (section) => {
   transition: background-color 0.3s, box-shadow 0.3s;
 }
 
+.scroll-progress {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 2px;
+  overflow: hidden;
+
+  span {
+    display: block;
+    height: 100%;
+    background: linear-gradient(90deg, $gradient-start 0%, $gradient-end 100%);
+    transform-origin: 0 50%;
+    transform: scaleX(0);
+  }
+}
+
 .logo-desktop {
   @include mobile {
     display: none;
@@ -108,7 +163,10 @@ const scrollTo = (section) => {
 }
 
 .logo-mobile {
-  @include desktop {
+  // The complement of the rule above, not `desktop`. The mobile breakpoint
+  // ends at 767px and desktop only starts at 968px, so keying this to desktop
+  // left a band in between where both logos were on screen at once.
+  @media (min-width: #{$breakpoint-md}) {
     display: none;
   }
 }

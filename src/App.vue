@@ -1,6 +1,10 @@
 <template>
-  <Snowfall />
-  <NewYear />
+  <!--
+    Not while a game is running. Each game drives its own animation loop, and
+    confetti drifting over a playfield is both a distraction and a second
+    canvas competing for the same frames.
+  -->
+  <SeasonalLayer v-if="route.name !== 'arcade-game'" />
   <RouterView />
   <CommandPalette />
 </template>
@@ -10,8 +14,7 @@ import { computed, onBeforeUnmount, watch } from 'vue'
 import { RouterView, useRoute } from 'vue-router'
 import profileImageUrl from '@/assets/images/profile.jpg?url'
 import { resolveOrigin } from '@/utils/site'
-import Snowfall from '@/components/Snowfall.vue'
-import NewYear from '@/components/NewYear.vue'
+import SeasonalLayer from '@/components/SeasonalLayer.vue'
 import CommandPalette from '@/components/CommandPalette.vue'
 
 const route = useRoute()

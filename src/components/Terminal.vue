@@ -91,11 +91,13 @@ import { useRouter } from 'vue-router'
 import { useLanguage } from '../composables/useLanguage'
 import { useDarkMode } from '../composables/useDarkMode'
 import { useCommandPalette } from '../composables/useCommandPalette'
+import { OCCASION_IDS, useSeason } from '../composables/useSeason'
 import cvUrl from '../assets/pdfs/CV_nicklas_vedeby.pdf?url'
 
 const { t, language, setLanguage, localePath } = useLanguage()
 const { isDarkMode, toggleDarkMode } = useDarkMode()
 const { open: openPalette } = useCommandPalette()
+const { season, reducedMotion, setSeasonOverride } = useSeason()
 const router = useRouter()
 
 const shellEl = ref(null)
@@ -110,7 +112,7 @@ const isBooting = ref(true)
 const history = ref([])
 const historyIndex = ref(-1)
 
-const suggestions = ['help', 'whoami', 'experience', 'decisions', 'neofetch', 'play', 'sudo hire-me']
+const suggestions = ['help', 'whoami', 'experience', 'decisions', 'neofetch', 'season', 'play', 'sudo hire-me']
 const promptLabel = 'visitor@nicklasvedeby:~$'
 const CAREER_START = new Date('2020-03-01')
 
@@ -479,6 +481,46 @@ const commandHandlers = {
 
     setLanguage(requested)
     return [{ text: t.value.terminal.langSet.replace('{name}', requested), cls: 'line--success' }]
+  },
+
+  season: (args) => {
+    const copy = t.value.season
+    const label = (id) => copy.occasions[id]?.name ?? id
+    const requested = args[0]?.toLowerCase()
+
+    if (!requested) {
+      const active = season.value
+      const status = active
+        ? { text: copy.current.replace('{name}', label(active.id)).replace('{id}', active.id), cls: 'line--accent' }
+        : { text: copy.none, cls: 'line--dim' }
+
+      return [
+        status,
+        ...(reducedMotion.value ? [{ text: copy.reducedMotion, cls: 'line--dim' }] : []),
+        { text: '' },
+        { text: copy.listTitle, cls: 'line--dim' },
+        ...OCCASION_IDS.map((id) => ({
+          html: true,
+          text: `  <span class="cmd">${esc(id.padEnd(18))}</span><span class="dim">${esc(label(id))}</span>`
+        }))
+      ]
+    }
+
+    if (requested === 'auto') {
+      setSeasonOverride(null)
+      return [{ text: copy.auto, cls: 'line--success' }]
+    }
+
+    if (requested === 'off') {
+      setSeasonOverride('off')
+      return [{ text: copy.off, cls: 'line--success' }]
+    }
+
+    if (!setSeasonOverride(requested)) {
+      return [{ text: copy.unknown.replace('{name}', requested), cls: 'line--error' }]
+    }
+
+    return [{ text: copy.preview.replace('{name}', label(requested)), cls: 'line--success' }]
   },
 
   play: (args) => {

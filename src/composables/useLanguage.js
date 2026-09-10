@@ -343,6 +343,7 @@ const translations = {
         goto: 'Jump to a section (try: goto projects)',
         theme: 'Switch theme (theme dark | theme light)',
         lang: 'Switch language (lang da | lang en)',
+        season: 'Preview a seasonal effect (try: season halloween)',
         play: 'Open the arcade (try: play stack-overflow)',
         palette: 'Open the command palette',
         echo: 'Print some text back',
@@ -413,6 +414,50 @@ const translations = {
         downloadCv: 'Download CV (PDF)',
         arcade: 'Open the arcade',
         sendEmail: 'Send me an email'
+      }
+    },
+    season: {
+      dismiss: 'Dismiss',
+      current: 'Active occasion: {name} ({id})',
+      none: 'Nothing running today. The calendar picks the next one on its own.',
+      listTitle: 'Occasions in the calendar:',
+      preview: 'Previewing {name}. Run "season auto" to hand it back to the calendar.',
+      auto: 'Back on the calendar.',
+      off: 'Seasonal effects off for this visit.',
+      unknown: 'season: {name}: no such occasion. Run season on its own for the list.',
+      reducedMotion:
+        'Your system asks for reduced motion, so nothing runs on its own. Naming an occasion below still shows it.',
+      // Only occasions with a title get a greeting card. The rest are ambient.
+      occasions: {
+        'programmers-day': {
+          name: "Programmer's Day",
+          title: 'Day 256',
+          message: 'The 256th day of the year, and the largest power of two that fits in a byte.'
+        },
+        newyear: {
+          name: 'New Year',
+          title: '{year}',
+          message: 'Happy New Year, and thanks for dropping by.'
+        },
+        christmas: {
+          name: 'Christmas',
+          title: 'Merry Christmas',
+          message: 'Glædelig jul from Denmark. Enjoy the snow.'
+        },
+        advent: { name: 'December' },
+        winter: { name: 'Winter' },
+        spring: { name: 'Spring' },
+        midsummer: {
+          name: 'Midsummer',
+          title: 'Sankt Hans',
+          message: 'Bonfire night in Denmark. Those are embers drifting past.'
+        },
+        autumn: { name: 'Autumn' },
+        halloween: {
+          name: 'Halloween',
+          title: 'Happy Halloween',
+          message: 'Something is circling the page. It is only bats.'
+        }
       }
     },
     decisions: {
@@ -820,6 +865,7 @@ const translations = {
         goto: 'Hop til en sektion (prøv: goto projects)',
         theme: 'Skift tema (theme dark | theme light)',
         lang: 'Skift sprog (lang da | lang en)',
+        season: 'Se en sæsoneffekt (prøv: season halloween)',
         play: 'Åbn arkaden (prøv: play stack-overflow)',
         palette: 'Åbn kommandopaletten',
         echo: 'Skriv en tekst tilbage',
@@ -890,6 +936,50 @@ const translations = {
         downloadCv: 'Hent CV (PDF)',
         arcade: 'Åbn arkaden',
         sendEmail: 'Send mig en mail'
+      }
+    },
+    season: {
+      dismiss: 'Luk',
+      current: 'Aktiv begivenhed: {name} ({id})',
+      none: 'Ingen begivenhed i dag. Kalenderen finder selv den næste.',
+      listTitle: 'Begivenheder i kalenderen:',
+      preview: 'Viser {name}. Kør "season auto" for at give den tilbage til kalenderen.',
+      auto: 'Tilbage på kalenderen.',
+      off: 'Sæsoneffekter slået fra for dette besøg.',
+      unknown: 'season: {name}: ingen begivenhed med det navn. Kør season alene for at se listen.',
+      reducedMotion:
+        'Dit system beder om mindre bevægelse, så intet kører af sig selv. Vælger du en begivenhed nedenfor, vises den alligevel.',
+      // Kun begivenheder med en title får et lille kort. Resten er stemning.
+      occasions: {
+        'programmers-day': {
+          name: 'Programmørernes dag',
+          title: 'Dag 256',
+          message: 'Årets 256. dag, og den største toerpotens der er plads til i en byte.'
+        },
+        newyear: {
+          name: 'Nytår',
+          title: '{year}',
+          message: 'Godt nytår, og tak fordi du kiggede forbi.'
+        },
+        christmas: {
+          name: 'Jul',
+          title: 'Glædelig jul',
+          message: 'God jul herfra. Nyd sneen.'
+        },
+        advent: { name: 'December' },
+        winter: { name: 'Vinter' },
+        spring: { name: 'Forår' },
+        midsummer: {
+          name: 'Sankt Hans',
+          title: 'Sankt Hans',
+          message: 'Bålaften. Det er gløder der driver forbi.'
+        },
+        autumn: { name: 'Efterår' },
+        halloween: {
+          name: 'Halloween',
+          title: 'Glædelig halloween',
+          message: 'Der er noget der kredser om siden. Det er bare flagermus.'
+        }
       }
     },
     decisions: {
